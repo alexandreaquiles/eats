@@ -1,0 +1,5 @@
+<h2>Formas de Pagameto</h2>
+<h3 *ngFor="let formaDePagamento of formasDePagamento">
+  <a [routerLink]="['/admin/forma-de-pagamento/editar', formaDePagamento.id]">{{formaDePagamento.nome}}</a>
+</h3>
+<button [routerLink]="['/admin/forma-de-pagamento/adicionar']">Adicionar</button>

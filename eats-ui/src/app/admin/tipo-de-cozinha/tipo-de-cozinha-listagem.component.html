@@ -1,0 +1,5 @@
+<h2>Tipos de Cozinha</h2>
+<h3 *ngFor="let tipoDeCozinha of tiposDeCozinha">
+  <a [routerLink]="['/admin/tipo-de-cozinha/editar', tipoDeCozinha.id]">{{tipoDeCozinha.nome}}</a>
+</h3>
+<a [routerLink]="['/admin/tipo-de-cozinha/adicionar']">Adicionar</a>
