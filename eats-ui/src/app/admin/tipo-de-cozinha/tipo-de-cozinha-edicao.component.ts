@@ -48,9 +48,4 @@ export class TipoDeCozinhaEdicaoComponent implements OnInit, OnDestroy {
     }, error => console.error(error));
   }
 
-  remove(tipoDeCozinha) {
-    this.tipoDeCozinhaService.remove(tipoDeCozinha).subscribe(result => {
-      this.gotoList();
-    }, error => console.error(error));
-  }
 }

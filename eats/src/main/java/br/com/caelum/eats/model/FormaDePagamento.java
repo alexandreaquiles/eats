@@ -10,6 +10,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,11 +20,26 @@ import lombok.NoArgsConstructor;
 @Data
 public class FormaDePagamento {
 
+	@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 	public static enum Tipo {
-		DINHEIRO,
-		CARTAO_CREDITO,
-		CARTAO_DEBITO,
-		VALE_REFEICAO;
+		DINHEIRO("Dinheiro"),
+		CARTAO_CREDITO("Cartão de Crédito"),
+		CARTAO_DEBITO("Cartão de Débito"),
+		VALE_REFEICAO("Vale Refeição");
+		
+		private String descricao;
+		
+		private Tipo(String descricao) {
+			this.descricao = descricao;
+		}
+		
+		public String getNome() {
+			return name();
+		}
+		
+		public String getDescricao() {
+			return descricao;
+		}
 	}
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)

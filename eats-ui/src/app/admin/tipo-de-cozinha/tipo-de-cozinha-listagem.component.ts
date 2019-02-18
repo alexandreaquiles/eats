@@ -17,4 +17,10 @@ export class TipoDeCozinhaListagemComponent implements OnInit {
     });
   }
 
+  remove(tipoDeCozinha) {
+    this.tipoDeCozinhaService.remove(tipoDeCozinha).subscribe(result => {
+      this.tiposDeCozinha = this.tiposDeCozinha.filter(t => t.id != tipoDeCozinha.id);
+    }, error => console.error(error));
+  }
+
 }

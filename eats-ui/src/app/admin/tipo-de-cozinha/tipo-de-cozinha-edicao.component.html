@@ -4,6 +4,5 @@
     <input placeholder="Nome do tipo de cozinha" [(ngModel)]="tipoDeCozinha.nome"
               required name="nome" #nome>
     <button type="submit" [disabled]="!tipoDeCozinhaForm.form.valid">Salvar</button>
-    <button (click)="remove(tipoDeCozinha)" *ngIf="tipoDeCozinha.id" type="button">Deletar</button>
     <a routerLink="/admin/tipo-de-cozinha/listar">Cancelar</a>
 </form>
