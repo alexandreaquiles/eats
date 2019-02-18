@@ -10,6 +10,7 @@ import { NgForm } from '@angular/forms';
   templateUrl: './tipo-de-cozinha-edicao.component.html'
 })
 export class TipoDeCozinhaEdicaoComponent implements OnInit, OnDestroy {
+
   tipoDeCozinha: any = {};
 
   sub: Subscription;
@@ -23,7 +24,7 @@ export class TipoDeCozinhaEdicaoComponent implements OnInit, OnDestroy {
     this.sub = this.route.params.subscribe(params => {
       const id = params['id'];
       if (id) {
-        this.tipoDeCozinhaService.get(id).subscribe((tipoDeCozinha: any) => {
+        this.tipoDeCozinhaService.porId(id).subscribe((tipoDeCozinha: any) => {
           if (tipoDeCozinha) {
             this.tipoDeCozinha = tipoDeCozinha;
           } else {
@@ -42,8 +43,8 @@ export class TipoDeCozinhaEdicaoComponent implements OnInit, OnDestroy {
     this.router.navigate(['/admin/tipo-de-cozinha/listar']);
   }
 
-  save(form: NgForm) {
-    this.tipoDeCozinhaService.save(form).subscribe(result => {
+  salva() {
+    this.tipoDeCozinhaService.salva(this.tipoDeCozinha).subscribe(result => {
       this.gotoList();
     }, error => console.error(error));
   }

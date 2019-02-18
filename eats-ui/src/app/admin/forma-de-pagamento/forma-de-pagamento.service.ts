@@ -10,15 +10,15 @@ export class FormaDePagamentoService {
   constructor(private http: HttpClient) {
   }
 
-  all(): Observable<any> {
+  todas(): Observable<any> {
     return this.http.get(this.ADMIN_API);
   }
 
-  get(id: string) {
+  porId(id: string) {
     return this.http.get(this.ADMIN_API + '/' + id);
   }
 
-  save(formaDePagamento: any): Observable<any> {
+  salva(formaDePagamento: any): Observable<any> {
     let result: Observable<Object>;
     if (formaDePagamento.id) {
       result = this.http.put(this.ADMIN_API + '/' + formaDePagamento.id, formaDePagamento);
@@ -30,6 +30,10 @@ export class FormaDePagamentoService {
 
   remove(formaDePagamento: any) {
     return this.http.delete(this.ADMIN_API + '/' + formaDePagamento.id);
+  }
+
+  tipos(): Observable<any> {
+    return this.http.get(this.ADMIN_API+'/tipos');
   }
 
 }

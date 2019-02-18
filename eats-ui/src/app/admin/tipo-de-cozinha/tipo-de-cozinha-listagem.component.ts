@@ -12,7 +12,7 @@ export class TipoDeCozinhaListagemComponent implements OnInit {
   constructor(private tipoDeCozinhaService: TipoDeCozinhaService) { }
 
   ngOnInit() {
-    this.tipoDeCozinhaService.all().subscribe(data => {
+    this.tipoDeCozinhaService.todos().subscribe(data => {
       this.tiposDeCozinha = data;
     });
   }

@@ -1,11 +1,10 @@
-<form #formaDePagamentoForm="ngForm" (ngSubmit)="save(formaDePagamentoForm.value)">
-  <h2>{{formaDePagamento.nome ? 'Editar' : 'Adicionar'}} Forma de Pagamento</h2>
+<form #formaDePagamentoForm="ngForm" (ngSubmit)="salva()">
+  <h2>{{formaDePagamento.id ? 'Editar' : 'Adicionar'}} Forma de Pagamento</h2>
     <input type="hidden" name="id" [(ngModel)]="formaDePagamento.id">
-    <input matInput placeholder="Nome da forma de pagamento" [(ngModel)]="formaDePagamento.nome"
-                 required name="nome" #nome>
-    <button type="submit"
-                [disabled]="!formaDePagamentoForm.form.valid">Salvar</button>
-    <button (click)="remove(formaDePagamento)"
-                *ngIf="formaDePagamento.id" type="button">Deletar</button>
+    <input placeholder="Nome da forma de pagamento" [(ngModel)]="formaDePagamento.nome" required name="nome" #nome>
+    <select [(ngModel)]="formaDePagamento.tipo" required name="tipo" #tipo>
+      <option *ngFor="let tipo of tiposDeFormaDePagamento" [value]="tipo">{{tipo}}</option>
+    </select>
+    <button type="submit" [disabled]="!formaDePagamentoForm.form.valid">Salvar</button>
     <a routerLink="/admin/forma-de-pagamento/listar">Cancelar</a>
 </form>

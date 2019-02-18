@@ -10,7 +10,10 @@ import { NgForm } from '@angular/forms';
   templateUrl: './forma-de-pagamento-edicao.component.html'
 })
 export class FormaDePagamentoEdicaoComponent implements OnInit, OnDestroy {
+
   formaDePagamento: any = {};
+
+  tiposDeFormaDePagamento: Array<any> = [];
 
   sub: Subscription;
 
@@ -20,10 +23,15 @@ export class FormaDePagamentoEdicaoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
+    this.formaDePagamentoService.tipos().subscribe(data => {
+      this.tiposDeFormaDePagamento = data;
+    });
+
     this.sub = this.route.params.subscribe(params => {
       const id = params['id'];
       if (id) {
-        this.formaDePagamentoService.get(id).subscribe((formaDePagamento: any) => {
+        this.formaDePagamentoService.porId(id).subscribe((formaDePagamento: any) => {
           if (formaDePagamento) {
             this.formaDePagamento = formaDePagamento;
           } else {
@@ -42,15 +50,12 @@ export class FormaDePagamentoEdicaoComponent implements OnInit, OnDestroy {
     this.router.navigate(['/admin/forma-de-pagamento/listar']);
   }
 
-  save(form: NgForm) {
-    this.formaDePagamentoService.save(form).subscribe(result => {
+  salva() {
+    console.log(this.formaDePagamento);
+    //this.formaDePagamento.tipo = this.formaDePagamento.tipo.nome;
+    this.formaDePagamentoService.salva(this.formaDePagamento).subscribe(result => {
       this.gotoList();
     }, error => console.error(error));
   }
 
-  remove(formaDePagamento) {
-    this.formaDePagamentoService.remove(formaDePagamento).subscribe(result => {
-      this.gotoList();
-    }, error => console.error(error));
-  }
 }

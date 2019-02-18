@@ -35,11 +35,11 @@ const routes: Routes = [
     component: FormaDePagamentoListagemComponent
   },
   {
-    path: 'admin/forma-de-pagamento/cadastro',
+    path: 'admin/forma-de-pagamento/adicionar',
     component: FormaDePagamentoEdicaoComponent
   },
   {
-    path: 'admin/forma-de-pagamento/cadastro/:id',
+    path: 'admin/forma-de-pagamento/editar/:id',
     component: FormaDePagamentoEdicaoComponent
   }
 ];

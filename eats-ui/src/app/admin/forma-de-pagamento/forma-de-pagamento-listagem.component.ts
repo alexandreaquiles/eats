@@ -12,9 +12,15 @@ export class FormaDePagamentoListagemComponent implements OnInit {
   constructor(private formaDePagamentoService: FormaDePagamentoService) { }
 
   ngOnInit() {
-    this.formaDePagamentoService.all().subscribe(data => {
+    this.formaDePagamentoService.todas().subscribe(data => {
       this.formasDePagamento = data;
     });
+  }
+
+  remove(formaDePagamento) {
+    this.formaDePagamentoService.remove(formaDePagamento).subscribe(result => {
+      this.formasDePagamento = this.formasDePagamento.filter(f => f.id != formaDePagamento.id);
+    }, error => console.error(error));
   }
 
 }

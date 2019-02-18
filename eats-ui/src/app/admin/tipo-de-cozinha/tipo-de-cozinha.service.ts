@@ -10,15 +10,15 @@ export class TipoDeCozinhaService {
   constructor(private http: HttpClient) {
   }
 
-  all(): Observable<any> {
+  todos(): Observable<any> {
     return this.http.get(this.ADMIN_API);
   }
 
-  get(id: string) {
+  porId(id: string) {
     return this.http.get(this.ADMIN_API + '/' + id);
   }
 
-  save(tipoDeCozinha: any): Observable<any> {
+  salva(tipoDeCozinha: any): Observable<any> {
     let result: Observable<Object>;
     if (tipoDeCozinha.id) {
       result = this.http.put(this.ADMIN_API + '/' + tipoDeCozinha.id, tipoDeCozinha);

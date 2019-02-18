@@ -1,5 +1,5 @@
-<form #tipoDeCozinhaForm="ngForm" (ngSubmit)="save(tipoDeCozinhaForm.value)">
-    <h2>{{tipoDeCozinha.nome ? 'Editar' : 'Adicionar'}} Tipo de Cozinha</h2>
+<form #tipoDeCozinhaForm="ngForm" (ngSubmit)="salva()">
+    <h2>{{tipoDeCozinha.id ? 'Editar' : 'Adicionar'}} Tipo de Cozinha</h2>
     <input type="hidden" name="id" [(ngModel)]="tipoDeCozinha.id">
     <input placeholder="Nome do tipo de cozinha" [(ngModel)]="tipoDeCozinha.nome"
               required name="nome" #nome>
