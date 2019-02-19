@@ -27,115 +27,96 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import br.com.caelum.eats.model.FormaDePagamento;
-import br.com.caelum.eats.repository.FormaDePagamentoRepository;
+import br.com.caelum.eats.model.TipoDeCozinha;
+import br.com.caelum.eats.repository.TipoDeCozinhaRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class FormaDePagamentoControllerTest {
+public class TipoDeCozinhaControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
 
 	@MockBean
-	private FormaDePagamentoRepository repo;
+	private TipoDeCozinhaRepository repo;
 	
 	@Autowired
 	private ObjectMapper json;
 
-	private FormaDePagamento visaCredito;
-	private FormaDePagamento ticketRestaurante;
-	private List<FormaDePagamento> formasDePagamento;
-	
+	private TipoDeCozinha chinesa;
+	private TipoDeCozinha mexicana;
+	private List<TipoDeCozinha> tiposDeCozinha;
+
 	@Before
 	public void antes() {
-		visaCredito = new FormaDePagamento(1L, FormaDePagamento.Tipo.CARTAO_CREDITO, "Visa Crédito");
-		ticketRestaurante = new FormaDePagamento(2L, FormaDePagamento.Tipo.VALE_REFEICAO, "Ticket Restaurante");
+		chinesa = new TipoDeCozinha(1L, "Chinesa");
+		mexicana = new TipoDeCozinha(2L, "Mexicana");
 		
-		formasDePagamento = Arrays.asList(visaCredito, ticketRestaurante);
+		tiposDeCozinha = Arrays.asList(chinesa, mexicana);
 	}
 	
 	@Test
 	public void todas() throws Exception {
-		Mockito.when(repo.findAll()).thenReturn(formasDePagamento);
+		Mockito.when(repo.findAllByOrderByNomeAsc()).thenReturn(tiposDeCozinha);
 		
-		this.mockMvc.perform(get("/admin/formas-de-pagamento"))
+		this.mockMvc.perform(get("/admin/tipos-de-cozinha"))
 			.andDo(print())
 			.andExpect(status().isOk())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 			.andExpect(jsonPath("$").isArray())
 			.andExpect(jsonPath("$.length()").value(2))
 			.andExpect(jsonPath("$.[0].id").value(1L))
-			.andExpect(jsonPath("$.[0].tipo").value(FormaDePagamento.Tipo.CARTAO_CREDITO.name()))
-			.andExpect(jsonPath("$.[0].nome").value("Visa Crédito"))
+			.andExpect(jsonPath("$.[0].nome").value("Chinesa"))
 			.andExpect(jsonPath("$.[1].id").value(2L))
-			.andExpect(jsonPath("$.[1].tipo").value(FormaDePagamento.Tipo.VALE_REFEICAO.name()))
-			.andExpect(jsonPath("$.[1].nome").value("Ticket Restaurante"));
+			.andExpect(jsonPath("$.[1].nome").value("Mexicana"));
 
-		Mockito.verify(repo).findAll();
+		Mockito.verify(repo).findAllByOrderByNomeAsc();
 
 	}
 	
 	@Test
 	public void detalhaPorId() throws Exception {
-		Mockito.when(repo.findById(1L)).thenReturn(Optional.of(visaCredito));
+		Mockito.when(repo.findById(1L)).thenReturn(Optional.of(chinesa));
 		
-		this.mockMvc.perform(get("/admin/formas-de-pagamento/1"))
+		this.mockMvc.perform(get("/admin/tipos-de-cozinha/1"))
 			.andDo(print())
 			.andExpect(status().isOk())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 			.andExpect(jsonPath("$.id").value(1L))
-			.andExpect(jsonPath("$.tipo").value(FormaDePagamento.Tipo.CARTAO_CREDITO.name()))
-			.andExpect(jsonPath("$.nome").value("Visa Crédito"));
+			.andExpect(jsonPath("$.nome").value("Chinesa"));
 
 		Mockito.verify(repo).findById(1L);
 	}
 
 	@Test
-	public void tipos() throws Exception {
-		this.mockMvc.perform(get("/admin/formas-de-pagamento/tipos"))
-			.andDo(print())
-			.andExpect(status().isOk())
-			.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-			.andExpect(jsonPath("$").isArray())
-			.andExpect(jsonPath("$.length()").value(4))
-			.andExpect(jsonPath("$.[0]").value("DINHEIRO"))
-			.andExpect(jsonPath("$.[1]").value("CARTAO_CREDITO"))
-			.andExpect(jsonPath("$.[2]").value("CARTAO_DEBITO"))
-			.andExpect(jsonPath("$.[3]").value("VALE_REFEICAO"));
-
-		Mockito.verifyZeroInteractions(repo);
-	}
-	
-	@Test
 	public void adiciona() throws Exception {
-		FormaDePagamento visaCreditoSemId = new FormaDePagamento(null, FormaDePagamento.Tipo.CARTAO_CREDITO, "Visa Crédito");
+		TipoDeCozinha chinesaSemId = new TipoDeCozinha(null, "Chinesa");
 		
-		Mockito.when(repo.save(visaCreditoSemId)).thenReturn(visaCredito);
+		Mockito.when(repo.save(chinesaSemId)).thenReturn(chinesa);
 		
 		this.mockMvc.perform(
-				post("/admin/formas-de-pagamento")
+				post("/admin/tipos-de-cozinha")
 				.contentType(MediaType.APPLICATION_JSON_UTF8)
-				.content(json.writeValueAsString(visaCreditoSemId)))
+				.content(json.writeValueAsString(chinesaSemId)))
 			.andDo(print())
 			.andExpect(status().isOk());
 
-		Mockito.verify(repo).save(visaCreditoSemId);
+		Mockito.verify(repo).save(chinesaSemId);
 	}
 
 	@Test
 	public void atualiza() throws Exception {
-		Mockito.when(repo.save(visaCredito)).thenReturn(visaCredito);
+		Mockito.when(repo.save(chinesa)).thenReturn(chinesa);
 
 		this.mockMvc.perform(
-				put("/admin/formas-de-pagamento/1")
+				put("/admin/tipos-de-cozinha/1")
 				.contentType(MediaType.APPLICATION_JSON_UTF8)
-				.content(json.writeValueAsString(visaCredito)))
+				.content(json.writeValueAsString(chinesa)))
 			.andDo(print())
 			.andExpect(status().isOk());
 
-		Mockito.verify(repo).save(visaCredito);
+		Mockito.verify(repo).save(chinesa);
 	}
 	
 	@Test
@@ -143,7 +124,7 @@ public class FormaDePagamentoControllerTest {
 		Mockito.doNothing().when(repo).deleteById(1L);
 
 		this.mockMvc.perform(
-				delete("/admin/formas-de-pagamento/1")
+				delete("/admin/tipos-de-cozinha/1")
 				.contentType(MediaType.APPLICATION_JSON_UTF8))
 			.andDo(print())
 			.andExpect(status().isOk());
