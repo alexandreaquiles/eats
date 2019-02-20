@@ -19,12 +19,17 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.br.CNPJ;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
+@EqualsAndHashCode @ToString
 public class Restaurante {
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)

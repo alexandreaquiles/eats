@@ -5,5 +5,5 @@ CREATE TABLE horario_de_funcionamento (
   horario_de_fechamento time NOT NULL,
   restaurante_id bigint(20) DEFAULT NULL,
   PRIMARY KEY (id),
-  KEY FK_restaurante_horario_de_funcionamento (restaurante_id)
+  FOREIGN KEY (restaurante_id) REFERENCES restaurante(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

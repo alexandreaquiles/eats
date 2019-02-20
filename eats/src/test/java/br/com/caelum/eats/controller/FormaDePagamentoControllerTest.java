@@ -58,7 +58,7 @@ public class FormaDePagamentoControllerTest {
 	
 	@Test
 	public void todas() throws Exception {
-		Mockito.when(repo.findAll()).thenReturn(formasDePagamento);
+		Mockito.when(repo.findAllByOrderByNomeAsc()).thenReturn(formasDePagamento);
 		
 		this.mockMvc.perform(get("/admin/formas-de-pagamento"))
 			.andDo(print())
@@ -73,7 +73,7 @@ public class FormaDePagamentoControllerTest {
 			.andExpect(jsonPath("$.[1].tipo").value(FormaDePagamento.Tipo.VALE_REFEICAO.name()))
 			.andExpect(jsonPath("$.[1].nome").value("Ticket Restaurante"));
 
-		Mockito.verify(repo).findAll();
+		Mockito.verify(repo).findAllByOrderByNomeAsc();
 
 	}
 	

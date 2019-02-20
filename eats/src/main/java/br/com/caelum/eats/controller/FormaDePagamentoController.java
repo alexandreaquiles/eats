@@ -28,7 +28,7 @@ public class FormaDePagamentoController {
 
 	@GetMapping
 	private List<FormaDePagamento> lista() {
-		return repo.findAll();
+		return repo.findAllByOrderByNomeAsc();
 	}
 
 	@GetMapping("/{id}")
