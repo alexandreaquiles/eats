@@ -3,7 +3,6 @@ import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { FormaDePagamentoService } from './forma-de-pagamento.service';
-import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-forma-de-pagamento-edicao',

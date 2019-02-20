@@ -1,6 +1,10 @@
-<h1>{{title}}</h1>
-<a routerLink="/admin">Admin</a>
-<a routerLink="/restaurante">Cadastre seu Restaurante</a>
-<a routerLink="/entregador">Seja entregador</a>
+<h1><a routerLink="/">{{title}}</a></h1>
+<nav>
+  <ul>
+    <li><a routerLink="/admin">Admin</a></li>
+    <li> <a routerLink="/restaurante">Cadastre seu Restaurante</a></li>
+    <li> <a routerLink="/entregador">Seja entregador</a></li>
+  </ul>
+</nav>
 
 <router-outlet></router-outlet>

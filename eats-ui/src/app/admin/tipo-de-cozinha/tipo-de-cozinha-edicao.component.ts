@@ -3,7 +3,6 @@ import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { TipoDeCozinhaService } from './tipo-de-cozinha.service';
-import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-tipo-de-cozinha-edicao',
