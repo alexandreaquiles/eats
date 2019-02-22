@@ -1,13 +1,2 @@
-<input type="search" placeholder="Prato ou restaurante">
-
-<h2>Promoções</h2>
-<app-promocoes></app-promocoes>
-
-<h2>Tipos de Cozinha</h2>
-<app-tipos-de-cozinha></app-tipos-de-cozinha>
-
-<h2>Últimos Resturantes</h2>
-<app-ultimos-restaurantes></app-ultimos-restaurantes>
-
-<h2>Restaurantes</h2>
-<app-restaurantes-mais-proximos></app-restaurantes-mais-proximos>
+<input [(ngModel)]="cep" placeholder="Digite seu CEP" name="cep">
+<button (click)="buscar()">Buscar</button>

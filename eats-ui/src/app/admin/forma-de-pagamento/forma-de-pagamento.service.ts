@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { environment } from 'src/environments/environment';
+
 @Injectable()
 export class FormaDePagamentoService {
 
-  private ADMIN_API = '//localhost:8080/admin/formas-de-pagamento';
+  private ADMIN_API = environment.baseUrl + '/admin/formas-de-pagamento';
 
   constructor(private http: HttpClient) {
   }

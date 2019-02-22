@@ -18,11 +18,11 @@ import br.com.caelum.eats.repository.FormaDePagamentoRepository;
 
 @RestController
 @RequestMapping("/admin/formas-de-pagamento")
-public class FormaDePagamentoController {
+public class AdminFormaDePagamentoController {
 
 	private FormaDePagamentoRepository repo;
 
-	public FormaDePagamentoController(FormaDePagamentoRepository repo) {
+	public AdminFormaDePagamentoController(FormaDePagamentoRepository repo) {
 		this.repo = repo;
 	}
 

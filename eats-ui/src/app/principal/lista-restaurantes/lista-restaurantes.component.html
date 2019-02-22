@@ -1,0 +1,26 @@
+<h2>Entregar em {{ cep }}</h2>
+
+<input type="search" placeholder="Prato ou restaurante">
+
+<section *ngIf="promocoes?.length">
+  <h2>Promoções</h2>
+</section>
+
+<section *ngIf="tiposDeCozinha?.length">
+  <h2>Tipos de Cozinha</h2>
+  <ul *ngFor="let tipoDeCozinha of tiposDeCozinha">
+    <li>{{tipoDeCozinha.nome}}</li>
+  </ul>
+</section>
+
+<section *ngIf="restaurantesMaisProximos?.length">
+  <h2>Restaurantes próximos</h2>
+  <div *ngFor="let restaurante of restaurantesMaisProximos">
+    <p>{{restaurante.nome}}</p>
+    <p>★ {{ restaurante.mediaAvaliacoes | number:'1.1-1' }}</p>
+    <p><span>{{restaurante.tipoDeCozinha.nome}}</span> • <span>{{restaurante.tempoDeEntregaMinimoEmMinutos}} - {{restaurante.tempoDeEntregaMaximoEmMinutos}}</span> min</p>
+    <p>{{ restaurante.distancia | number:'1.1-1' }} km</p>
+    <p>{{ restaurante.taxaDeEntregaEmReais | currency:'BRL' }}</p>
+    <button (click)="pedir(restaurante)">Pedir</button>
+  </div>
+</section>

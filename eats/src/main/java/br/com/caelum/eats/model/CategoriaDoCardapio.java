@@ -10,15 +10,12 @@ import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@EqualsAndHashCode @ToString
 public class CategoriaDoCardapio {
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)

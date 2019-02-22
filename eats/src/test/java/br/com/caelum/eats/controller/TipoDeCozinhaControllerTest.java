@@ -35,6 +35,8 @@ import br.com.caelum.eats.repository.TipoDeCozinhaRepository;
 @AutoConfigureMockMvc
 public class TipoDeCozinhaControllerTest {
 
+	private static final String ADMIN_TIPOS_DE_COZINHA = "/admin/tipos-de-cozinha";
+
 	@Autowired
 	private MockMvc mockMvc;
 
@@ -60,7 +62,7 @@ public class TipoDeCozinhaControllerTest {
 	public void todas() throws Exception {
 		Mockito.when(repo.findAllByOrderByNomeAsc()).thenReturn(tiposDeCozinha);
 		
-		this.mockMvc.perform(get("/admin/tipos-de-cozinha"))
+		this.mockMvc.perform(get(ADMIN_TIPOS_DE_COZINHA))
 			.andDo(print())
 			.andExpect(status().isOk())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -79,7 +81,7 @@ public class TipoDeCozinhaControllerTest {
 	public void detalhaPorId() throws Exception {
 		Mockito.when(repo.findById(1L)).thenReturn(Optional.of(chinesa));
 		
-		this.mockMvc.perform(get("/admin/tipos-de-cozinha/1"))
+		this.mockMvc.perform(get(ADMIN_TIPOS_DE_COZINHA + "/1"))
 			.andDo(print())
 			.andExpect(status().isOk())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -96,7 +98,7 @@ public class TipoDeCozinhaControllerTest {
 		Mockito.when(repo.save(chinesaSemId)).thenReturn(chinesa);
 		
 		this.mockMvc.perform(
-				post("/admin/tipos-de-cozinha")
+				post(ADMIN_TIPOS_DE_COZINHA)
 				.contentType(MediaType.APPLICATION_JSON_UTF8)
 				.content(json.writeValueAsString(chinesaSemId)))
 			.andDo(print())
@@ -110,7 +112,7 @@ public class TipoDeCozinhaControllerTest {
 		Mockito.when(repo.save(chinesa)).thenReturn(chinesa);
 
 		this.mockMvc.perform(
-				put("/admin/tipos-de-cozinha/1")
+				put(ADMIN_TIPOS_DE_COZINHA + "/1")
 				.contentType(MediaType.APPLICATION_JSON_UTF8)
 				.content(json.writeValueAsString(chinesa)))
 			.andDo(print())
@@ -124,7 +126,7 @@ public class TipoDeCozinhaControllerTest {
 		Mockito.doNothing().when(repo).deleteById(1L);
 
 		this.mockMvc.perform(
-				delete("/admin/tipos-de-cozinha/1")
+				delete(ADMIN_TIPOS_DE_COZINHA + "/1")
 				.contentType(MediaType.APPLICATION_JSON_UTF8))
 			.andDo(print())
 			.andExpect(status().isOk());

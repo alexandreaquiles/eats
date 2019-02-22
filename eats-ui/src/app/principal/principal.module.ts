@@ -1,23 +1,21 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { PrincipalComponent } from './principal.component';
-import { PromocoesComponent } from './promocoes/promocoes.component';
-import { RestaurantesMaisProximosComponent } from './restaurantes-mais-proximos/restaurantes-mais-proximos.component';
-import { TiposDeCozinhaComponent } from './tipos-de-cozinha/tipos-de-cozinha.component';
-import { UltimosRestaurantesComponent } from './ultimos-restaurantes/ultimos-restaurantes.component';
+import { ListaRestaurantesComponent } from './lista-restaurantes/lista-restaurantes.component';
 
 import { principalRoutes } from './principal.routes';
+import { TiposDeCozinhaService } from './lista-restaurantes/tipos-de-cozinha.service';
+import { RestaurantesMaisProximosService } from './lista-restaurantes/restaurantes-mais-proximos.service';
 
 @NgModule({
   declarations: [
     PrincipalComponent,
-    PromocoesComponent,
-    RestaurantesMaisProximosComponent,
-    TiposDeCozinhaComponent,
-    UltimosRestaurantesComponent
+    ListaRestaurantesComponent
   ],
-  imports: [ CommonModule, principalRoutes ],
-  exports: [ PrincipalComponent ]
+  imports: [ CommonModule, FormsModule, principalRoutes ],
+  exports: [ PrincipalComponent ],
+  providers: [ TiposDeCozinhaService, RestaurantesMaisProximosService ]
 })
 export class PrincipalModule { }

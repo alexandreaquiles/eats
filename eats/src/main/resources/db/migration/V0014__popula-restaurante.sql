@@ -1,5 +1,6 @@
-INSERT INTO restaurante (aprovado, cnpj, descricao, nome, taxa_de_entrega_em_reais, tempo_de_entrega_maximo_em_minutos, tempo_de_entrega_minimo_em_minutos, tipo_de_cozinha_id)
-values (true, '98444252000104', 'O melhor da China aqui do seu lado.', 'Long Fu', 6, 25, 40, 1);
+-- Chinês Long Fu
+INSERT INTO restaurante (id, aprovado, cnpj, descricao, nome, taxa_de_entrega_em_reais, tempo_de_entrega_maximo_em_minutos, tempo_de_entrega_minimo_em_minutos, tipo_de_cozinha_id)
+values (1, true, '98444252000104', 'O melhor da China aqui do seu lado.', 'Long Fu', 6, 25, 40, 1);
 
 INSERT INTO restaurante_formas_de_pagamento (restaurante_id, formas_de_pagamento_id) values (1, 1);
 INSERT INTO restaurante_formas_de_pagamento (restaurante_id, formas_de_pagamento_id) values (1, 2);
@@ -15,11 +16,11 @@ INSERT INTO horario_de_funcionamento (dia_da_semana, horario_de_abertura, horari
 INSERT INTO horario_de_funcionamento (dia_da_semana, horario_de_abertura, horario_de_fechamento, restaurante_id) values ('FRIDAY', 11, 23, 1);
 INSERT INTO horario_de_funcionamento (dia_da_semana, horario_de_abertura, horario_de_fechamento, restaurante_id) values ('SATURDAY', 11, 23, 1);
 
-INSERT INTO cardapio (restaurante_id) values (1);
+INSERT INTO cardapio (id, restaurante_id) values (1, 1);
 
-INSERT INTO categoria_do_cardapio (nome, cardapio_id) values ('ENTRADAS', 1);
-INSERT INTO categoria_do_cardapio (nome, cardapio_id) values ('PRATOS PRINCIPAIS', 1);
-INSERT INTO categoria_do_cardapio (nome, cardapio_id) values ('BEBIDAS', 1);
+INSERT INTO categoria_do_cardapio (id, nome, cardapio_id) values (1, 'ENTRADAS', 1);
+INSERT INTO categoria_do_cardapio (id, nome, cardapio_id) values (2, 'PRATOS PRINCIPAIS', 1);
+INSERT INTO categoria_do_cardapio (id, nome, cardapio_id) values (3, 'BEBIDAS', 1);
 
 -- ENTRADAS
 INSERT INTO item_cardapio (
@@ -95,3 +96,4 @@ INSERT INTO item_cardapio (
   preco_promocional,
   categoria_id
 ) values ('Cerveja Heineken Lata 350 ML', null, 6.9, null, 3);
+

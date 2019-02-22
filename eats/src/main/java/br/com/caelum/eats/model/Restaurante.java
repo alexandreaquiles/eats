@@ -13,7 +13,6 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
@@ -21,15 +20,12 @@ import org.hibernate.validator.constraints.br.CNPJ;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@EqualsAndHashCode @ToString
 public class Restaurante {
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -44,7 +40,7 @@ public class Restaurante {
 	@Size(max=1000)
 	private String descricao;
 	
-	@NotNull @Positive
+	@Positive
 	private BigDecimal taxaDeEntregaEmReais;
 	
 	@ManyToOne(optional=false)

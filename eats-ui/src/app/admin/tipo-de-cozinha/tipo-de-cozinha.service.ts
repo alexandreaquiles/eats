@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { environment } from 'src/environments/environment';
+
 @Injectable()
 export class TipoDeCozinhaService {
 
-  private ADMIN_API = '//localhost:8080/admin/tipos-de-cozinha';
+  private ADMIN_API = environment.baseUrl + '/admin/tipos-de-cozinha';
 
   constructor(private http: HttpClient) {
   }
