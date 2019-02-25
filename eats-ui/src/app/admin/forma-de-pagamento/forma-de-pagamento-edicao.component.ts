@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { FormaDePagamentoService } from './forma-de-pagamento.service';
+import { FormaDePagamentoService } from '../services/forma-de-pagamento.service';
 
 @Component({
   selector: 'app-forma-de-pagamento-edicao',

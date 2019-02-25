@@ -1,0 +1,33 @@
+<section *ngIf="restaurante">
+  <h2>{{restaurante.nome}}</h2>
+  <p>★ {{ restaurante.mediaAvaliacoes | number:'1.1-1' }}</p>
+  <p><span>{{restaurante.tipoDeCozinha.nome}}</span> • <span>{{restaurante.tempoDeEntregaMinimoEmMinutos}} - {{restaurante.tempoDeEntregaMaximoEmMinutos}}</span> min</p>
+  <p>{{ restaurante.distancia | number:'1.1-1' }} km</p>
+  <p>{{ restaurante.descricao }}</p>
+</section>
+
+<section *ngIf="restaurante && cardapio">
+  <h2>Cardápio</h2>
+  <div *ngFor="let categoria of cardapio.categorias">
+    <h3>{{ categoria.nome | uppercase }}</h3>
+    <div *ngFor="let item of categoria.itens">
+      <h4>{{ item.nome }}</h4>
+      <p>{{ item.descricao }}</p>
+
+      <p *ngIf="!item.precoPromocional; else promocional">{{ item.preco | currency:'BRL' }}</p>
+      <ng-template #promocional>
+        <del>{{ item.preco | currency:'BRL' }}</del>
+        <p>{{ item.precoPromocional | currency:'BRL' }}</p>
+      </ng-template>
+
+    </div>
+  </div>
+</section>
+
+<section *ngIf="restaurante && avaliacoes">
+  <h2>Avaliações</h2>
+  <div *ngFor="let avaliacao of avaliacoes">
+    <p>Nota: {{ avaliacao.nota }}</p>
+    <p>{{ avaliacao.comentario }}</p>
+  </div>
+</section>

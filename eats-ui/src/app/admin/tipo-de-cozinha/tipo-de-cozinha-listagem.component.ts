@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TipoDeCozinhaService } from 'src/app/admin/tipo-de-cozinha/tipo-de-cozinha.service';
+import { TipoDeCozinhaService } from 'src/app/admin/services/tipo-de-cozinha.service';
 
 @Component({
   selector: 'app-tipo-de-cozinha-listagem',

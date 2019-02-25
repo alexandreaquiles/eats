@@ -8,8 +8,8 @@ import { TipoDeCozinhaEdicaoComponent } from './tipo-de-cozinha/tipo-de-cozinha-
 import { FormaDePagamentoListagemComponent } from './forma-de-pagamento/forma-de-pagamento-listagem.component';
 import { FormaDePagamentoEdicaoComponent } from './forma-de-pagamento/forma-de-pagamento-edicao.component';
 
-import { TipoDeCozinhaService } from './tipo-de-cozinha/tipo-de-cozinha.service';
-import { FormaDePagamentoService } from './forma-de-pagamento/forma-de-pagamento.service';
+import { TipoDeCozinhaService } from './services/tipo-de-cozinha.service';
+import { FormaDePagamentoService } from './services/forma-de-pagamento.service';
 
 import { adminRoutes } from './admin.routes';
 

@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { TiposDeCozinhaService } from './tipos-de-cozinha.service';
-import { RestaurantesMaisProximosService } from './restaurantes-mais-proximos.service';
+import { TiposDeCozinhaService } from '../services/tipos-de-cozinha.service';
+import { RestaurantesService } from '../services/restaurantes.service';
 
 @Component({
   selector: 'app-lista-restaurantes',
@@ -15,8 +15,9 @@ export class ListaRestaurantesComponent implements OnInit {
   restaurantesMaisProximos:Array<any>
 
   constructor(private route: ActivatedRoute,
+              private router: Router,
               private tiposDeCozinhaService: TiposDeCozinhaService,
-              private restaurantesMaisProximosService: RestaurantesMaisProximosService) {
+              private restaurantesService: RestaurantesService) {
   }
 
   ngOnInit() {
@@ -27,14 +28,13 @@ export class ListaRestaurantesComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.cep = params['cep'];
       if (this.cep) {
-        this.restaurantesMaisProximosService.porCep(this.cep).subscribe((restaurantes: any) => {
-            this.restaurantesMaisProximos = restaurantes;
-        });
+        this.restaurantesService.maisProximosPorCep(this.cep)
+            .subscribe(restaurantes => this.restaurantesMaisProximos = restaurantes);
       }
     });
   }
 
   pedir(restaurante) {
-    alert(restaurante.nome);
+    this.router.navigateByUrl(`/restaurantes/${this.cep}/restaurante/${restaurante.id}`);
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormaDePagamentoService } from 'src/app/admin/forma-de-pagamento/forma-de-pagamento.service';
+import { FormaDePagamentoService } from 'src/app/admin/services/forma-de-pagamento.service';
 
 @Component({
   selector: 'app-forma-de-pagamento-listagem',

@@ -3,15 +3,16 @@ import {  LOCALE_ID, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/pt';
 
 import { AppComponent } from './app.component';
 
 import { AdminModule } from './admin/admin.module';
 import { PrincipalModule } from './principal/principal.module';
-import { RouterModule } from '@angular/router';
 
-import { registerLocaleData } from '@angular/common';
-import localeFr from '@angular/common/locales/pt';
 
 registerLocaleData(localeFr, 'pt');
 

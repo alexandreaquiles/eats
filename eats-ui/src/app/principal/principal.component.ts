@@ -10,6 +10,6 @@ export class PrincipalComponent {
   constructor(private router: Router) { }
 
   buscar() {
-    this.router.navigate(['/lista-restaurantes/', this.cep]);
+    this.router.navigate(['/restaurantes/', this.cep]);
   }
 }

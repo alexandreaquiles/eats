@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { TipoDeCozinhaService } from './tipo-de-cozinha.service';
+import { TipoDeCozinhaService } from '../services/tipo-de-cozinha.service';
 
 @Component({
   selector: 'app-tipo-de-cozinha-edicao',

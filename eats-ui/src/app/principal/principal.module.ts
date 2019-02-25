@@ -4,18 +4,23 @@ import { FormsModule } from '@angular/forms';
 
 import { PrincipalComponent } from './principal.component';
 import { ListaRestaurantesComponent } from './lista-restaurantes/lista-restaurantes.component';
+import { RestauranteComponent } from './restaurante/restaurante.component';
 
 import { principalRoutes } from './principal.routes';
-import { TiposDeCozinhaService } from './lista-restaurantes/tipos-de-cozinha.service';
-import { RestaurantesMaisProximosService } from './lista-restaurantes/restaurantes-mais-proximos.service';
+
+import { TiposDeCozinhaService } from './services/tipos-de-cozinha.service';
+import { RestaurantesService } from './services/restaurantes.service';
+import { CardapioService } from './services/cardapio.service';
+import { AvaliacoesService } from './services/avaliacoes.service';
 
 @NgModule({
   declarations: [
     PrincipalComponent,
-    ListaRestaurantesComponent
+    ListaRestaurantesComponent,
+    RestauranteComponent
   ],
   imports: [ CommonModule, FormsModule, principalRoutes ],
   exports: [ PrincipalComponent ],
-  providers: [ TiposDeCozinhaService, RestaurantesMaisProximosService ]
+  providers: [ TiposDeCozinhaService, RestaurantesService, CardapioService, AvaliacoesService ]
 })
 export class PrincipalModule { }

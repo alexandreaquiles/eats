@@ -5,15 +5,15 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable()
-export class RestaurantesMaisProximosService {
+export class AvaliacoesService {
 
-  private API = environment.baseUrl + '/restaurantes/mais-proximos';
+  private API = environment.baseUrl + '/restaurantes';
 
   constructor(private http: HttpClient) {
   }
 
-  porCep(cep: string): Observable<any> {
-    return this.http.get(this.API+'/'+cep);
+  porIdDoRestaurante(restauranteId: string): Observable<any> {
+    return this.http.get(`${this.API}/${restauranteId}/avaliacoes`);
   }
 
 }
