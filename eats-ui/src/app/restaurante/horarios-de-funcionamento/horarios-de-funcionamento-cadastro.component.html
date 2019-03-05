@@ -1,0 +1,27 @@
+<h2><small>Restaurante:</small> {{ restaurante?.nome }}</h2>
+<form #horarioDeFuncionamentoForm="ngForm" (ngSubmit)="salva()">
+
+  <input type="hidden" name="id" [(ngModel)]="horarioDeFuncionamento.id">
+
+  <div>
+    <label for="diaDaSemana">Dia da semana</label>
+    <select [(ngModel)]="horarioDeFuncionamento.diaDaSemana" required name="diaDaSemana" id="diaDaSemana" #diaDaSemana>
+      <option *ngFor="let dia of diaDaSemanaService.diasDaSemana" [value]="dia.valor">{{dia.nome}}</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="horarioDeAbertura">Horário de abertura</label>
+    <input required name="horarioDeAbertura" id="horarioDeAbertura" [(ngModel)]="horarioDeFuncionamento.horarioDeAbertura" #horarioDeAbertura>
+  </div>
+
+  <div>
+      <label for="horarioDeFechamento">Horário de fechamento</label>
+      <input required name="horarioDeFechamento" id="horarioDeFechamento" [(ngModel)]="horarioDeFuncionamento.horarioDeFechamento" #horarioDeFechamento>
+    </div>
+
+  <button type="submit" [disabled]="!horarioDeFuncionamentoForm.form.valid">Salvar</button>
+
+  <a [routerLink]="['/cadastro/restaurante',restaurante.id,'horarios-de-funcionamento']">Cancelar</a>
+
+</form>

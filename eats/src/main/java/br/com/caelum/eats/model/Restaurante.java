@@ -43,6 +43,14 @@ public class Restaurante {
 	@Positive
 	private BigDecimal taxaDeEntregaEmReais;
 	
+	@Positive @Min(10) @Max(180)
+	private Integer tempoDeEntregaMinimoEmMinutos;
+	
+	@Positive @Min(10) @Max(180)
+	private Integer tempoDeEntregaMaximoEmMinutos;
+	
+	private Boolean aprovado;
+
 	@ManyToOne(optional=false)
 	private TipoDeCozinha tipoDeCozinha;
 	
@@ -52,12 +60,4 @@ public class Restaurante {
 	@OneToMany(mappedBy="restaurante")
 	private List<HorarioDeFuncionamento> horariosDeFuncionamento;
 	
-	@Positive @Min(10) @Max(180)
-	private Integer tempoDeEntregaMinimoEmMinutos;
-	
-	@Positive @Min(10) @Max(180)
-	private Integer tempoDeEntregaMaximoEmMinutos;
-	
-	private Boolean aprovado;
-
 }

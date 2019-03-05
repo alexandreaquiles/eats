@@ -1,5 +1,5 @@
 <h2>Tipos de Cozinha</h2>
-<a [routerLink]="['/admin/tipo-de-cozinha/adicionar']">Adicionar</a>
+<a [routerLink]="['/admin/tipo-de-cozinha/cadastro']">Adicionar</a>
 <table>
   <thead>
     <tr>
@@ -11,7 +11,7 @@
   <tbody>
     <tr *ngFor="let tipoDeCozinha of tiposDeCozinha">
       <td>{{tipoDeCozinha.nome}}</td>
-      <td><a [routerLink]="['/admin/tipo-de-cozinha/editar', tipoDeCozinha.id]">Editar</a></td>
+      <td><a [routerLink]="['/admin/tipo-de-cozinha/cadastro', tipoDeCozinha.id]">Editar</a></td>
       <td><a (click)="remove(tipoDeCozinha)">Deletar</a></td>
     </tr>
   </tbody>

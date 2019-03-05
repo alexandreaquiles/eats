@@ -18,31 +18,27 @@ export class RestauranteComponent implements OnInit {
   avaliacoes:Array<any>
 
   constructor(private route: ActivatedRoute,
-    private router: Router,
     private restaurantesService: RestaurantesService,
     private cardapioService: CardapioService,
     private avaliacoesService: AvaliacoesService) {
   }
 
   ngOnInit() {
-     this.route.params.subscribe(params => {
+    this.cep = this.route.snapshot.params.cep;
+    this.restauranteId = this.route.snapshot.params.restauranteId;
 
-      this.cep = params['cep'];
-      this.restauranteId = params['restauranteId'];
+    this.restaurantesService
+      .porId(this.cep, this.restauranteId)
+      .subscribe(restaurante => this.restaurante = restaurante);
 
-      this.restaurantesService
-        .porId(this.cep, this.restauranteId)
-        .subscribe(restaurante => this.restaurante = restaurante);
+    this.cardapioService
+      .porIdDoRestaurante(this.restauranteId)
+      .subscribe(cardapio => this.cardapio = cardapio);
 
-      this.cardapioService
-        .porIdDoRestaurante(this.restauranteId)
-        .subscribe(cardapio => this.cardapio = cardapio);
+    this.avaliacoesService
+      .porIdDoRestaurante(this.restauranteId)
+      .subscribe(avaliacoes => this.avaliacoes = avaliacoes);
 
-      this.avaliacoesService
-        .porIdDoRestaurante(this.restauranteId)
-        .subscribe(avaliacoes => this.avaliacoes = avaliacoes);
-
-    });
   }
 
 

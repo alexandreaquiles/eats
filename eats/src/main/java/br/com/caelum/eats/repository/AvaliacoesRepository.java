@@ -8,7 +8,7 @@ import br.com.caelum.eats.model.FormaDePagamento;
 
 public interface AvaliacoesRepository  extends JpaRepository<FormaDePagamento, Long> {
 
-	@Query("SELECT AVG(a.nota) from Avaliacao a where a.restaurante.id =:restauranteId")
+	@Query("select avg(a.nota) from Avaliacao a where a.restaurante.id =:restauranteId")
 	public Double mediaDoRestaurantePeloId(@Param("restauranteId") Long restauranteId);
 
 }

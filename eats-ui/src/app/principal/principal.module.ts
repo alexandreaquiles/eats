@@ -20,7 +20,6 @@ import { AvaliacoesService } from './services/avaliacoes.service';
     RestauranteComponent
   ],
   imports: [ CommonModule, FormsModule, principalRoutes ],
-  exports: [ PrincipalComponent ],
   providers: [ TiposDeCozinhaService, RestaurantesService, CardapioService, AvaliacoesService ]
 })
 export class PrincipalModule { }

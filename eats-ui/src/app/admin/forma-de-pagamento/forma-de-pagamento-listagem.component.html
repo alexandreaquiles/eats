@@ -1,5 +1,5 @@
 <h2>Formas de Pagamento</h2>
-<a [routerLink]="['/admin/forma-de-pagamento/adicionar']">Adicionar</a>
+<a [routerLink]="['/admin/forma-de-pagamento/cadastro']">Adicionar</a>
 <table>
   <thead>
     <tr>
@@ -13,7 +13,7 @@
     <tr *ngFor="let formaDePagamento of formasDePagamento">
       <td>{{formaDePagamento.nome}}</td>
       <td>{{formaDePagamento.tipo}}</td>
-      <td><a [routerLink]="['/admin/forma-de-pagamento/editar', formaDePagamento.id]">Editar</a></td>
+      <td><a [routerLink]="['/admin/forma-de-pagamento/cadastro', formaDePagamento.id]">Editar</a></td>
       <td><a (click)="remove(formaDePagamento)">Deletar</a></td>
     </tr>
   </tbody>

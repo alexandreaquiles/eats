@@ -1,0 +1,22 @@
+<h2><small>Restaurante:</small> {{ restaurante?.nome }}</h2>
+<h3>Formas de pagamentos</h3>
+<form>
+  <button>Adicionar</button>
+</form>
+<table>
+  <tr>
+    <thead>
+        <th>Nome</th>
+        <th>Editar</th>
+        <th>Remover</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let formaDePagamento of formasDePagamento">
+        <td>{{ formaDePagamento.nome }}</td>
+        <td><a (click)="remove(formaDePagamento)">Deletar</a></td>
+      </tr>
+    </tbody>
+</tr>
+</table>
+
+<a [routerLink]="['/cadastro/restaurante',restauranteId]">Cancelar</a>

@@ -1,20 +1,17 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { FormaDePagamentoService } from '../services/forma-de-pagamento.service';
 
 @Component({
-  selector: 'app-forma-de-pagamento-edicao',
-  templateUrl: './forma-de-pagamento-edicao.component.html'
+  selector: 'app-forma-de-pagamento-cadastro',
+  templateUrl: './forma-de-pagamento-cadastro.component.html'
 })
-export class FormaDePagamentoEdicaoComponent implements OnInit, OnDestroy {
+export class FormaDePagamentoCadastroComponent implements OnInit {
 
   formaDePagamento: any = {};
 
   tiposDeFormaDePagamento: Array<any> = [];
-
-  sub: Subscription;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -27,8 +24,7 @@ export class FormaDePagamentoEdicaoComponent implements OnInit, OnDestroy {
       this.tiposDeFormaDePagamento = data;
     });
 
-    this.sub = this.route.params.subscribe(params => {
-      const id = params['id'];
+    const id = this.route.snapshot.params.id;
       if (id) {
         this.formaDePagamentoService.porId(id).subscribe((formaDePagamento: any) => {
           if (formaDePagamento) {
@@ -38,20 +34,13 @@ export class FormaDePagamentoEdicaoComponent implements OnInit, OnDestroy {
           }
         });
       }
-    });
-  }
-
-  ngOnDestroy() {
-    this.sub.unsubscribe();
   }
 
   gotoList() {
-    this.router.navigate(['/admin/forma-de-pagamento/listar']);
+    this.router.navigate(['/admin/forma-de-pagamento']);
   }
 
   salva() {
-    console.log(this.formaDePagamento);
-    //this.formaDePagamento.tipo = this.formaDePagamento.tipo.nome;
     this.formaDePagamentoService.salva(this.formaDePagamento).subscribe(result => {
       this.gotoList();
     }, error => console.error(error));

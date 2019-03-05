@@ -6,10 +6,10 @@ import lombok.experimental.Delegate;
 
 @Data
 @AllArgsConstructor
-public class RestauranteMaisProximoComMediaDeAvaliacoes {
+public class RestauranteComDistanciaEComMediaDeAvaliacoes {
 
 	@Delegate
-	private RestauranteMaisProximo restauranteMaisProximo;
+	private RestauranteComDistancia restauranteComDistancia;
 	
 	private Double mediaAvaliacoes;
 

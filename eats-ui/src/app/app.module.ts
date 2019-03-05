@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 
 import { AdminModule } from './admin/admin.module';
 import { PrincipalModule } from './principal/principal.module';
+import { RestauranteModule } from './restaurante/restaurante.module';
 
 
 registerLocaleData(localeFr, 'pt');
@@ -27,7 +28,8 @@ registerLocaleData(localeFr, 'pt');
     BrowserAnimationsModule,
     RouterModule.forRoot([]),
     AdminModule,
-    PrincipalModule
+    PrincipalModule,
+    RestauranteModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'pt' }],
   bootstrap: [AppComponent]

@@ -8,7 +8,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import br.com.caelum.eats.dto.RestauranteMaisProximo;
+import br.com.caelum.eats.dto.RestauranteComDistancia;
+import br.com.caelum.eats.model.Restaurante;
 import br.com.caelum.eats.repository.RestauranteRepository;
 
 @Service
@@ -20,27 +21,37 @@ public class DistanciaService {
 		this.repo = repo;
 	}
 	
-	public List<RestauranteMaisProximo> restaurantesMaisProximosAoCep(String cep) {
-		simulaDemora();
-		
+	public List<RestauranteComDistancia> restaurantesMaisProximosAoCep(String cep) {
 		Pageable limit = PageRequest.of(0,5);
 		return repo
 				.findAll(limit)
 				.getContent()
 				.stream()
-				.map(r -> {
+				.map(restaurante -> {
 					BigDecimal distancia = new BigDecimal(Math.random()*15);
-					return new RestauranteMaisProximo(r.getId(), r.getNome(), r.getTipoDeCozinha(), r.getTaxaDeEntregaEmReais(), r.getTempoDeEntregaMinimoEmMinutos(), r.getTempoDeEntregaMaximoEmMinutos(), distancia);
+					return new RestauranteComDistancia(restaurante, distancia);
 				})
 				.collect(Collectors.toList());
-		}
+	}
+
+	public BigDecimal distanciaDoCep(Restaurante restaurante, String cep) {
+		return calculaDistancia();
+	}
+
+	private BigDecimal calculaDistancia() {
+		simulaDemora();
+		return new BigDecimal(Math.random()*15);
+	}
 
 	private void simulaDemora() {
-		try {
-			//simula demora de até 5s
-			Thread.sleep((long) (Math.random()*4000+1000));
-		} catch (InterruptedException e) {
-			throw new RuntimeException(e);
+		//simula demora de até 5s
+		long demora = (long) (Math.random()*4000+1000);
+		if (demora % 2 == 0) {
+			try {
+				Thread.sleep(demora);
+			} catch (InterruptedException e) {
+				throw new RuntimeException(e);
+			}
 		}
 	}
 }

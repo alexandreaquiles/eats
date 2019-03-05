@@ -1,0 +1,25 @@
+<h2><small>Restaurante:</small> {{ restaurante?.nome }}</h2>
+<h3>Horários de funcionamento</h3>
+<a [routerLink]="['/cadastro/restaurante',restaurante.id,'horarios-de-funcionamento','cadastro']">Adicionar</a>
+<table>
+  <thead>
+    <tr>
+      <th>Dia da semana</th>
+      <th>Horário de abertura</th>
+      <th>Horário de fechamento</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let horarioDeFuncionamento of horariosDeFuncionamento">
+        <td>{{diaDaSemanaService.aPartirDoValor(horarioDeFuncionamento.diaDaSemana)?.nome}}</td>
+        <td>{{horarioDeFuncionamento.horarioDeAbertura}}</td>
+        <td>{{horarioDeFuncionamento.horarioDeFechamento}}</td>
+        <td><a [routerLink]="['/cadastro/restaurante',restaurante.id,'horarios-de-funcionamento','cadastro', horarioDeFuncionamento.id]">Editar</a></td>
+        <td><a (click)="remove(horarioDeFuncionamento)">Deletar</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<a [routerLink]="['/cadastro/restaurante',restaurante.id]">Cancelar</a>

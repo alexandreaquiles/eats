@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { AdminComponent } from './admin.component';
 import { TipoDeCozinhaListagemComponent } from './tipo-de-cozinha/tipo-de-cozinha-listagem.component';
-import { TipoDeCozinhaEdicaoComponent } from './tipo-de-cozinha/tipo-de-cozinha-edicao.component';
+import { TipoDeCozinhaCadastroComponent } from './tipo-de-cozinha/tipo-de-cozinha-cadastro.component';
 import { FormaDePagamentoListagemComponent } from './forma-de-pagamento/forma-de-pagamento-listagem.component';
-import { FormaDePagamentoEdicaoComponent } from './forma-de-pagamento/forma-de-pagamento-edicao.component';
+import { FormaDePagamentoCadastroComponent } from './forma-de-pagamento/forma-de-pagamento-cadastro.component';
 
 import { TipoDeCozinhaService } from './services/tipo-de-cozinha.service';
 import { FormaDePagamentoService } from './services/forma-de-pagamento.service';
@@ -17,12 +17,11 @@ import { adminRoutes } from './admin.routes';
   declarations: [
     AdminComponent,
     TipoDeCozinhaListagemComponent,
-    TipoDeCozinhaEdicaoComponent,
+    TipoDeCozinhaCadastroComponent,
     FormaDePagamentoListagemComponent,
-    FormaDePagamentoEdicaoComponent
+    FormaDePagamentoCadastroComponent
   ],
   imports: [CommonModule, FormsModule, adminRoutes],
-  exports: [AdminComponent],
   providers: [TipoDeCozinhaService, FormaDePagamentoService]
 })
 export class AdminModule { }

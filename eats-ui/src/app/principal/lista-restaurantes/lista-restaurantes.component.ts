@@ -25,13 +25,11 @@ export class ListaRestaurantesComponent implements OnInit {
       this.tiposDeCozinha = data;
     });
 
-    this.route.params.subscribe(params => {
-      this.cep = params['cep'];
+    this.cep = this.route.snapshot.params.cep;
       if (this.cep) {
         this.restaurantesService.maisProximosPorCep(this.cep)
             .subscribe(restaurantes => this.restaurantesMaisProximos = restaurantes);
       }
-    });
   }
 
   pedir(restaurante) {

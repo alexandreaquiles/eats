@@ -23,17 +23,17 @@ public class Avaliacao {
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotNull @PositiveOrZero @Max(5)
 	private Integer nota;
-	
+
 	@Size(max=255)
 	private String comentario;
-	
+
 	@OneToOne(optional=false)
 	private Pedido pedido;
 
 	@ManyToOne(optional=false)
 	private Restaurante restaurante;
-	
+
 }
