@@ -10,7 +10,7 @@ import { RestauranteService } from '../services/restaurante.service';
 })
 export class RestauranteCadastroComponent implements OnInit {
 
-  restaurante = {
+  restaurante:any = {
     tipoDeCozinha: { }
   }
   tiposDeCozinha:Array<any>

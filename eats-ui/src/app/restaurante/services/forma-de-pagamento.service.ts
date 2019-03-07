@@ -12,12 +12,16 @@ export class FormaDePagamentoService {
   constructor(private http: HttpClient) {
   }
 
-  porIdDoRestaurante(restauranteId) {
-    return this.http.get(`${this.API}/restaurantes/${restauranteId}/formas-de-pagamento`);
+  doRestaurante(restaurante) {
+    return this.http.get(`${this.API}/restaurantes/${restaurante.id}/formas-de-pagamento`);
   }
 
   todas(): Observable<any> {
     return this.http.get(`${this.API}/formas-de-pagamento`);
+  }
+
+  adicionaAoRestaurante(formaDePagamento, restaurante): Observable<any> {
+    return this.http.post(`${this.API}/restaurantes/${restaurante.id}/formas-de-pagamento`, formaDePagamento);
   }
 
 }

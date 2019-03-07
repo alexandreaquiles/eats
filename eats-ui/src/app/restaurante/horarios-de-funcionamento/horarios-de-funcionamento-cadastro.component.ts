@@ -41,7 +41,7 @@ export class HorariosDeFuncionamentoCadastroComponent {
   salva() {
     this.horarioDeFuncionamento.restaurante = this.restaurante;
     this.horarioDeFuncionamentoService.salva(this.restaurante, this.horarioDeFuncionamento)
-      .subscribe(() => this.router.navigate([`/cadastro/restaurante/${this.restaurante.id}/horarios-de-funcionamento`]));
+      .subscribe(() => this.router.navigate([`/cadastro/restaurante/${this.restaurante.id}`]));
   }
 
 }

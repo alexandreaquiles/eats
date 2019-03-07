@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.caelum.eats.model.FormaDePagamento;
@@ -30,6 +32,10 @@ public class FormasDePagamentoController {
 		restaurante.setId(idRestaurante);
 		List<FormaDePagamento> formasDePagamentoDoRestaurante = repo.findAllByRestauranteOrderByNomeAsc(restaurante);
 		return formasDePagamentoDoRestaurante;
+	}
+	
+	@PostMapping("/restaurantes/{idRestaurante}/formas-de-pagamento")
+	public void adiciona(@PathVariable("idRestaurante") Long idRestaurante, @RequestBody FormaDePagamento formaDePagamento) {
 	}
 
 }

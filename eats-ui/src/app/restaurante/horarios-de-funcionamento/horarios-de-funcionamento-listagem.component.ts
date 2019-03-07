@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { HorarioDeFuncionamentoService } from '../services/horario-de-funcionamento.service';
-import { RestauranteService } from '../services/restaurante.service';
 import { DiaDaSemanaService } from '../services/dia-da-semana.service';
 
 @Component({
@@ -11,25 +9,18 @@ import { DiaDaSemanaService } from '../services/dia-da-semana.service';
 })
 export class HorariosDeFuncionamentoListagemComponent implements OnInit {
 
-  restaurante
+  @Input() restaurante
   horariosDeFuncionamento
 
-  constructor(private route: ActivatedRoute,
-              private restauranteService: RestauranteService,
-              private horarioDeFuncionamentoService:HorarioDeFuncionamentoService,
+  constructor(private horarioDeFuncionamentoService:HorarioDeFuncionamentoService,
               private diaDaSemanaService: DiaDaSemanaService) {
   }
 
   ngOnInit() {
-    const restauranteId = this.route.snapshot.params.restauranteId;
-    this.restaurante = {id: restauranteId};
-
-    this.restauranteService.porId(restauranteId)
-      .subscribe(restaurante => this.restaurante = restaurante);
-
-    this.horarioDeFuncionamentoService.todosDoRestaurante({id: restauranteId})
-      .subscribe(horarios => this.horariosDeFuncionamento = horarios);
-
+    if (this.restaurante.id) {
+      this.horarioDeFuncionamentoService.todosDoRestaurante(this.restaurante)
+        .subscribe(horarios => this.horariosDeFuncionamento = horarios);
+    }
   }
 
   remove(horario) {

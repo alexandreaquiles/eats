@@ -15,20 +15,12 @@ const routes: Routes = [
     component: RestauranteCadastroComponent
   },
   {
-    path: 'cadastro/restaurante/:restauranteId/horarios-de-funcionamento',
-    component: HorariosDeFuncionamentoListagemComponent
-  },
-  {
     path: 'cadastro/restaurante/:restauranteId/horarios-de-funcionamento/cadastro',
     component: HorariosDeFuncionamentoCadastroComponent
   },
   {
     path: 'cadastro/restaurante/:restauranteId/horarios-de-funcionamento/cadastro/:horarioId',
     component: HorariosDeFuncionamentoCadastroComponent
-  },
-  {
-    path: 'cadastro/restaurante/:restauranteId/formas-de-pagamento',
-    component: FormasDePagamentoListagemComponent
   }
 ];
 

@@ -49,11 +49,11 @@
   <ng-template #restauranteTemId>
 
     <div>
-      <a routerLink="horarios-de-funcionamento">Horários de Funcionamento</a>
+      <app-horarios-de-funcionamento-listagem [restaurante]="restaurante"></app-horarios-de-funcionamento-listagem>
     </div>
 
     <div>
-      <a routerLink="formas-de-pagamento">Formas de Pagamento</a>
+      <app-formas-de-pagamento-listagem [restaurante]="restaurante"></app-formas-de-pagamento-listagem>
     </div>
 
   </ng-template>

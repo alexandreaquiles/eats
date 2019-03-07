@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Input } from '@angular/core';
 
-import { RestauranteService } from '../services/restaurante.service';
 import { FormaDePagamentoService } from '../services/forma-de-pagamento.service';
 
 @Component({
@@ -10,22 +8,26 @@ import { FormaDePagamentoService } from '../services/forma-de-pagamento.service'
 })
 export class FormasDePagamentoListagemComponent implements OnInit {
 
-  restauranteId
-  restaurante
+  @Input() restaurante
   todasAsFormasDePagamento
-  formasDePagamento
+  formasDePagamentoDoRestaurante
+  formaDePagamentoParaAdicionar
 
-  constructor(private route: ActivatedRoute,
-    private restauranteService: RestauranteService,
-    private formaDePagamentoService:FormaDePagamentoService) {
+  constructor(private formaDePagamentoService:FormaDePagamentoService) {
+    formaDePagamentoService.todas()
+      .subscribe(todasAsFormas => this.todasAsFormasDePagamento = todasAsFormas);
   }
 
   ngOnInit() {
-    this.restauranteId = this.route.snapshot.params.restauranteId;
-    this.restauranteService.porId(this.restauranteId)
-      .subscribe(restaurante => this.restaurante = restaurante);
+    this.formaDePagamentoService.doRestaurante(this.restaurante)
+      .subscribe(formasDePagamento => this.formasDePagamentoDoRestaurante = formasDePagamento);
+  }
 
-    this.formaDePagamentoService.porIdDoRestaurante(this.restauranteId)
-      .subscribe(formasDePagamento => this.formasDePagamento = formasDePagamento);
+  adicionaFormaDePagamentoAoRestaurante() {
+    this.formaDePagamentoService.adicionaAoRestaurante(this.formaDePagamentoParaAdicionar, this.restaurante)
+      .subscribe(() => {
+        this.formasDePagamentoDoRestaurante.push(this.formaDePagamentoParaAdicionar);
+        this.formaDePagamentoParaAdicionar = {};
+      });
   }
 }

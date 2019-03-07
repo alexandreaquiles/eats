@@ -1,5 +1,4 @@
-<h2><small>Restaurante:</small> {{ restaurante?.nome }}</h2>
-<h3>Horários de funcionamento</h3>
+<h2>Horários de Funcionamento</h2>
 <a [routerLink]="['/cadastro/restaurante',restaurante.id,'horarios-de-funcionamento','cadastro']">Adicionar</a>
 <table>
   <thead>
@@ -21,5 +20,3 @@
     </tr>
   </tbody>
 </table>
-
-<a [routerLink]="['/cadastro/restaurante',restaurante.id]">Cancelar</a>
