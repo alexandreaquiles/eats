@@ -24,10 +24,22 @@ export class FormasDePagamentoListagemComponent implements OnInit {
   }
 
   adicionaFormaDePagamentoAoRestaurante() {
-    this.formaDePagamentoService.adicionaAoRestaurante(this.formaDePagamentoParaAdicionar, this.restaurante)
-      .subscribe(() => {
-        this.formasDePagamentoDoRestaurante.push(this.formaDePagamentoParaAdicionar);
-        this.formaDePagamentoParaAdicionar = {};
-      });
+    if (this.formaDePagamentoParaAdicionar) {
+      const jaTem = this.formasDePagamentoDoRestaurante.some(f => f.id == this.formaDePagamentoParaAdicionar.id);
+      if (!jaTem) {
+        this.formaDePagamentoService.adicionaAoRestaurante(this.formaDePagamentoParaAdicionar, this.restaurante)
+        .subscribe(() => {
+            this.formasDePagamentoDoRestaurante.push(this.formaDePagamentoParaAdicionar);
+            this.formasDePagamentoDoRestaurante.sort((a,b) => a.nome.localeCompare(b.nome));
+            this.formaDePagamentoParaAdicionar = {};
+        });
+      }
+    }
+  }
+
+  remove(formaDePagamento) {
+    this.formaDePagamentoService.remove(formaDePagamento, this.restaurante).subscribe(() => {
+      this.formasDePagamentoDoRestaurante = this.formasDePagamentoDoRestaurante.filter(f => f != formaDePagamento);
+    });
   }
 }

@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Max;
@@ -53,9 +52,6 @@ public class Restaurante {
 
 	@ManyToOne(optional=false)
 	private TipoDeCozinha tipoDeCozinha;
-	
-	@ManyToMany
-	private List<FormaDePagamento> formasDePagamento;
 	
 	@OneToMany(mappedBy="restaurante")
 	private List<HorarioDeFuncionamento> horariosDeFuncionamento;

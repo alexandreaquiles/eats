@@ -41,9 +41,11 @@
   <input [(ngModel)]="restaurante.tempoDeEntregaMaximoEmMinutos" type="number" min="10" max="180" id="tempoDeEntregaMaximoEmMinutos" name="tempoDeEntregaMaximoEmMinutos" #tempoDeEntregaMaximoEmMinutos>
   </div>
 
-  <button type="submit" [disabled]="!restauranteForm.form.valid">Salvar</button>
+  <button type="submit" [disabled]="!restauranteForm.form.valid">{{ restaurante.id ? 'Atualizar' : 'Inserir' }}</button>
 
-  <div *ngIf="!restaurante.id; else restauranteTemId">
+</form>
+
+<div *ngIf="!restaurante.id; else restauranteTemId">
     <a routerLink="/">Cancelar</a>
   </div>
   <ng-template #restauranteTemId>
@@ -57,5 +59,3 @@
     </div>
 
   </ng-template>
-
-</form>

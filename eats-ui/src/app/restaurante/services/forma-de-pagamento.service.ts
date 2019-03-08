@@ -24,4 +24,8 @@ export class FormaDePagamentoService {
     return this.http.post(`${this.API}/restaurantes/${restaurante.id}/formas-de-pagamento`, formaDePagamento);
   }
 
+  remove(formaDePagamento, restaurante) {
+    return this.http.delete(`${this.API}/restaurantes/${restaurante.id}/formas-de-pagamento/${formaDePagamento.id}`);
+  }
+
 }

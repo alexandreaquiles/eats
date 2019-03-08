@@ -10,6 +10,6 @@
 <ul>
   <li *ngFor="let formaDePagamento of formasDePagamentoDoRestaurante">
     <span>{{ formaDePagamento.nome }}</span>
-    <td><a (click)="remove(formaDePagamento)">Deletar</a></td>
+    <a (click)="remove(formaDePagamento)">Deletar</a>
   </li>
 </ul>
