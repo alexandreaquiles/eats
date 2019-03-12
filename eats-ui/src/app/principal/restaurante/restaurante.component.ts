@@ -15,7 +15,10 @@ export class RestauranteComponent implements OnInit {
   restauranteId: string
   restaurante
   cardapio
-  avaliacoes:Array<any>
+  avaliacoes:Array<any> = []
+  pedido:any = {
+    itens: []
+  }
 
   constructor(private route: ActivatedRoute,
     private restaurantesService: RestaurantesService,
@@ -29,7 +32,10 @@ export class RestauranteComponent implements OnInit {
 
     this.restaurantesService
       .porId(this.cep, this.restauranteId)
-      .subscribe(restaurante => this.restaurante = restaurante);
+      .subscribe(restaurante => {
+        this.restaurante = restaurante;
+        this.pedido.restaurante = restaurante;
+      });
 
     this.cardapioService
       .porIdDoRestaurante(this.restauranteId)
@@ -41,5 +47,9 @@ export class RestauranteComponent implements OnInit {
 
   }
 
+  pedir(item) {
+    alert(item.nome);
+    this.pedido.itens.push(item);
+  }
 
 }

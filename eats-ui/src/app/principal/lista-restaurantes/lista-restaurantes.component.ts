@@ -12,6 +12,7 @@ export class ListaRestaurantesComponent implements OnInit {
 
   tiposDeCozinha:Array<any>
   cep: string
+  tipoDeCozinhaId: string
   restaurantesMaisProximos:Array<any>
 
   constructor(private route: ActivatedRoute,
@@ -25,11 +26,22 @@ export class ListaRestaurantesComponent implements OnInit {
       this.tiposDeCozinha = data;
     });
 
-    this.cep = this.route.snapshot.params.cep;
-      if (this.cep) {
-        this.restaurantesService.maisProximosPorCep(this.cep)
-            .subscribe(restaurantes => this.restaurantesMaisProximos = restaurantes);
+    this.route.params.subscribe(
+      params => {
+        this.cep = params.cep;
+        if (this.cep) {
+
+          this.tipoDeCozinhaId = params.tipoDeCozinhaId;
+          if (this.tipoDeCozinhaId) {
+            this.restaurantesService.maisProximosPorCepETipoDeCozinha(this.cep, this.tipoDeCozinhaId)
+              .subscribe(restaurantes => this.restaurantesMaisProximos = restaurantes);
+          } else {
+            this.restaurantesService.maisProximosPorCep(this.cep)
+              .subscribe(restaurantes => this.restaurantesMaisProximos = restaurantes);
+          }
+        }
       }
+    );
   }
 
   pedir(restaurante) {

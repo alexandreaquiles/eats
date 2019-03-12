@@ -2,14 +2,14 @@
 
 <input type="search" placeholder="Prato ou restaurante">
 
-<section *ngIf="promocoes?.length">
-  <h2>Promoções</h2>
+<section *ngIf="recomendacoes?.length">
+  <h2>Recomendações</h2>
 </section>
 
 <section *ngIf="tiposDeCozinha?.length">
   <h2>Tipos de Cozinha</h2>
   <ul *ngFor="let tipoDeCozinha of tiposDeCozinha">
-    <li>{{tipoDeCozinha.nome}}</li>
+    <li><a [routerLink]="['/restaurantes', cep, 'tipos-de-cozinha', tipoDeCozinha.id]">{{tipoDeCozinha.nome}}</a></li>
   </ul>
 </section>
 

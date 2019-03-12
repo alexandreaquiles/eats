@@ -14,9 +14,13 @@ const routes: Routes = [
     component: ListaRestaurantesComponent
   },
   {
+    path: 'restaurantes/:cep/tipos-de-cozinha/:tipoDeCozinhaId',
+    component: ListaRestaurantesComponent
+  },
+  {
     path: 'restaurantes/:cep/restaurante/:restauranteId',
     component: RestauranteComponent
-  },
+  }
 ];
 
 export const principalRoutes = RouterModule.forRoot(routes);
