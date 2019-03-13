@@ -23,7 +23,7 @@ INSERT INTO categoria_do_cardapio (id, nome, cardapio_id) values (2, 'PRATOS PRI
 INSERT INTO categoria_do_cardapio (id, nome, cardapio_id) values (3, 'BEBIDAS', 1);
 
 -- ENTRADAS
-INSERT INTO item_cardapio (
+INSERT INTO item_do_cardapio (
   nome,
   descricao,
   preco,
@@ -31,7 +31,7 @@ INSERT INTO item_cardapio (
   categoria_id
 ) values ('Gyoza Bovino - 6 unidades', 'Massa fina cozida a vapor recheada com carne temperada com gengibre', 23.5, null, 1);
 
-INSERT INTO item_cardapio (
+INSERT INTO item_do_cardapio (
   nome,
   descricao,
   preco,
@@ -39,7 +39,7 @@ INSERT INTO item_cardapio (
   categoria_id
 ) values ('Pão Chinês - 3 unidades', 'Pão macio e fofinho recheado de frango e legumes', 11.9, 9.9, 1);
 
-INSERT INTO item_cardapio (
+INSERT INTO item_do_cardapio (
   nome,
   descricao,
   preco,
@@ -48,7 +48,7 @@ INSERT INTO item_cardapio (
 ) values ('Rolinho Primavera - 2 unidades', 'Massa fina recheada com carne, repolho e cenoura. Acompanha molho agridoce', 9.9, null, 1);
 
 -- PRATOS PRINCIPAIS
-INSERT INTO item_cardapio (
+INSERT INTO item_do_cardapio (
   nome,
   descricao,
   preco,
@@ -56,7 +56,7 @@ INSERT INTO item_cardapio (
   categoria_id
 ) values ('Yakissoba Clássico', 'Yakissoba de carne e frango acompanhado por legumes frescos e champignons', 40.9, 39.9, 2);
 
-INSERT INTO item_cardapio (
+INSERT INTO item_do_cardapio (
   nome,
   descricao,
   preco,
@@ -64,7 +64,7 @@ INSERT INTO item_cardapio (
   categoria_id
 ) values ('Macarrão Xian', 'Macarrão com molho à base de shoyu, cubos de frango e legumes', 17.9, null, 2);
 
-INSERT INTO item_cardapio (
+INSERT INTO item_do_cardapio (
   nome,
   descricao,
   preco,
@@ -73,7 +73,7 @@ INSERT INTO item_cardapio (
 ) values ('Yakimeshi', 'Arroz soltinho refogado com flocos de ovos, pedacinhos de cenoura, apresuntado e cebolinha', 21.9, null, 2);
 
 -- BEBIDAS
-INSERT INTO item_cardapio (
+INSERT INTO item_do_cardapio (
   nome,
   descricao,
   preco,
@@ -81,7 +81,7 @@ INSERT INTO item_cardapio (
   categoria_id
 ) values ('Coca-Cola Lata 310 ML', null, 5.9, null, 3);
 
-INSERT INTO item_cardapio (
+INSERT INTO item_do_cardapio (
   nome,
   descricao,
   preco,
@@ -89,7 +89,7 @@ INSERT INTO item_cardapio (
   categoria_id
 ) values ('Coca-Cola Zero Lata 310 ML', null, 5.9, null, 3);
 
-INSERT INTO item_cardapio (
+INSERT INTO item_do_cardapio (
   nome,
   descricao,
   preco,

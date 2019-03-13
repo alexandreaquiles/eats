@@ -19,30 +19,19 @@ export class FormaDePagamentoCadastroComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.formaDePagamentoService.tipos().subscribe(data => {
       this.tiposDeFormaDePagamento = data;
     });
 
     const id = this.route.snapshot.params.id;
-      if (id) {
-        this.formaDePagamentoService.porId(id).subscribe((formaDePagamento: any) => {
-          if (formaDePagamento) {
-            this.formaDePagamento = formaDePagamento;
-          } else {
-            this.gotoList();
-          }
-        });
-      }
-  }
-
-  gotoList() {
-    this.router.navigate(['/admin/forma-de-pagamento']);
+    if (id) {
+      this.formaDePagamentoService.porId(id).subscribe(formaDePagamento => this.formaDePagamento = formaDePagamento);
+    }
   }
 
   salva() {
-    this.formaDePagamentoService.salva(this.formaDePagamento).subscribe(result => {
-      this.gotoList();
+    this.formaDePagamentoService.salva(this.formaDePagamento).subscribe(() => {
+      this.router.navigate(['/admin/forma-de-pagamento']);
     }, error => console.error(error));
   }
 

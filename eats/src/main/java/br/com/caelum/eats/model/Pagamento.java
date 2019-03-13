@@ -12,8 +12,8 @@ public class Pagamento {
 	
 	private Long id;
 	private BigDecimal valor;
-	private FormaDePagamento formaDePagamento;
 	private Status status;
 	private Pedido pedido;
+	private FormaDePagamento formaDePagamento;
 
 }

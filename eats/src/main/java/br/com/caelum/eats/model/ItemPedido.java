@@ -19,17 +19,14 @@ import lombok.NoArgsConstructor;
 public class ItemPedido {
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 
-	@ManyToOne(optional=false)
-	private Pedido pedido;
-
-	@ManyToOne(optional=false)
-	private ItemCardapio itemCardapio;
-	
 	@NotNull @Positive
 	private Integer quantidade;
 
 	private String observacao;
+
+	@ManyToOne(optional=false)
+	private ItemDoCardapio itemCardapio;
 
 }

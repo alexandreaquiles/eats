@@ -1,0 +1,26 @@
+<h2><small>Categoria: </small> {{ categoria.nome }}</h2>
+
+<h3>Cardápio do restaurante: <small>{{ restaurante.nome }}</small></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Descrição</th>
+      <th>Preço</th>
+      <th>Preço Promocional</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of categoria.itens">
+      <td>{{ item.nome }}</td>
+      <td>{{ item.descricao }}</td>
+      <td>{{ item.preco  | currency:'BRL'  }}</td>
+      <td>{{ item.precoPromocional  | currency:'BRL'  }}</td>
+      <td><a [routerLink]="['/cadastro/restaurante',restaurante.id, 'cardapio', cardapio.id, 'categoria', categoria.id, 'item', item.id]">Editar</a></td>
+      <td><a (click)="removerItemCardapio(item)">Deletar</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<a [routerLink]="['/cadastro/restaurante',restaurante.id]">Voltar</a>

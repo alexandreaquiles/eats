@@ -1,4 +1,4 @@
-CREATE TABLE item_cardapio (
+CREATE TABLE item_do_cardapio (
   id bigint(20) NOT NULL AUTO_INCREMENT,
   descricao varchar(255) DEFAULT NULL,
   nome varchar(150) DEFAULT NULL,

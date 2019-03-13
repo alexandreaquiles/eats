@@ -1,9 +1,9 @@
 import { RouterModule, Routes } from '@angular/router';
 
 import { RestauranteCadastroComponent } from './restaurante-cadastro/restaurante-cadastro.component';
-import { HorariosDeFuncionamentoListagemComponent } from './horarios-de-funcionamento/horarios-de-funcionamento-listagem.component';
 import { HorariosDeFuncionamentoCadastroComponent } from './horarios-de-funcionamento/horarios-de-funcionamento-cadastro.component';
-import { FormasDePagamentoListagemComponent } from './formas-de-pagamento/formas-de-pagamento-listagem.component';
+import { CategoriaDoCardapioCadastroComponent } from './cardapio/categoria-do-cardapio-cadastro.component';
+import { ItemDoCardapioCadastroComponent } from './cardapio/item-do-cardapio-cadastro.component';
 
 const routes: Routes = [
   {
@@ -15,12 +15,20 @@ const routes: Routes = [
     component: RestauranteCadastroComponent
   },
   {
-    path: 'cadastro/restaurante/:restauranteId/horarios-de-funcionamento/cadastro',
+    path: 'cadastro/restaurante/:restauranteId/horarios-de-funcionamento',
     component: HorariosDeFuncionamentoCadastroComponent
   },
   {
-    path: 'cadastro/restaurante/:restauranteId/horarios-de-funcionamento/cadastro/:horarioId',
+    path: 'cadastro/restaurante/:restauranteId/horarios-de-funcionamento/:horarioId',
     component: HorariosDeFuncionamentoCadastroComponent
+  },
+  {
+    path: 'cadastro/restaurante/:restauranteId/cardapio/:cardapioId/categoria/:categoriaId',
+    component: CategoriaDoCardapioCadastroComponent
+  },
+  {
+    path: 'cadastro/restaurante/:restauranteId/cardapio/:cardapioId/categoria/:categoriaId/item/:itemId',
+    component: ItemDoCardapioCadastroComponent
   }
 ];
 

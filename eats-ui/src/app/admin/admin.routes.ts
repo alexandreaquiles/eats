@@ -5,6 +5,7 @@ import { TipoDeCozinhaListagemComponent } from './tipo-de-cozinha/tipo-de-cozinh
 import { TipoDeCozinhaCadastroComponent } from './tipo-de-cozinha/tipo-de-cozinha-cadastro.component';
 import { FormaDePagamentoListagemComponent } from './forma-de-pagamento/forma-de-pagamento-listagem.component';
 import { FormaDePagamentoCadastroComponent } from './forma-de-pagamento/forma-de-pagamento-cadastro.component';
+import { RestauranteEmAprovacaoComponent } from './restaurantes-em-aprovacao/restaurantes-em-aprovacao.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,10 @@ const routes: Routes = [
   {
     path: 'admin/forma-de-pagamento/cadastro/:id',
     component: FormaDePagamentoCadastroComponent
+  },
+  {
+    path: 'admin/restaurantes-em-aprovacao',
+    component: RestauranteEmAprovacaoComponent
   }
 ];
 

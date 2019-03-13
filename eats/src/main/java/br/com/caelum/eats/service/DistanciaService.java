@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.caelum.eats.dto.RestauranteComDistancia;
 import br.com.caelum.eats.model.Restaurante;
+import br.com.caelum.eats.model.TipoDeCozinha;
 import br.com.caelum.eats.repository.RestauranteRepository;
 
 @Service
@@ -23,9 +24,18 @@ public class DistanciaService {
 	
 	public List<RestauranteComDistancia> restaurantesMaisProximosAoCep(String cep) {
 		Pageable limit = PageRequest.of(0,5);
-		return repo
-				.findAll(limit)
-				.getContent()
+		return calculaDistanciaParaOsRestaurantes(repo.findAllByAprovado(true, limit).getContent(), cep);
+	}
+
+	public List<RestauranteComDistancia> restaurantesDoTipoDeCozinhaMaisProximosAoCep(Long tipoDeCozinhaId, String cep) {
+		Pageable limit = PageRequest.of(0,5);
+		TipoDeCozinha tipo = new TipoDeCozinha();
+		tipo.setId(tipoDeCozinhaId);
+		return calculaDistanciaParaOsRestaurantes(repo.findAllByAprovadoAndTipoDeCozinha(true, tipo, limit).getContent(), cep);
+	}
+	
+	public List<RestauranteComDistancia> calculaDistanciaParaOsRestaurantes(List<Restaurante> restaurantes, String cep) {
+		return restaurantes
 				.stream()
 				.map(restaurante -> {
 					BigDecimal distancia = new BigDecimal(Math.random()*15);
@@ -54,4 +64,5 @@ public class DistanciaService {
 			}
 		}
 	}
+
 }
