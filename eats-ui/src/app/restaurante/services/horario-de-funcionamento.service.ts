@@ -24,20 +24,20 @@ export class HorarioDeFuncionamentoService {
       );
   }
 
-  porId(restaurante, horario) {
-    return this.http.get(`${this.API}/${restaurante.id}/horarios-de-funcionamento/${horario.id}`);
+  porId(restauranteId, horarioId) {
+    return this.http.get(`${this.API}/${restauranteId}/horarios-de-funcionamento/${horarioId}`);
   }
 
-  salva(restaurante: any, horario: any): Observable<any> {
+  salva(horario): Observable<any> {
     if (horario.id) {
-      return this.http.put(`${this.API}/${restaurante.id}/horarios-de-funcionamento/${horario.id}`, horario);
+      return this.http.put(`${this.API}/${horario.restaurante.id}/horarios-de-funcionamento/${horario.id}`, horario);
     } else {
-      return this.http.post(`${this.API}/${restaurante.id}/horarios-de-funcionamento`, horario);
+      return this.http.post(`${this.API}/${horario.restaurante.id}/horarios-de-funcionamento`, horario);
     }
   }
 
-  remove(restaurante, horarioDeFuncionamento: any) {
-    return this.http.delete(`${this.API}/${restaurante.id}/horarios-de-funcionamento/${horarioDeFuncionamento.id}`);
+  remove(horario) {
+    return this.http.delete(`${this.API}/${horario.restaurante.id}/horarios-de-funcionamento/${horario.id}`);
   }
 
   ordena(horarios) {

@@ -30,8 +30,8 @@ export class HorariosDeFuncionamentoCadastroComponent {
     const horarioId = this.route.snapshot.params.horarioId;
 
     if (horarioId) {
-      this.horarioDeFuncionamentoService.porId({id: restauranteId}, {id: horarioId})
-      .subscribe(horario => this.horarioDeFuncionamento = horario);
+      this.horarioDeFuncionamentoService.porId(restauranteId, horarioId)
+        .subscribe(horario => this.horarioDeFuncionamento = horario);
     }
 
   }
@@ -40,7 +40,7 @@ export class HorariosDeFuncionamentoCadastroComponent {
 
   salva() {
     this.horarioDeFuncionamento.restaurante = this.restaurante;
-    this.horarioDeFuncionamentoService.salva(this.restaurante, this.horarioDeFuncionamento)
+    this.horarioDeFuncionamentoService.salva( this.horarioDeFuncionamento)
       .subscribe(() => this.router.navigate([`/cadastro/restaurante/${this.restaurante.id}`]));
   }
 

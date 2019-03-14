@@ -27,7 +27,8 @@ export class FormasDePagamentoListagemComponent implements OnInit {
     if (this.formaDePagamentoParaAdicionar) {
       const jaTem = this.formasDePagamentoDoRestaurante.some(f => f.id == this.formaDePagamentoParaAdicionar.id);
       if (!jaTem) {
-        this.formaDePagamentoService.adicionaAoRestaurante(this.formaDePagamentoParaAdicionar, this.restaurante)
+        this.formaDePagamentoParaAdicionar.restaurante = this.restaurante;
+        this.formaDePagamentoService.adicionaAoRestaurante(this.formaDePagamentoParaAdicionar)
         .subscribe(() => {
             this.formasDePagamentoDoRestaurante.push(this.formaDePagamentoParaAdicionar);
             this.formasDePagamentoDoRestaurante.sort((a,b) => a.nome.localeCompare(b.nome));
@@ -38,8 +39,9 @@ export class FormasDePagamentoListagemComponent implements OnInit {
   }
 
   remove(formaDePagamento) {
-    this.formaDePagamentoService.remove(formaDePagamento, this.restaurante).subscribe(() => {
-      this.formasDePagamentoDoRestaurante = this.formasDePagamentoDoRestaurante.filter(f => f != formaDePagamento);
+    formaDePagamento.restaurante = this.restaurante;
+    this.formaDePagamentoService.remove(formaDePagamento).subscribe(() => {
+      this.formasDePagamentoDoRestaurante = this.formasDePagamentoDoRestaurante.filter(f => f !== formaDePagamento);
     });
   }
 }

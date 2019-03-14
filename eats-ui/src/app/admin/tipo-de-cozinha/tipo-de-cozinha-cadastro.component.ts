@@ -20,24 +20,12 @@ export class TipoDeCozinhaCadastroComponent implements OnInit {
       const id = this.route.snapshot.params.id;
       if (id) {
         this.tipoDeCozinhaService.porId(id)
-          .subscribe((tipoDeCozinha: any) => {
-            if (tipoDeCozinha) {
-              this.tipoDeCozinha = tipoDeCozinha;
-            } else {
-              this.gotoList();
-            }
-          });
+          .subscribe(tipoDeCozinha => this.tipoDeCozinha = tipoDeCozinha);
       }
   }
 
-  gotoList() {
-    this.router.navigate(['/admin/tipo-de-cozinha']);
-  }
-
   salva() {
-    this.tipoDeCozinhaService.salva(this.tipoDeCozinha).subscribe(result => {
-      this.gotoList();
-    }, error => console.error(error));
+    this.tipoDeCozinhaService.salva(this.tipoDeCozinha).subscribe(() => this.router.navigate(['/admin/tipo-de-cozinha']));
   }
 
 }

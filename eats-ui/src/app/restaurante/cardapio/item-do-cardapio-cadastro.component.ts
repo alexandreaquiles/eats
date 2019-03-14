@@ -12,10 +12,10 @@ import { ItemDoCardapioService } from '../services/item-do-cardapio.service';
 })
 export class ItemDoCardapioCadastroComponent implements OnInit {
 
-  restaurante:any = {}
-  cardapio:any = {}
-  categoria:any = {}
-  item:any = {}
+  restaurante: any = {};
+  cardapio: any = {};
+  categoria: any = {};
+  item: any = {};
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -39,13 +39,17 @@ export class ItemDoCardapioCadastroComponent implements OnInit {
       .subscribe(categoria => this.categoria = categoria);
 
     const itemId = this.route.snapshot.params.itemId;
-    this.itemDoCardapioService.porId(restauranteId, cardapioId, categoriaId, itemId)
+    if (itemId) {
+      this.itemDoCardapioService.porId(restauranteId, cardapioId, categoriaId, itemId)
       .subscribe(item => this.item = item);
+    }
   }
 
   salva() {
+    this.cardapio.restaurante = this.restaurante;
+    this.categoria.cardapio = this.cardapio;
     this.item.categoria = this.categoria;
-    this.itemDoCardapioService.salva(this.restaurante, this.cardapio, this.categoria, this.item).subscribe(() => {
+    this.itemDoCardapioService.salva(this.item).subscribe(() => {
       this.router.navigate(['/cadastro/restaurante', this.restaurante.id, 'cardapio', this.cardapio.id, 'categoria', this.categoria.id]);
     });
   }

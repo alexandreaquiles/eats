@@ -10,10 +10,11 @@ import { RestauranteService } from '../services/restaurante.service';
 })
 export class RestauranteCadastroComponent implements OnInit {
 
-  restaurante:any = {
+  restaurante: any = {
     tipoDeCozinha: { }
-  }
-  tiposDeCozinha:Array<any>
+  };
+
+  tiposDeCozinha:Array<any>;
 
   constructor(
               private route: ActivatedRoute,
@@ -28,24 +29,18 @@ export class RestauranteCadastroComponent implements OnInit {
     });
 
     const id = this.route.snapshot.params.id;
-      if (id) {
-        this.restauranteService.porId(id).subscribe((restaurante:any) => {
-          if (restaurante) {
-            this.restaurante = restaurante;
-            this.gotoEdit(restaurante.id)
-          }
-        });
-      }
+    if (id) {
+      this.restauranteService.porId(id).subscribe((restaurante: any) => {
+        if (restaurante) {
+          this.restaurante = restaurante;
+          this.router.navigate(['/cadastro/restaurante/' + restaurante.id]);
+        }
+      });
     }
-
-  gotoEdit(id) {
-    this.router.navigate(['/cadastro/restaurante/'+id]);
   }
 
   salvaRestaurante() {
-    this.restauranteService.salva(this.restaurante).subscribe(result => {
-      this.restaurante = result;
-    }, error => console.error(error));
+    this.restauranteService.salva(this.restaurante).subscribe(restaurante => this.restaurante = restaurante);
   }
 
 }

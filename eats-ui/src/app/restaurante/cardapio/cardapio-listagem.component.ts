@@ -9,11 +9,11 @@ import { CategoriaDoCardapioService } from '../services/categoria-do-cardapio.se
 })
 export class CardapioListagemComponent implements OnInit {
 
-  @Input() restaurante
-  cardapio:any = {
+  @Input() restaurante;
+  cardapio: any = {
     categorias: []
-  }
-  categoriaDoCardapioParaAdicionar:any = {}
+  };
+  categoriaDoCardapioParaAdicionar: any = {};
 
   constructor(private cardapioService: CardapioService,
               private categoriaDoCardapioService: CategoriaDoCardapioService) {
@@ -28,7 +28,9 @@ export class CardapioListagemComponent implements OnInit {
   }
 
   adicionaCategoriaAoCardapio() {
-    this.categoriaDoCardapioService.adicionaCategoriaAoCardapio(this.restaurante, this.cardapio, this.categoriaDoCardapioParaAdicionar)
+    this.cardapio.restaurante = this.restaurante;
+    this.categoriaDoCardapioParaAdicionar.cardapio = this.cardapio;
+    this.categoriaDoCardapioService.adicionaCategoriaAoCardapio(this.categoriaDoCardapioParaAdicionar)
       .subscribe(categoriaAdicionada => this.cardapio.categorias.push(categoriaAdicionada));
   }
 

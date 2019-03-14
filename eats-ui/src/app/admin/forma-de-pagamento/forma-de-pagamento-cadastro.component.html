@@ -7,7 +7,6 @@
 
   <select [(ngModel)]="formaDePagamento.tipo" required name="tipo" #tipo>
     <option *ngFor="let tipo of tiposDeFormaDePagamento" [value]="tipo">{{tipo}}</option>
-
    </select>
 
   <button type="submit" [disabled]="!formaDePagamentoForm.form.valid">Salvar</button>

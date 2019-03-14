@@ -2,6 +2,8 @@
 
 <h3>Cardápio do restaurante: <small>{{ restaurante.nome }}</small></h3>
 
+<td><a [routerLink]="['/cadastro/restaurante',restaurante.id, 'cardapio', cardapio.id, 'categoria', categoria.id, 'item']">Adicionar</a></td>
+
 <table>
   <thead>
     <tr>

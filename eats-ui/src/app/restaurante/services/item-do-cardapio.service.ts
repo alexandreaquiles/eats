@@ -16,7 +16,10 @@ export class ItemDoCardapioService {
     return this.http.get(`${this.API}/${restauranteId}/cardapio/${cardapioId}/categoria/${categoriaId}/item/${itemId}`);
   }
 
-  salva(restaurante, cardapio, categoria, item): Observable<any> {
+  salva(item): Observable<any> {
+    const categoria = item.categoria;
+    const cardapio = categoria.cardapio;
+    const restaurante = cardapio.restaurante;
     if (item.id) {
       return this.http.put(`${this.API}/${restaurante.id}/cardapio/${cardapio.id}/categoria/${categoria.id}/item/${item.id}`, item);
     }

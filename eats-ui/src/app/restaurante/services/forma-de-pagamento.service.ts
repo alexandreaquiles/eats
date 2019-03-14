@@ -20,12 +20,12 @@ export class FormaDePagamentoService {
     return this.http.get(`${this.API}/formas-de-pagamento`);
   }
 
-  adicionaAoRestaurante(formaDePagamento, restaurante): Observable<any> {
-    return this.http.post(`${this.API}/restaurantes/${restaurante.id}/formas-de-pagamento`, formaDePagamento);
+  adicionaAoRestaurante(formaDePagamento): Observable<any> {
+    return this.http.post(`${this.API}/restaurantes/${formaDePagamento.restaurante.id}/formas-de-pagamento`, formaDePagamento);
   }
 
-  remove(formaDePagamento, restaurante) {
-    return this.http.delete(`${this.API}/restaurantes/${restaurante.id}/formas-de-pagamento/${formaDePagamento.id}`);
+  remove(formaDePagamento) {
+    return this.http.delete(`${this.API}/restaurantes/${formaDePagamento.restaurante.id}/formas-de-pagamento/${formaDePagamento.id}`);
   }
 
 }

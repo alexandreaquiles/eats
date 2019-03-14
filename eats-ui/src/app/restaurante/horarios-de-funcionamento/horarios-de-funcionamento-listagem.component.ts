@@ -24,8 +24,9 @@ export class HorariosDeFuncionamentoListagemComponent implements OnInit {
   }
 
   remove(horario) {
-    this.horarioDeFuncionamentoService.remove(this.restaurante, horario).subscribe(() => {
-      this.horariosDeFuncionamento = this.horariosDeFuncionamento.filter(h => h != horario);
+    horario.restaurante = this.restaurante;
+    this.horarioDeFuncionamentoService.remove(horario).subscribe(() => {
+      this.horariosDeFuncionamento = this.horariosDeFuncionamento.filter(h => h !== horario);
     });
   }
 

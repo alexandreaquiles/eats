@@ -30,9 +30,7 @@ export class FormaDePagamentoCadastroComponent implements OnInit {
   }
 
   salva() {
-    this.formaDePagamentoService.salva(this.formaDePagamento).subscribe(() => {
-      this.router.navigate(['/admin/forma-de-pagamento']);
-    }, error => console.error(error));
+    this.formaDePagamentoService.salva(this.formaDePagamento).subscribe(() => this.router.navigate(['/admin/forma-de-pagamento']));
   }
 
 }

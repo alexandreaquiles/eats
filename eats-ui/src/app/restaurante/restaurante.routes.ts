@@ -27,6 +27,10 @@ const routes: Routes = [
     component: CategoriaDoCardapioCadastroComponent
   },
   {
+    path: 'cadastro/restaurante/:restauranteId/cardapio/:cardapioId/categoria/:categoriaId/item',
+    component: ItemDoCardapioCadastroComponent
+  },
+  {
     path: 'cadastro/restaurante/:restauranteId/cardapio/:cardapioId/categoria/:categoriaId/item/:itemId',
     component: ItemDoCardapioCadastroComponent
   }

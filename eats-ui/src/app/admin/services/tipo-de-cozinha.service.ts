@@ -21,13 +21,10 @@ export class TipoDeCozinhaService {
   }
 
   salva(tipoDeCozinha: any): Observable<any> {
-    let result: Observable<Object>;
     if (tipoDeCozinha.id) {
-      result = this.http.put(this.ADMIN_API + '/' + tipoDeCozinha.id, tipoDeCozinha);
-    } else {
-      result = this.http.post(this.ADMIN_API, tipoDeCozinha);
+     return this.http.put(this.ADMIN_API + '/' + tipoDeCozinha.id, tipoDeCozinha);
     }
-    return result;
+    return this.http.post(this.ADMIN_API, tipoDeCozinha);
   }
 
   remove(tipoDeCozinha: any) {

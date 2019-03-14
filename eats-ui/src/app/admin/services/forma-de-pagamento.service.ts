@@ -21,13 +21,10 @@ export class FormaDePagamentoService {
   }
 
   salva(formaDePagamento: any): Observable<any> {
-    let result: Observable<Object>;
     if (formaDePagamento.id) {
-      result = this.http.put(this.ADMIN_API + '/' + formaDePagamento.id, formaDePagamento);
-    } else {
-      result = this.http.post(this.ADMIN_API, formaDePagamento);
+      return this.http.put(this.ADMIN_API + '/' + formaDePagamento.id, formaDePagamento);
     }
-    return result;
+    return this.http.post(this.ADMIN_API, formaDePagamento);
   }
 
   remove(formaDePagamento: any) {

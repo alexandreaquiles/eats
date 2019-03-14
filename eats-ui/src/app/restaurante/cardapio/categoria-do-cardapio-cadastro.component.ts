@@ -11,9 +11,9 @@ import { CategoriaDoCardapioService } from '../services/categoria-do-cardapio.se
 })
 export class CategoriaDoCardapioCadastroComponent implements OnInit {
 
-  restaurante:any = {}
-  cardapio:any = {}
-  categoria:any = {}
+  restaurante: any = {};
+  cardapio: any = {};
+  categoria: any = {};
 
   constructor(private route: ActivatedRoute,
               private restauranteService: RestauranteService,
@@ -38,7 +38,10 @@ export class CategoriaDoCardapioCadastroComponent implements OnInit {
   }
 
   removerItemCardapio(item) {
-    this.categoriaDoCardapioService.remove(this.restaurante, this.cardapio, this.categoria, item)
-      .subscribe(() => this.categoria.itens = this.categoria.itens.filter(i => i != item));
+    this.cardapio.restaurante = this.restaurante;
+    this.categoria.cardapio = this.cardapio;
+    item.categoria = this.categoria;
+    this.categoriaDoCardapioService.remove(item)
+      .subscribe(() => this.categoria.itens = this.categoria.itens.filter(i => i !== item));
   }
 }

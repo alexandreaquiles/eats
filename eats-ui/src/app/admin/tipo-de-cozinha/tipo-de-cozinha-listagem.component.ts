@@ -12,15 +12,15 @@ export class TipoDeCozinhaListagemComponent implements OnInit {
   constructor(private tipoDeCozinhaService: TipoDeCozinhaService) { }
 
   ngOnInit() {
-    this.tipoDeCozinhaService.todos().subscribe(data => {
-      this.tiposDeCozinha = data;
+    this.tipoDeCozinhaService.todos().subscribe(tiposDeCozinha => {
+      this.tiposDeCozinha = tiposDeCozinha;
     });
   }
 
   remove(tipoDeCozinha) {
-    this.tipoDeCozinhaService.remove(tipoDeCozinha).subscribe(result => {
-      this.tiposDeCozinha = this.tiposDeCozinha.filter(t => t.id != tipoDeCozinha.id);
-    }, error => console.error(error));
+    this.tipoDeCozinhaService.remove(tipoDeCozinha).subscribe(() =>
+      this.tiposDeCozinha = this.tiposDeCozinha.filter(t => t.id !== tipoDeCozinha.id)
+    );
   }
 
 }

@@ -17,13 +17,10 @@ export class RestauranteService {
   }
 
   salva(restaurante): Observable<any> {
-    let result: Observable<Object>;
     if (restaurante.id) {
-      result = this.http.put(this.API + '/' + restaurante.id, restaurante);
-    } else {
-      result = this.http.post(this.API, restaurante);
+      return this.http.put(this.API + '/' + restaurante.id, restaurante);
     }
-    return result;
+    return this.http.post(this.API, restaurante);
   }
 
 }

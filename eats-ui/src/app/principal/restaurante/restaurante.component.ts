@@ -19,11 +19,12 @@ export class RestauranteComponent implements OnInit {
   pedido:any = {
     itens: []
   }
+  itemDoPedidoEscolhido
 
   constructor(private route: ActivatedRoute,
-    private restaurantesService: RestaurantesService,
-    private cardapioService: CardapioService,
-    private avaliacoesService: AvaliacoesService) {
+              private restaurantesService: RestaurantesService,
+              private cardapioService: CardapioService,
+              private avaliacoesService: AvaliacoesService) {
   }
 
   ngOnInit() {
@@ -47,9 +48,17 @@ export class RestauranteComponent implements OnInit {
 
   }
 
-  pedir(item) {
-    alert(item.nome);
-    this.pedido.itens.push(item);
+  escolherItemDoCardapio(itemDoCardapio) {
+    this.itemDoPedidoEscolhido = { itemDoCardapio, quantidade: 1 };
+  }
+
+  adicionarItemAoPedido() {
+    this.pedido.itens.push(this.itemDoPedidoEscolhido);
+    this.itemDoPedidoEscolhido = null;
+  }
+
+  fazerPedido() {
+    // TODO
   }
 
 }

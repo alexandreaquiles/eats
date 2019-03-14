@@ -18,9 +18,8 @@ export class FormaDePagamentoListagemComponent implements OnInit {
   }
 
   remove(formaDePagamento) {
-    this.formaDePagamentoService.remove(formaDePagamento).subscribe(result => {
-      this.formasDePagamento = this.formasDePagamento.filter(f => f.id != formaDePagamento.id);
-    }, error => console.error(error));
+    this.formaDePagamentoService.remove(formaDePagamento).subscribe(() =>
+      this.formasDePagamento = this.formasDePagamento.filter(f => f.id !== formaDePagamento.id));
   }
 
 }
