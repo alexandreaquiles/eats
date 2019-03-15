@@ -5,9 +5,9 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable()
-export class PedidoService {
+export class PagamentoService {
 
-  private API = environment.baseUrl + '/pedidos';
+  private API = environment.baseUrl + '/pagamentos';
 
   constructor(private http: HttpClient) {
   }
@@ -16,8 +16,16 @@ export class PedidoService {
     return this.http.get(`${this.API}/${pedidoId}`);
   }
 
-  adiciona(pedido): Observable<any> {
+  cria(pedido): Observable<any> {
     return this.http.post(`${this.API}`, pedido);
+  }
+
+  confirma(pedido): Observable<any> {
+    return this.http.put(`${this.API}/${pedido.id}`, pedido);
+  }
+
+  cancela(pedido): Observable<any> {
+    return this.http.delete(`${this.API}/${pedido.id}`, pedido);
   }
 
 }

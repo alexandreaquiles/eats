@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.caelum.eats.dto.HorarioDeFuncionamentoSemRestaurante;
+import br.com.caelum.eats.dto.HorarioDeFuncionamentoDto;
 import br.com.caelum.eats.exception.ResourceNotFoundException;
 import br.com.caelum.eats.model.HorarioDeFuncionamento;
 import br.com.caelum.eats.model.Restaurante;
@@ -27,17 +27,17 @@ public class HorarioDeFuncionamentoController {
 	}
 	
 	@GetMapping("/restaurantes/{idRestaurante}/horarios-de-funcionamento/{id}")
-	public HorarioDeFuncionamentoSemRestaurante detalha(@PathVariable("id") Long id) {
+	public HorarioDeFuncionamentoDto detalha(@PathVariable("id") Long id) {
 		HorarioDeFuncionamento horario = repo.findById(id).orElseThrow(() -> new ResourceNotFoundException());
-		return new HorarioDeFuncionamentoSemRestaurante(horario);
+		return new HorarioDeFuncionamentoDto(horario);
 	}
 
 	@GetMapping("/restaurantes/{idRestaurante}/horarios-de-funcionamento")
-	public List<HorarioDeFuncionamentoSemRestaurante> lista(@PathVariable("idRestaurante") Long idRestaurante) {
+	public List<HorarioDeFuncionamentoDto> lista(@PathVariable("idRestaurante") Long idRestaurante) {
 		Restaurante restaurante = new Restaurante();
 		restaurante.setId(idRestaurante);
 		List<HorarioDeFuncionamento> horariosDoRestaurante = repo.findAllByRestaurante(restaurante);
-		return horariosDoRestaurante.stream().map(h -> new HorarioDeFuncionamentoSemRestaurante(h)).collect(Collectors.toList());
+		return horariosDoRestaurante.stream().map(h -> new HorarioDeFuncionamentoDto(h)).collect(Collectors.toList());
 	}
 
 	@PostMapping("/restaurantes/{idRestaurante}/horarios-de-funcionamento")

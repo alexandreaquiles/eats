@@ -5,4 +5,3 @@ INSERT INTO forma_de_pagamento (id, nome, tipo) values (4, 'Alelo', 'VALE_REFEIC
 INSERT INTO forma_de_pagamento (id, nome, tipo) values (5, 'Ticket Restaurante', 'VALE_REFEICAO');
 INSERT INTO forma_de_pagamento (id, nome, tipo) values (6, 'MasterCard Maestro', 'CARTAO_DEBITO');
 INSERT INTO forma_de_pagamento (id, nome, tipo) values (7, 'Visa Débito', 'CARTAO_DEBITO');
-INSERT INTO forma_de_pagamento (id, nome, tipo) values (8, 'Dinheiro', 'DINHEIRO');

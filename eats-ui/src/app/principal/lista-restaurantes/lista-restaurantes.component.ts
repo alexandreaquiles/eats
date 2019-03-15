@@ -44,7 +44,7 @@ export class ListaRestaurantesComponent implements OnInit {
     );
   }
 
-  pedir(restaurante) {
+  escolher(restaurante) {
     this.router.navigateByUrl(`/restaurantes/${this.cep}/restaurante/${restaurante.id}`);
   }
 }

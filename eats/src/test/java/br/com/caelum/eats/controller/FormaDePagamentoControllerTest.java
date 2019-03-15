@@ -100,7 +100,6 @@ public class FormaDePagamentoControllerTest {
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 			.andExpect(jsonPath("$").isArray())
 			.andExpect(jsonPath("$.length()").value(4))
-			.andExpect(jsonPath("$.[0]").value("DINHEIRO"))
 			.andExpect(jsonPath("$.[1]").value("CARTAO_CREDITO"))
 			.andExpect(jsonPath("$.[2]").value("CARTAO_DEBITO"))
 			.andExpect(jsonPath("$.[3]").value("VALE_REFEICAO"));

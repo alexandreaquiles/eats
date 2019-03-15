@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RestaurantesService } from '../services/restaurantes.service';
 import { CardapioService } from '../services/cardapio.service';
 import { AvaliacoesService } from '../services/avaliacoes.service';
+import { PedidoService } from '../services/pedido.service';
 
 @Component({
   selector: 'app-restaurante',
@@ -12,7 +13,6 @@ import { AvaliacoesService } from '../services/avaliacoes.service';
 export class RestauranteComponent implements OnInit {
 
   cep: string
-  restauranteId: string
   restaurante
   cardapio
   avaliacoes:Array<any> = []
@@ -20,45 +20,77 @@ export class RestauranteComponent implements OnInit {
     itens: []
   }
   itemDoPedidoEscolhido
+  adicionandoItemAoPedido = false;
 
   constructor(private route: ActivatedRoute,
+              private router: Router,
               private restaurantesService: RestaurantesService,
               private cardapioService: CardapioService,
-              private avaliacoesService: AvaliacoesService) {
+              private avaliacoesService: AvaliacoesService,
+              private pedidoService: PedidoService) {
   }
 
   ngOnInit() {
     this.cep = this.route.snapshot.params.cep;
-    this.restauranteId = this.route.snapshot.params.restauranteId;
+    const restauranteId = this.route.snapshot.params.restauranteId;
 
     this.restaurantesService
-      .porId(this.cep, this.restauranteId)
+      .porId(this.cep, restauranteId)
       .subscribe(restaurante => {
         this.restaurante = restaurante;
         this.pedido.restaurante = restaurante;
       });
 
     this.cardapioService
-      .porIdDoRestaurante(this.restauranteId)
+      .porIdDoRestaurante(restauranteId)
       .subscribe(cardapio => this.cardapio = cardapio);
 
     this.avaliacoesService
-      .porIdDoRestaurante(this.restauranteId)
+      .porIdDoRestaurante(restauranteId)
       .subscribe(avaliacoes => this.avaliacoes = avaliacoes);
 
   }
 
-  escolherItemDoCardapio(itemDoCardapio) {
+  escolheItemDoCardapio(itemDoCardapio) {
     this.itemDoPedidoEscolhido = { itemDoCardapio, quantidade: 1 };
+    this.adicionandoItemAoPedido = true;
   }
 
-  adicionarItemAoPedido() {
-    this.pedido.itens.push(this.itemDoPedidoEscolhido);
+  adicionaItemAoPedido() {
+    if (this.adicionandoItemAoPedido) {
+      this.pedido.itens.push(this.itemDoPedidoEscolhido);
+    }
     this.itemDoPedidoEscolhido = null;
+    this.adicionandoItemAoPedido = false;
   }
 
-  fazerPedido() {
-    // TODO
+  editaItemDoPedido(itemPedido) {
+    this.itemDoPedidoEscolhido = itemPedido;
   }
 
+  removeItemDoPedido(itemPedido) {
+    this.pedido.itens = this.pedido.itens.filter(i => i !== itemPedido);
+    this.itemDoPedidoEscolhido = null;
+    this.adicionandoItemAoPedido = false;
+  }
+
+  fazPedido() {
+    this.pedido.restaurante = this.restaurante;
+    this.pedidoService.adiciona(this.pedido)
+      .subscribe(pedido => this.router.navigateByUrl(`pedidos/${pedido.id}/pagamento`));
+  }
+
+  calculaSubTotal(itemPedido) {
+    const itemCardapio = itemPedido.itemDoCardapio;
+    const preco = itemCardapio.precoPromocional || itemCardapio.preco;
+    return itemPedido.quantidade * preco;
+  }
+
+  totalDoPedido() {
+    let total = this.restaurante.taxaDeEntregaEmReais || 0;
+    this.pedido.itens.forEach(item => {
+      total += this.calculaSubTotal(item);
+    });
+    return total;
+  }
 }

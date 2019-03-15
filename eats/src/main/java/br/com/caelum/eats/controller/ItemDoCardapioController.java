@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.caelum.eats.dto.ItemDoCardapioSemCategoria;
+import br.com.caelum.eats.dto.ItemDoCardapioDto;
 import br.com.caelum.eats.exception.ResourceNotFoundException;
 import br.com.caelum.eats.model.ItemDoCardapio;
 import br.com.caelum.eats.repository.ItemDoCardapioRepository;
@@ -23,19 +23,19 @@ public class ItemDoCardapioController {
 	}
 
 	@PostMapping("/restaurantes/{idRestaurante}/cardapio/{idCardapio}/categoria/{idCategoria}/item")
-	public ItemDoCardapioSemCategoria adiciona(@RequestBody ItemDoCardapio item) {
-		return new ItemDoCardapioSemCategoria(repo.save(item));
+	public ItemDoCardapioDto adiciona(@RequestBody ItemDoCardapio item) {
+		return new ItemDoCardapioDto(repo.save(item));
 	}
 
 	@PutMapping("/restaurantes/{idRestaurante}/cardapio/{idCardapio}/categoria/{idCategoria}/item/{idItem}")
-	public ItemDoCardapioSemCategoria atualiza(@RequestBody ItemDoCardapio item) {
-		return new ItemDoCardapioSemCategoria(repo.save(item));
+	public ItemDoCardapioDto atualiza(@RequestBody ItemDoCardapio item) {
+		return new ItemDoCardapioDto(repo.save(item));
 	}
 
 	@GetMapping("/restaurantes/{idRestaurante}/cardapio/{idCardapio}/categoria/{idCategoria}/item/{idItem}")
-	public ItemDoCardapioSemCategoria porId(@PathVariable("idItem") Long idItem) {
+	public ItemDoCardapioDto porId(@PathVariable("idItem") Long idItem) {
 		ItemDoCardapio item = repo.findById(idItem).orElseThrow(() -> new ResourceNotFoundException());
-		return new ItemDoCardapioSemCategoria(item);
+		return new ItemDoCardapioDto(item);
 	}
 
 	@DeleteMapping("/restaurantes/{idRestaurante}/cardapio/{idCardapio}/categoria/{idCategoria}/item/{idItem}")

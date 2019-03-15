@@ -6,13 +6,13 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class AvaliacaoSemPedidoNemRestaurante {
+public class AvaliacaoDto {
 
 	private Long id;
 	private Integer nota;
 	private String comentario;
 
-	public AvaliacaoSemPedidoNemRestaurante(Avaliacao avaliacao) {
+	public AvaliacaoDto(Avaliacao avaliacao) {
 		this(avaliacao.getId(), avaliacao.getNota(), avaliacao.getComentario());
 	}
 }

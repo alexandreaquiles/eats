@@ -13,7 +13,7 @@ import br.com.caelum.eats.dto.RestauranteComDistancia;
 import br.com.caelum.eats.dto.RestauranteComDistanciaEComMediaDeAvaliacoes;
 import br.com.caelum.eats.exception.ResourceNotFoundException;
 import br.com.caelum.eats.model.Restaurante;
-import br.com.caelum.eats.repository.AvaliacoesRepository;
+import br.com.caelum.eats.repository.AvaliacaoRepository;
 import br.com.caelum.eats.repository.RestauranteRepository;
 import br.com.caelum.eats.service.DistanciaService;
 
@@ -22,10 +22,10 @@ import br.com.caelum.eats.service.DistanciaService;
 public class RestaurantesMaisProximosController {
 
 	private RestauranteRepository restauranteRepo;
-	private AvaliacoesRepository avaliacoesRepo;
+	private AvaliacaoRepository avaliacoesRepo;
 	private DistanciaService distanciaService;
 
-	public RestaurantesMaisProximosController(RestauranteRepository restauranteRepo, AvaliacoesRepository avaliacoesRepo, DistanciaService repo) {
+	public RestaurantesMaisProximosController(RestauranteRepository restauranteRepo, AvaliacaoRepository avaliacoesRepo, DistanciaService repo) {
 		this.restauranteRepo = restauranteRepo;
 		this.avaliacoesRepo = avaliacoesRepo;
 		this.distanciaService = repo;

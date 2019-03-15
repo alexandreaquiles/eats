@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.caelum.eats.dto.RestauranteSemHorariosDeFuncionamento;
+import br.com.caelum.eats.dto.RestauranteDto;
 import br.com.caelum.eats.repository.RestauranteRepository;
 
 @RestController
@@ -23,10 +23,10 @@ public class AdminRestauranteController {
 	}
 
 	@GetMapping("/em-aprovacao")
-	public List<RestauranteSemHorariosDeFuncionamento> emAprovacao() {
+	public List<RestauranteDto> emAprovacao() {
 		return repo.findAllByAprovado(false)
 				.stream()
-				.map(r -> new RestauranteSemHorariosDeFuncionamento(r))
+				.map(r -> new RestauranteDto(r))
 				.collect(Collectors.toList());
 	}
 

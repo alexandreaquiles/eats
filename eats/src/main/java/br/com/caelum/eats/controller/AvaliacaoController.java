@@ -7,26 +7,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.caelum.eats.dto.AvaliacaoSemPedidoNemRestaurante;
+import br.com.caelum.eats.dto.AvaliacaoDto;
 import br.com.caelum.eats.model.Restaurante;
-import br.com.caelum.eats.repository.AvaliacoesRepository;
+import br.com.caelum.eats.repository.AvaliacaoRepository;
 
 @RestController
 public class AvaliacaoController {
 
-	private AvaliacoesRepository repo;
+	private AvaliacaoRepository repo;
 
-	public AvaliacaoController(AvaliacoesRepository repo) {
+	public AvaliacaoController(AvaliacaoRepository repo) {
 		this.repo = repo;
 	}
 
 	@GetMapping("/restaurantes/{restauranteId}/avaliacoes")
-	public List<AvaliacaoSemPedidoNemRestaurante> listaDoRestaurante(@PathVariable("restauranteId") Long restauranteId) {
+	public List<AvaliacaoDto> listaDoRestaurante(@PathVariable("restauranteId") Long restauranteId) {
 		Restaurante restaurante = new Restaurante();
 		restaurante.setId(restauranteId);
 		return repo.findAllByRestaurante(restaurante)
 				.stream()
-				.map(a -> new AvaliacaoSemPedidoNemRestaurante(a))
+				.map(a -> new AvaliacaoDto(a))
 				.collect(Collectors.toList());
 	}
 }

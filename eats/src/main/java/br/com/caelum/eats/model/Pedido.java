@@ -4,13 +4,13 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
@@ -44,8 +44,8 @@ public class Pedido {
 	@ManyToOne(optional=false)
 	private Restaurante restaurante;
 
-	@OneToMany @JoinColumn(name = "pedido_id")
-	private List<ItemPedido> itens = new ArrayList<>();
+	@OneToMany(cascade=CascadeType.PERSIST, mappedBy="pedido")
+	private List<ItemDoPedido> itens = new ArrayList<>();
 
 //	private Usuario usuario;
 

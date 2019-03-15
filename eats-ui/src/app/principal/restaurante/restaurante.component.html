@@ -8,32 +8,37 @@
 
 <section *ngIf="itemDoPedidoEscolhido">
   <p><strong>{{ itemDoPedidoEscolhido.itemDoCardapio?.nome }}</strong></p>
-  <form #itemDoPedidoEscolhidoForm="ngForm" (ngSubmit)="adicionarItemAoPedido()">
+  <form #itemDoPedidoEscolhidoForm="ngForm" (ngSubmit)="adicionaItemAoPedido()">
     <div>
         <label for="quantidade">Quantidade</label>
-        <input type="number" id="quantidade" name="quantidade" [(ngModel)]="itemDoPedidoEscolhido.quantidade">
+        <input type="number" min="1" id="quantidade" name="quantidade" [(ngModel)]="itemDoPedidoEscolhido.quantidade">
     </div>
     <div>
         <label for="observacao">Observação</label>
         <textarea id="observacao" name="observacao"  [(ngModel)]="itemDoPedidoEscolhido.observacao"></textarea>
     </div>
-    <button type="submit" [disabled]="!itemDoPedidoEscolhidoForm.form.valid">Adicionar</button>
+    <button type="submit" [disabled]="!itemDoPedidoEscolhidoForm.form.valid">{{ adicionandoItemAoPedido ? 'Adicionar':'Atualizar' }}</button>
   </form>
 </section>
 
 <section *ngIf="restaurante && pedido.itens.length">
   <h2>Pedido</h2>
   <div *ngFor="let itemPedido of pedido.itens">
-    <p>{{ itemPedido.quantidade }}x {{ itemPedido.itemDoCardapio.nome }}</p>
+    <p>{{ itemPedido.quantidade }}x {{ itemPedido.itemDoCardapio.nome }}
+      <span>{{ calculaSubTotal(itemPedido) | currency:'BRL' }}</span></p>
+    <p><small>{{ itemPedido.observacao }}</small></p>
+    <p><button (click)="editaItemDoPedido(itemPedido)">Editar</button> <button (click)="removeItemDoPedido(itemPedido)">Remover</button></p>
   </div>
-  <button (click)="fazerPedido()">Fazer Pedido</button>
+  <p>Taxa de entrega: {{ restaurante.taxaDeEntregaEmReais ? (restaurante.taxaDeEntregaEmReais | currency:'BRL') : 'Grátis' }}</p>
+  <p>Total: {{ totalDoPedido() | currency:'BRL' }}</p>
+  <button (click)="fazPedido()">Fazer Pedido</button>
 </section>
 
 <section *ngIf="restaurante && cardapio">
   <h2>Cardápio</h2>
   <div *ngFor="let categoria of cardapio.categorias">
     <h3>{{ categoria.nome | uppercase }}</h3>
-    <div *ngFor="let itemCardapio of categoria.itens" (click)="escolherItemDoCardapio(itemCardapio)">
+    <div *ngFor="let itemCardapio of categoria.itens" (click)="escolheItemDoCardapio(itemCardapio)">
       <h4>{{ itemCardapio.nome }}</h4>
       <p>{{ itemCardapio.descricao }}</p>
       <p *ngIf="!itemCardapio.precoPromocional; else promocional">{{ itemCardapio.preco | currency:'BRL' }}</p>

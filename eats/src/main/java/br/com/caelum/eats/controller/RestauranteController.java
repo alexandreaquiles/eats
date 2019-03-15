@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.caelum.eats.dto.RestauranteSemHorariosDeFuncionamento;
+import br.com.caelum.eats.dto.RestauranteDto;
 import br.com.caelum.eats.exception.ResourceNotFoundException;
 import br.com.caelum.eats.model.Cardapio;
 import br.com.caelum.eats.model.Restaurante;
@@ -28,9 +28,9 @@ public class RestauranteController {
 	}
 
 	@GetMapping("/{id}")
-	private RestauranteSemHorariosDeFuncionamento detalha(@PathVariable("id") Long id) {
+	private RestauranteDto detalha(@PathVariable("id") Long id) {
 		Restaurante restaurante = restauranteRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException());
-		return new RestauranteSemHorariosDeFuncionamento(restaurante);
+		return new RestauranteDto(restaurante);
 	}
 
 	@PostMapping

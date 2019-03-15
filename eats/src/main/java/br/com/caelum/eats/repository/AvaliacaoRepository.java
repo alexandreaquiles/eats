@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import br.com.caelum.eats.model.Avaliacao;
 import br.com.caelum.eats.model.Restaurante;
 
-public interface AvaliacoesRepository  extends JpaRepository<Avaliacao, Long> {
+public interface AvaliacaoRepository  extends JpaRepository<Avaliacao, Long> {
 
 	@Query("select avg(a.nota) from Avaliacao a where a.pedido.restaurante.id =:restauranteId")
 	public Double mediaDoRestaurantePeloId(Long restauranteId);

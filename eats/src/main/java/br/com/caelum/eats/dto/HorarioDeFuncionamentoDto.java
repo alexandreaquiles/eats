@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class HorarioDeFuncionamentoSemRestaurante {
+public class HorarioDeFuncionamentoDto {
 
 	private Long id;
 
@@ -19,7 +19,7 @@ public class HorarioDeFuncionamentoSemRestaurante {
 
 	private LocalTime horarioDeFechamento;
 
-	public HorarioDeFuncionamentoSemRestaurante(HorarioDeFuncionamento horario) {
+	public HorarioDeFuncionamentoDto(HorarioDeFuncionamento horario) {
 		this(horario.getId(), horario.getDiaDaSemana(), horario.getHorarioDeAbertura(), horario.getHorarioDeFechamento());
 	}
 }

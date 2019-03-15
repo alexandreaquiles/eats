@@ -19,6 +19,6 @@
     <p><span>{{restaurante.tipoDeCozinha.nome}}</span> • <span>{{restaurante.tempoDeEntregaMinimoEmMinutos}} - {{restaurante.tempoDeEntregaMaximoEmMinutos}}</span> min</p>
     <p>{{ restaurante.distancia | number:'1.1-1' }} km</p>
     <p>{{ restaurante.taxaDeEntregaEmReais | currency:'BRL' }}</p>
-    <button (click)="pedir(restaurante)">Pedir</button>
+    <button (click)="escolher(restaurante)">Escolher</button>
   </div>
 </section>

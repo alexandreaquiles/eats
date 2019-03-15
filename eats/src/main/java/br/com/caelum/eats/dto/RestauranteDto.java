@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class RestauranteSemHorariosDeFuncionamento {
+public class RestauranteDto {
 
 	private Long id;
 
@@ -29,7 +29,7 @@ public class RestauranteSemHorariosDeFuncionamento {
 
 	private TipoDeCozinha tipoDeCozinha;
 	
-	public RestauranteSemHorariosDeFuncionamento(Restaurante restaurante) {
+	public RestauranteDto(Restaurante restaurante) {
 		this(restaurante.getId(), restaurante.getCnpj(), restaurante.getNome(), restaurante.getDescricao(), restaurante.getTaxaDeEntregaEmReais(), restaurante.getTempoDeEntregaMinimoEmMinutos(), restaurante.getTempoDeEntregaMinimoEmMinutos(), restaurante.getAprovado(), restaurante.getTipoDeCozinha());
 	}
 

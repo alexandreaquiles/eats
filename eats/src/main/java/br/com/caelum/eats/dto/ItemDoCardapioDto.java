@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ItemDoCardapioSemCategoria {
+public class ItemDoCardapioDto {
 
 	private Long id;
 	private String nome;
@@ -16,7 +16,7 @@ public class ItemDoCardapioSemCategoria {
 	private BigDecimal preco;
 	private BigDecimal precoPromocional;
 
-	public ItemDoCardapioSemCategoria(ItemDoCardapio item) {
+	public ItemDoCardapioDto(ItemDoCardapio item) {
 		this(item.getId(), item.getNome(), item.getDescricao(), item.getPreco(), item.getPrecoPromocional());
 	}
 

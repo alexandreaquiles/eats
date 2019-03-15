@@ -13,15 +13,19 @@ export class RestaurantesService {
   }
 
   maisProximosPorCep(cep: string): Observable<any> {
-    return this.http.get(this.API+'/mais-proximos/'+cep);
+    return this.http.get(`${this.API}/mais-proximos/${cep}`);
   }
 
   maisProximosPorCepETipoDeCozinha(cep: string, tipoDeCozinhaId: string): Observable<any> {
-    return this.http.get(this.API+'/mais-proximos/'+cep+'/tipos-de-cozinha/'+tipoDeCozinhaId);
+    return this.http.get(`${this.API}/mais-proximos/${cep}/tipos-de-cozinha/${tipoDeCozinhaId}`);
   }
 
   porId(cep: string, restauranteId: string): Observable<any> {
-    return this.http.get(this.API+'/'+cep+'/restaurante/'+restauranteId);
+    return this.http.get(`${this.API}/${cep}/restaurante/${restauranteId}`);
+  }
+
+  formasDePagamento(restaurante): Observable<any>  {
+    return this.http.get(`${this.API}/${restaurante.id}/formas-de-pagamento`);
   }
 
 }

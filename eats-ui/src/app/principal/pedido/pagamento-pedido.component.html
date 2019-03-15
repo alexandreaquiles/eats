@@ -1,0 +1,44 @@
+<h2>Pagamento do pedido</h2>
+
+<section *ngIf="pedido">
+  <h3>Resumo do pedido</h3>
+  <div *ngFor="let itemPedido of pedido.itens">
+    <p>{{ itemPedido.quantidade }}x {{ itemPedido.itemDoCardapio.nome }}
+      <span>{{ itemPedido.quantidade * itemPedido.itemDoCardapio.preco | currency:'BRL' }}</span></p>
+    <p><small>{{ itemPedido.observacao }}</small></p>
+  </div>
+  <p>Taxa de entrega: {{ pedido.restaurante.taxaDeEntregaEmReais ? (pedido.restaurante.taxaDeEntregaEmReais | currency:'BRL') : 'Grátis' }}</p>
+  <p>Total: {{ pedido.total | currency:'BRL' }}</p>
+</section>
+
+<form *ngIf="!pagamento.status" #pagamentoForm="ngForm" (ngSubmit)="criaPagamento()">
+  <h3>Dados do pagamento</h3>
+  <div>
+    <label for="formaDePagamento">Forma de pagamento</label>
+    <select id="formaDePagamento" name="formaDePagamento" [(ngModel)]="pagamento.formaDePagamento">
+        <option *ngFor="let forma of formasDePagamento" [ngValue]="forma">{{ forma.nome }}</option>
+      </select>
+  </div>
+  <div>
+    <label for="nome">Nome no cartão</label>
+    <input required id="nome" name="nome" [(ngModel)]="pagamento.nome">
+  </div>
+  <div>
+    <label for="numero">Número do cartão</label>
+    <input required maxlength="19" id="numero" name="numero" [(ngModel)]="pagamento.numero" placeholder="0000 0000 0000 0000">
+  </div>
+  <div>
+    <label for="expiracao">Data de expiração</label>
+    <input type="month" required id="expiracao" name="expiracao" [(ngModel)]="pagamento.expiracao">
+  </div>
+  <div>
+    <label for="codigo">Código de Segurança</label>
+    <input type="number" min="0" max="999"  required id="codigo" name="codigo" [(ngModel)]="pagamento.codigo" placeholder="000">
+  </div>
+  <button type="submit" [disabled]="!pagamentoForm.form.valid">Criar pagamento</button>
+</form>
+
+<section *ngIf="pagamento.status === 'CRIADO'">
+  <button (click)="confirmaPagamento()">Confirmar pagamento</button>
+  <button (click)="cancelaPagamento()">Cancelar pagamento</button>
+</section>
