@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -43,6 +44,9 @@ public class Pedido {
 	
 	@ManyToOne(optional=false)
 	private Restaurante restaurante;
+
+	@OneToOne(cascade=CascadeType.PERSIST, optional=false, mappedBy="pedido")
+	private EnderecoDeEntrega entrega;
 
 	@OneToMany(cascade=CascadeType.PERSIST, mappedBy="pedido")
 	private List<ItemDoPedido> itens = new ArrayList<>();

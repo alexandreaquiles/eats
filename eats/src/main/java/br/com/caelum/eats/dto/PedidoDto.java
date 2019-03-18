@@ -21,10 +21,11 @@ public class PedidoDto {
 	private LocalDateTime dataHora;
 	private Status status;
 	private Restaurante restaurante;
+	private EnderecoDeEntregaDto entrega;
 	private List<ItemDoPedidoDto> itens = new ArrayList<>();
 	
 	public PedidoDto(Pedido pedido) {
-		this(pedido.getId(), pedido.getDataHora(), pedido.getStatus(), pedido.getRestaurante(), trataItens(pedido.getItens()));
+		this(pedido.getId(), pedido.getDataHora(), pedido.getStatus(), pedido.getRestaurante(), new EnderecoDeEntregaDto(pedido.getEntrega()), trataItens(pedido.getItens()));
 	}
 
 	private static List<ItemDoPedidoDto> trataItens(List<ItemDoPedido> itens) {

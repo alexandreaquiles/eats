@@ -76,6 +76,7 @@ export class RestauranteComponent implements OnInit {
 
   fazPedido() {
     this.pedido.restaurante = this.restaurante;
+    this.pedido.endereco = { cep: this.cep };
     this.pedidoService.adiciona(this.pedido)
       .subscribe(pedido => this.router.navigateByUrl(`pedidos/${pedido.id}/pagamento`));
   }

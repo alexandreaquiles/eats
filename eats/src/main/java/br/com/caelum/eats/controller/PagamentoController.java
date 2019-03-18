@@ -40,15 +40,15 @@ public class PagamentoController {
 	@PutMapping("/{id}")
 	public PagamentoDto confirma(@RequestBody Pagamento pagamento) {
 		pagamento.setStatus(Pagamento.Status.CONFIRMADO);
-		Pagamento salvo = repo.save(pagamento);
-		return new PagamentoDto(salvo);
+		repo.save(pagamento);
+		return new PagamentoDto(pagamento);
 	}
 
 	@DeleteMapping("/{id}")
 	public PagamentoDto cancela(@RequestBody Pagamento pagamento) {
 		pagamento.setStatus(Pagamento.Status.CANCELADO);
-		Pagamento salvo = repo.save(pagamento);
-		return new PagamentoDto(salvo);
+		repo.save(pagamento);
+		return new PagamentoDto(pagamento);
 	}
 
 }

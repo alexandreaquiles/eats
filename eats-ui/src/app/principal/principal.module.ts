@@ -6,6 +6,7 @@ import { PrincipalComponent } from './principal.component';
 import { ListaRestaurantesComponent } from './lista-restaurantes/lista-restaurantes.component';
 import { RestauranteComponent } from './restaurante/restaurante.component';
 import { PagamentoPedidoComponent } from './pedido/pagamento-pedido.component';
+import { RegistroEnderecoEntregaComponent } from './entrega/registro-endereco-entrega.component';
 
 import { principalRoutes } from './principal.routes';
 
@@ -21,7 +22,8 @@ import { PagamentoService } from './services/pagamento.service';
     PrincipalComponent,
     ListaRestaurantesComponent,
     RestauranteComponent,
-    PagamentoPedidoComponent
+    PagamentoPedidoComponent,
+    RegistroEnderecoEntregaComponent
   ],
   imports: [ CommonModule, FormsModule, principalRoutes ],
   providers: [ TiposDeCozinhaService, RestaurantesService, CardapioService, AvaliacoesService, PedidoService, PagamentoService ]

@@ -1,6 +1,6 @@
 <h2>Restaurantes em aprovação</h2>
 
-<table>
+<table *ngIf="restaurantesEmAprovacao?.length">
   <thead>
     <tr>
       <th>Restaurante</th>
@@ -18,6 +18,9 @@
     </tr>
   </tbody>
 </table>
+<div *ngIf="!restaurantesEmAprovacao?.length" >
+  <p>Não há restaurantes a serem aprovados</p>
+</div>
 
 <div *ngIf="restauranteEmDetalhe">
   <h3>Restaurante</h3>
@@ -30,13 +33,13 @@
       <p><strong>Tempo de entrega mínimo (em minutos):</strong> {{ restauranteEmDetalhe.tempoDeEntregaMinimoEmMinutos}}</p>
       <p><strong>Tempo de entrega máximo (em minutos):</strong> {{ restauranteEmDetalhe.tempoDeEntregaMaximoEmMinutos }}</p>
   </div>
-  <div *ngIf="formasDePagamento && formasDePagamento.length">
+  <div *ngIf="formasDePagamento?.length">
     <h4>Formas de pagamento</h4>
     <ul *ngFor="let forma of formasDePagamento">
       <li>{{ forma.nome }}</li>
     </ul>
   </div>
-  <div *ngIf="horariosDeFuncionamento && horariosDeFuncionamento.length">
+  <div *ngIf="horariosDeFuncionamento?.length">
     <h4>Horários de funcionamento</h4>
     <table>
         <thead>
@@ -55,7 +58,7 @@
         </tbody>
       </table>
   </div>
-  <div *ngIf="cardapio && cardapio.categorias && cardapio.categorias.length">
+  <div *ngIf="cardapio?.categorias?.length">
     <h4>Cardápio</h4>
         <div *ngFor="let categoria of cardapio.categorias">
           <h3>{{ categoria.nome | uppercase }}</h3>
