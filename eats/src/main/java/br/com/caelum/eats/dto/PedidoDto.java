@@ -33,7 +33,6 @@ public class PedidoDto {
 	}
 
 	public BigDecimal getTotal() {
-		System.out.println(itens);
 		BigDecimal total = restaurante.getTaxaDeEntregaEmReais() != null ? restaurante.getTaxaDeEntregaEmReais() : BigDecimal.ZERO;
 		for (ItemDoPedidoDto item : itens) {
 			BigDecimal preco = item.getItemDoCardapio().getPrecoPromocional() != null ? item.getItemDoCardapio().getPrecoPromocional() : item.getItemDoCardapio().getPreco() ;

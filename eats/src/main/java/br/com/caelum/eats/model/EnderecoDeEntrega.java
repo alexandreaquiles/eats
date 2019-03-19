@@ -24,7 +24,6 @@ public class EnderecoDeEntrega {
 	@NotBlank @Pattern(regexp="\\d{8}")
 	private String cep;
 
-	@NotBlank
 	private String endereco;
 
 	private String complemento;

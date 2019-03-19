@@ -1,0 +1,19 @@
+<h2>Endereço de entrega</h2>
+
+<app-resumo-pedido [pedido]="pedido"></app-resumo-pedido>
+
+<form #enderecoEntregaForm="ngForm" (ngSubmit)="registraEnderecoDeEntrega()">
+  <div>
+    <label for="cep">CEP</label>
+    <input required id="cep" name="cep" pattern="\d{8}" maxlength="8" [(ngModel)]="entrega.cep">
+  </div>
+  <div>
+    <label for="endereco">Endereço</label>
+    <textarea required id="endereco" name="endereco" [(ngModel)]="entrega.endereco"></textarea>
+  </div>
+  <div>
+    <label for="complemento">Complemento</label>
+    <textarea id="complemento" name="complemento" [(ngModel)]="entrega.complemento"></textarea>
+  </div>
+  <button type="submit" [disabled]="!enderecoEntregaForm.form.valid">Confirmar</button>
+</form>

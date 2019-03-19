@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { RestaurantesService } from '../services/restaurantes.service';
 import { PedidoService } from '../services/pedido.service';
@@ -16,6 +16,7 @@ export class PagamentoPedidoComponent implements OnInit {
   pagamento: any = {};
 
   constructor(private route: ActivatedRoute,
+              private router: Router,
               private pagamentoService: PagamentoService,
               private pedidoService: PedidoService,
               private restaurantesService: RestaurantesService) {
@@ -42,12 +43,14 @@ export class PagamentoPedidoComponent implements OnInit {
 
   confirmaPagamento() {
     this.pagamentoService.confirma(this.pagamento)
-      .subscribe();
+      .subscribe(pagamento => this.router.navigateByUrl(`pedidos/${pagamento.pedido.id}/entrega`));
   }
 
   cancelaPagamento() {
     this.pagamentoService.cancela(this.pagamento)
-      .subscribe();
-  }
+      .subscribe(pagamento => {
+        console.log(pagamento);
+      });
+}
 
 }

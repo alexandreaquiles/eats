@@ -35,6 +35,7 @@ public class PedidoController {
 		pedido.setDataHora(LocalDateTime.now());
 		pedido.setStatus(Pedido.Status.REALIZADO);
 		pedido.getItens().forEach(item -> item.setPedido(pedido));
+		pedido.getEntrega().setPedido(pedido);
 		Pedido salvo = repo.save(pedido);
 		return new PedidoDto(salvo);
 	}
