@@ -7,7 +7,7 @@ import { ListaRestaurantesComponent } from './lista-restaurantes/lista-restauran
 import { RestauranteComponent } from './restaurante/restaurante.component';
 import { PagamentoPedidoComponent } from './pedido/pagamento-pedido.component';
 import { RegistroEnderecoEntregaComponent } from './entrega/registro-endereco-entrega.component';
-import { ResumoPedidoComponent } from './pedido/resumo-pedido.component';
+import { ResumoPedidoComponent } from './resumo/resumo-pedido.component';
 
 import { principalRoutes } from './principal.routes';
 
@@ -17,6 +17,8 @@ import { CardapioService } from './services/cardapio.service';
 import { AvaliacoesService } from './services/avaliacoes.service';
 import { PedidoService } from './services/pedido.service';
 import { PagamentoService } from './services/pagamento.service';
+import { EnderecoDeEntregaService } from './services/entrega.service';
+import { StatusPedidoComponent } from './status/status-pedido.component';
 
 @NgModule({
   declarations: [
@@ -25,9 +27,10 @@ import { PagamentoService } from './services/pagamento.service';
     RestauranteComponent,
     PagamentoPedidoComponent,
     RegistroEnderecoEntregaComponent,
-    ResumoPedidoComponent
+    ResumoPedidoComponent,
+    StatusPedidoComponent
   ],
   imports: [ CommonModule, FormsModule, principalRoutes ],
-  providers: [ TiposDeCozinhaService, RestaurantesService, CardapioService, AvaliacoesService, PedidoService, PagamentoService ]
+  providers: [ TiposDeCozinhaService, RestaurantesService, CardapioService, AvaliacoesService, PedidoService, PagamentoService, EnderecoDeEntregaService ]
 })
 export class PrincipalModule { }

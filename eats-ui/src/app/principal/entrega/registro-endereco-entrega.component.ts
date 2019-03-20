@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PedidoService } from '../services/pedido.service';
+import { EnderecoDeEntregaService } from '../services/entrega.service';
 
 @Component({
   selector: 'app-registro-entrega',
@@ -13,7 +14,8 @@ export class RegistroEnderecoEntregaComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private pedidoService: PedidoService) {
+              private pedidoService: PedidoService,
+              private enderecoDeEntregaService: EnderecoDeEntregaService) {
   }
 
   ngOnInit() {
@@ -26,8 +28,11 @@ export class RegistroEnderecoEntregaComponent implements OnInit {
   }
 
   registraEnderecoDeEntrega() {
-    console.log(this.entrega);
-    //TODO: terminar
+    this.entrega.pedido = { id: this.pedido.id };
+    this.enderecoDeEntregaService.atualiza(this.entrega)
+      .subscribe(() => {
+        this.router.navigateByUrl(`pedidos/${this.pedido.id}/status`);
+      });
   }
 
 }

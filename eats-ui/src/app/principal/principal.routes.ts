@@ -5,6 +5,7 @@ import { ListaRestaurantesComponent } from './lista-restaurantes/lista-restauran
 import { RestauranteComponent } from './restaurante/restaurante.component';
 import { PagamentoPedidoComponent } from './pedido/pagamento-pedido.component';
 import { RegistroEnderecoEntregaComponent } from './entrega/registro-endereco-entrega.component';
+import { StatusPedidoComponent } from './status/status-pedido.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path: 'pedidos/:pedidoId/entrega',
     component: RegistroEnderecoEntregaComponent
+  },
+  {
+    path: 'pedidos/:pedidoId/status',
+    component: StatusPedidoComponent
   }
 ];
 

@@ -26,8 +26,8 @@ public class PagamentoController {
 
 	@GetMapping("/{id}")
 	public PagamentoDto porId(@PathVariable("id") Long id) {
-		Pagamento pedido = repo.findById(id).orElseThrow(() -> new ResourceNotFoundException());
-		return new PagamentoDto(pedido);
+		Pagamento pagamento = repo.findById(id).orElseThrow(() -> new ResourceNotFoundException());
+		return new PagamentoDto(pagamento);
 	}
 
 	@PostMapping
