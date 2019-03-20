@@ -8,6 +8,7 @@ import { RestauranteComponent } from './restaurante/restaurante.component';
 import { PagamentoPedidoComponent } from './pedido/pagamento-pedido.component';
 import { RegistroEnderecoEntregaComponent } from './entrega/registro-endereco-entrega.component';
 import { ResumoPedidoComponent } from './resumo/resumo-pedido.component';
+import { StatusPedidoComponent } from './status/status-pedido.component';
 
 import { principalRoutes } from './principal.routes';
 
@@ -18,7 +19,7 @@ import { AvaliacoesService } from './services/avaliacoes.service';
 import { PedidoService } from './services/pedido.service';
 import { PagamentoService } from './services/pagamento.service';
 import { EnderecoDeEntregaService } from './services/entrega.service';
-import { StatusPedidoComponent } from './status/status-pedido.component';
+import { RecomendacoesService } from './services/recomendacoes.service';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,6 @@ import { StatusPedidoComponent } from './status/status-pedido.component';
     StatusPedidoComponent
   ],
   imports: [ CommonModule, FormsModule, principalRoutes ],
-  providers: [ TiposDeCozinhaService, RestaurantesService, CardapioService, AvaliacoesService, PedidoService, PagamentoService, EnderecoDeEntregaService ]
+  providers: [ TiposDeCozinhaService, RestaurantesService, CardapioService, AvaliacoesService, PedidoService, PagamentoService, EnderecoDeEntregaService, RecomendacoesService ]
 })
 export class PrincipalModule { }

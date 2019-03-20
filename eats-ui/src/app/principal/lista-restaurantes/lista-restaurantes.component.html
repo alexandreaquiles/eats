@@ -2,12 +2,17 @@
 
 <section *ngIf="recomendacoes?.length">
   <h2>Recomendações</h2>
+  <ul>
+    <li *ngFor="let recomendacao of recomendacoes">
+      {{ recomendacao.nome }} <button (click)="escolher(recomendacao)">Escolher</button>
+    </li>
+  </ul>
 </section>
 
 <section *ngIf="tiposDeCozinha?.length">
   <h2>Tipos de Cozinha</h2>
-  <ul *ngFor="let tipoDeCozinha of tiposDeCozinha">
-    <li><a [routerLink]="['/restaurantes', cep, 'tipos-de-cozinha', tipoDeCozinha.id]">{{tipoDeCozinha.nome}}</a></li>
+  <ul>
+    <li *ngFor="let tipoDeCozinha of tiposDeCozinha"><a [routerLink]="['/restaurantes', cep, 'tipos-de-cozinha', tipoDeCozinha.id]">{{tipoDeCozinha.nome}}</a></li>
   </ul>
 </section>
 
