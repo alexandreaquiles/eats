@@ -2,7 +2,11 @@
 
 <app-resumo-pedido [pedido]="pedido"></app-resumo-pedido>
 
-<form #enderecoEntregaForm="ngForm" (ngSubmit)="registraEnderecoDeEntrega()">
+<form #entregaForm="ngForm" (ngSubmit)="registraEntrega()">
+  <div>
+    <label for="nomeDoCliente">Nome do Cliente</label>
+    <input required id="nomeDoCliente" name="nomeDoCliente" maxlength="100" [(ngModel)]="entrega.nomeDoCliente">
+  </div>
   <div>
     <label for="cep">CEP</label>
     <input required id="cep" name="cep" pattern="\d{8}" maxlength="8" [(ngModel)]="entrega.cep">
@@ -15,5 +19,5 @@
     <label for="complemento">Complemento</label>
     <textarea id="complemento" name="complemento" [(ngModel)]="entrega.complemento"></textarea>
   </div>
-  <button type="submit" [disabled]="!enderecoEntregaForm.form.valid">Confirmar</button>
+  <button type="submit" [disabled]="!entregaForm.form.valid">Confirmar</button>
 </form>

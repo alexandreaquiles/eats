@@ -30,6 +30,7 @@ public class Pedido {
 		REALIZADO,
 		CONFIRMADO,
 		PRONTO,
+		SAIU_PARA_ENTREGA,
 		ENTREGUE;
 	}
 
@@ -46,7 +47,7 @@ public class Pedido {
 	private Restaurante restaurante;
 
 	@OneToOne(cascade=CascadeType.PERSIST, optional=false, mappedBy="pedido")
-	private EnderecoDeEntrega entrega;
+	private Entrega entrega;
 
 	@OneToMany(cascade=CascadeType.PERSIST, mappedBy="pedido")
 	private List<ItemDoPedido> itens = new ArrayList<>();

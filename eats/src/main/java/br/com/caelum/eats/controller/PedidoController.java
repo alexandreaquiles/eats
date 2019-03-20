@@ -1,6 +1,8 @@
 package br.com.caelum.eats.controller;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.caelum.eats.dto.PedidoDto;
 import br.com.caelum.eats.exception.ResourceNotFoundException;
 import br.com.caelum.eats.model.Pedido;
+import br.com.caelum.eats.model.Pedido.Status;
 import br.com.caelum.eats.repository.PedidoRepository;
 
 @RestController
@@ -29,7 +32,15 @@ public class PedidoController {
 		Pedido pedido = repo.findById(id).orElseThrow(() -> new ResourceNotFoundException());
 		return new PedidoDto(pedido);
 	}
-	
+
+	@GetMapping("/pendentes")
+	public List<PedidoDto> realizados() {
+		return repo.semStatus(Status.ENTREGUE)
+				.stream()
+				.map(pedido -> new PedidoDto(pedido))
+				.collect(Collectors.toList());
+	}
+
 	@PostMapping
 	public PedidoDto adiciona(@RequestBody Pedido pedido) {
 		pedido.setDataHora(LocalDateTime.now());

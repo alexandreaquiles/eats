@@ -9,6 +9,7 @@ import { FormasDePagamentoListagemComponent } from './formas-de-pagamento/formas
 import { CardapioListagemComponent } from './cardapio/cardapio-listagem.component';
 import { CategoriaDoCardapioCadastroComponent } from './cardapio/categoria-do-cardapio-cadastro.component';
 import { ItemDoCardapioCadastroComponent } from './cardapio/item-do-cardapio-cadastro.component';
+import { ListaPedidosPendentesComponent } from './acompanhamento/lista-pedidos-pendentes.component';
 
 import { RestauranteService } from './services/restaurante.service';
 import { HorarioDeFuncionamentoService } from './services/horario-de-funcionamento.service';
@@ -17,6 +18,7 @@ import { DiaDaSemanaService } from './services/dia-da-semana.service';
 import { CardapioService } from './services/cardapio.service';
 import { CategoriaDoCardapioService } from './services/categoria-do-cardapio.service';
 import { ItemDoCardapioService } from './services/item-do-cardapio.service';
+import { PedidosService } from './services/pedidos.service';
 
 import { restauranteRoutes } from './restaurante.routes';
 
@@ -28,9 +30,19 @@ import { restauranteRoutes } from './restaurante.routes';
     FormasDePagamentoListagemComponent,
     CardapioListagemComponent,
     CategoriaDoCardapioCadastroComponent,
-    ItemDoCardapioCadastroComponent
+    ItemDoCardapioCadastroComponent,
+    ListaPedidosPendentesComponent
   ],
   imports: [ CommonModule, FormsModule, restauranteRoutes ],
-  providers: [ RestauranteService, HorarioDeFuncionamentoService, FormaDePagamentoService, DiaDaSemanaService, CardapioService, CategoriaDoCardapioService, ItemDoCardapioService ]
+  providers: [
+    RestauranteService,
+    HorarioDeFuncionamentoService,
+    FormaDePagamentoService,
+    DiaDaSemanaService,
+    CardapioService,
+    CategoriaDoCardapioService,
+    ItemDoCardapioService,
+    PedidosService
+  ]
 })
 export class RestauranteModule { }

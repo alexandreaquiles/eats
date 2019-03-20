@@ -1,5 +1,6 @@
-CREATE TABLE endereco_de_entrega (
+CREATE TABLE entrega (
   id bigint(20) NOT NULL AUTO_INCREMENT,
+  nome_do_cliente varchar(100) DEFAULT NULL,
   cep varchar(8) NOT NULL,
   endereco varchar(255) DEFAULT NULL,
   complemento varchar(255) DEFAULT NULL,

@@ -5,15 +5,14 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable()
-export class EntregaService {
+export class PedidosService {
 
-  private API = environment.baseUrl + '/entregas';
+  private API = environment.baseUrl + '/pedidos';
 
   constructor(private http: HttpClient) {
   }
 
-  atualiza(entrega): Observable<any> {
-    return this.http.put(`${this.API}/${entrega.id}`, entrega);
+  pendentes(): Observable<any> {
+    return this.http.get(`${this.API}/pendentes`);
   }
-
 }
