@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,9 +26,11 @@ import br.com.caelum.eats.repository.PedidoRepository;
 public class PedidoController {
 
 	private PedidoRepository repo;
+	private SimpMessagingTemplate websocket;
 
-	public PedidoController(PedidoRepository repo) {
+	public PedidoController(PedidoRepository repo, SimpMessagingTemplate websocket) {
 		this.repo = repo;
+		this.websocket = websocket;
 	}
 
 	@GetMapping("/{id}")
@@ -54,8 +58,10 @@ public class PedidoController {
 	}
 	
 	@PutMapping("/{id}/status")
+	//@SendTo("/pedidos/status")
 	public PedidoDto atualizaStatus(@RequestBody Pedido pedido) {
 		repo.atualizaStatus(pedido.getStatus(), pedido);
+		this.websocket.convertAndSend("/pedidos/status", pedido);
 		return new PedidoDto(pedido);
 	}
 
