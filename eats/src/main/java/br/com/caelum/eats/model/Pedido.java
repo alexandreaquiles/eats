@@ -28,6 +28,7 @@ public class Pedido {
 	
 	public static enum Status {
 		REALIZADO,
+		PAGO,
 		CONFIRMADO,
 		PRONTO,
 		SAIU_PARA_ENTREGA,

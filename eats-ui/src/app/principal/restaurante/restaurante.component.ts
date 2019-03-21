@@ -12,15 +12,16 @@ import { PedidoService } from '../services/pedido.service';
 })
 export class RestauranteComponent implements OnInit {
 
-  cep: string
-  restaurante
-  cardapio
-  avaliacoes:Array<any> = []
-  pedido:any = {
+  cep: string;
+  restaurante: any;
+  cardapio: any;
+  avaliacoes: Array<any> = [];
+  pedido: any = {
     itens: []
-  }
-  itemDoPedidoEscolhido
+  };
+  itemDoPedidoEscolhido: any;
   adicionandoItemAoPedido = false;
+  exibeFormularioDeEntrega = false;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -76,9 +77,14 @@ export class RestauranteComponent implements OnInit {
 
   fazPedido() {
     this.pedido.restaurante = this.restaurante;
-    this.pedido.entrega = { cep: this.cep } ;
+    this.pedido.entrega = { cep: this.cep, cliente: {} };
+    this.exibeFormularioDeEntrega = true;
+  }
+
+  registraEntrega() {
     this.pedidoService.adiciona(this.pedido)
-      .subscribe(pedido => this.router.navigateByUrl(`pedidos/${pedido.id}/pagamento`));
+    .subscribe(pedido => this.router.navigateByUrl(`pedidos/${pedido.id}/pagamento`));
+
   }
 
   calculaSubTotal(itemPedido) {

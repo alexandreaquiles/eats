@@ -6,7 +6,6 @@ import { PrincipalComponent } from './principal.component';
 import { ListaRestaurantesComponent } from './lista-restaurantes/lista-restaurantes.component';
 import { RestauranteComponent } from './restaurante/restaurante.component';
 import { PagamentoPedidoComponent } from './pedido/pagamento-pedido.component';
-import { RegistroEntregaComponent } from './entrega/registro-entrega.component';
 import { ResumoPedidoComponent } from './resumo/resumo-pedido.component';
 import { StatusPedidoComponent } from './status/status-pedido.component';
 
@@ -18,7 +17,6 @@ import { CardapioService } from './services/cardapio.service';
 import { AvaliacoesService } from './services/avaliacoes.service';
 import { PedidoService } from './services/pedido.service';
 import { PagamentoService } from './services/pagamento.service';
-import { EntregaService } from './services/entrega.service';
 import { RecomendacoesService } from './services/recomendacoes.service';
 
 @NgModule({
@@ -27,7 +25,6 @@ import { RecomendacoesService } from './services/recomendacoes.service';
     ListaRestaurantesComponent,
     RestauranteComponent,
     PagamentoPedidoComponent,
-    RegistroEntregaComponent,
     ResumoPedidoComponent,
     StatusPedidoComponent
   ],
@@ -39,7 +36,6 @@ import { RecomendacoesService } from './services/recomendacoes.service';
     AvaliacoesService,
     PedidoService,
     PagamentoService,
-    EntregaService,
     RecomendacoesService
   ]
 })

@@ -12,42 +12,47 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.caelum.eats.dto.PagamentoDto;
 import br.com.caelum.eats.exception.ResourceNotFoundException;
 import br.com.caelum.eats.model.Pagamento;
+import br.com.caelum.eats.model.Pedido.Status;
 import br.com.caelum.eats.repository.PagamentoRepository;
+import br.com.caelum.eats.repository.PedidoRepository;
 
 @RestController
 @RequestMapping("/pagamentos")
 public class PagamentoController {
 
-	private PagamentoRepository repo;
+	private PagamentoRepository pagamentoRepo;
+	private PedidoRepository pedidoRepo;
 
-	public PagamentoController(PagamentoRepository repo) {
-		this.repo = repo;
+	public PagamentoController(PagamentoRepository pagamentoRepo, PedidoRepository pedidoRepo) {
+		this.pagamentoRepo = pagamentoRepo;
+		this.pedidoRepo = pedidoRepo;
 	}
 
 	@GetMapping("/{id}")
 	public PagamentoDto porId(@PathVariable("id") Long id) {
-		Pagamento pagamento = repo.findById(id).orElseThrow(() -> new ResourceNotFoundException());
+		Pagamento pagamento = pagamentoRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException());
 		return new PagamentoDto(pagamento);
 	}
 
 	@PostMapping
 	public PagamentoDto cria(@RequestBody Pagamento pagamento) {
 		pagamento.setStatus(Pagamento.Status.CRIADO);
-		Pagamento salvo = repo.save(pagamento);
+		Pagamento salvo = pagamentoRepo.save(pagamento);
 		return new PagamentoDto(salvo);
 	}
 
 	@PutMapping("/{id}")
 	public PagamentoDto confirma(@RequestBody Pagamento pagamento) {
 		pagamento.setStatus(Pagamento.Status.CONFIRMADO);
-		repo.save(pagamento);
+		pagamentoRepo.save(pagamento);
+		pedidoRepo.atualizaStatus(Status.PAGO, pagamento.getPedido());
 		return new PagamentoDto(pagamento);
 	}
 
 	@DeleteMapping("/{id}")
 	public PagamentoDto cancela(@RequestBody Pagamento pagamento) {
 		pagamento.setStatus(Pagamento.Status.CANCELADO);
-		repo.save(pagamento);
+		pagamentoRepo.save(pagamento);
 		return new PagamentoDto(pagamento);
 	}
 

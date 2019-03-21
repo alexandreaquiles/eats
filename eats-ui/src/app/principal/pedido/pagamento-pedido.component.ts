@@ -43,14 +43,12 @@ export class PagamentoPedidoComponent implements OnInit {
 
   confirmaPagamento() {
     this.pagamentoService.confirma(this.pagamento)
-      .subscribe(pagamento => this.router.navigateByUrl(`pedidos/${pagamento.pedido.id}/entrega`));
+      .subscribe(pagamento => this.router.navigateByUrl(`pedidos/${pagamento.pedido.id}/status`));
   }
 
   cancelaPagamento() {
     this.pagamentoService.cancela(this.pagamento)
-      .subscribe(pagamento => {
-        console.log(pagamento);
-      });
+      .subscribe(() => this.router.navigateByUrl(``));
 }
 
 }

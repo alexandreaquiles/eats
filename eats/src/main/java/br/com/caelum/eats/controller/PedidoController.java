@@ -1,12 +1,14 @@
 package br.com.caelum.eats.controller;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,7 +37,7 @@ public class PedidoController {
 
 	@GetMapping("/pendentes")
 	public List<PedidoDto> realizados() {
-		return repo.semStatus(Status.ENTREGUE)
+		return repo.semStatus(Arrays.asList(Status.REALIZADO, Status.ENTREGUE))
 				.stream()
 				.map(pedido -> new PedidoDto(pedido))
 				.collect(Collectors.toList());
@@ -49,6 +51,12 @@ public class PedidoController {
 		pedido.getEntrega().setPedido(pedido);
 		Pedido salvo = repo.save(pedido);
 		return new PedidoDto(salvo);
+	}
+	
+	@PutMapping("/{id}/status")
+	public PedidoDto atualizaStatus(@RequestBody Pedido pedido) {
+		repo.atualizaStatus(pedido.getStatus(), pedido);
+		return new PedidoDto(pedido);
 	}
 
 }

@@ -1,5 +1,6 @@
 package br.com.caelum.eats.model;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,14 +23,16 @@ public class Entrega {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
-	@Size(max=100)
-	private String nomeDoCliente;
-	
+	@Embedded
+	private Cliente cliente;
+
 	@NotBlank @Pattern(regexp="\\d{8}")
 	private String cep;
 
+	@NotBlank @Size(max=255)
 	private String endereco;
 
+	@Size(max=255)
 	private String complemento;
 
 	@OneToOne(optional=false)

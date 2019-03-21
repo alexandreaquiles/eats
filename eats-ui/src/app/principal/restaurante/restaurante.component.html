@@ -6,6 +6,34 @@
   <p>{{ restaurante.descricao }}</p>
 </section>
 
+<section *ngIf="exibeFormularioDeEntrega">
+  <h3>Informações de Entrega</h3>
+  <form #entregaForm="ngForm" (ngSubmit)="registraEntrega()">
+    <div>
+      <label for="nome">Nome</label>
+      <input required id="nome" name="nome" maxlength="100" [(ngModel)]="pedido.entrega.cliente.nome">
+    </div>
+    <div>
+      <label for="telefone">Telefone</label>
+      <input required id="telefone" name="telefone" maxlength="10" [(ngModel)]="pedido.entrega.cliente.telefone">
+    </div>
+    <div>
+      <label for="cep">CEP</label>
+      <input required id="cep" name="cep" pattern="\d{8}" maxlength="8" [(ngModel)]="pedido.entrega.cep">
+    </div>
+    <div>
+      <label for="endereco">Endereço</label>
+      <textarea required id="endereco" name="endereco" [(ngModel)]="pedido.entrega.endereco"></textarea>
+    </div>
+    <div>
+      <label for="complemento">Complemento</label>
+      <textarea id="complemento" name="complemento" [(ngModel)]="pedido.entrega.complemento"></textarea>
+    </div>
+    <button type="submit" [disabled]="!entregaForm.form.valid">Confirmar pedido</button>
+  </form>
+</section>
+
+
 <section *ngIf="itemDoPedidoEscolhido">
   <p><strong>{{ itemDoPedidoEscolhido.itemDoCardapio?.nome }}</strong></p>
   <form #itemDoPedidoEscolhidoForm="ngForm" (ngSubmit)="adicionaItemAoPedido()">
@@ -21,7 +49,7 @@
   </form>
 </section>
 
-<section *ngIf="restaurante && pedido.itens.length">
+<section *ngIf="restaurante && pedido.itens?.length">
   <h2>Pedido</h2>
   <div *ngFor="let itemPedido of pedido.itens">
     <p>{{ itemPedido.quantidade }}x {{ itemPedido.itemDoCardapio.nome }}

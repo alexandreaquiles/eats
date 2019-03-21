@@ -15,4 +15,9 @@ export class PedidosService {
   pendentes(): Observable<any> {
     return this.http.get(`${this.API}/pendentes`);
   }
+
+  atualizaStatus(pedido): Observable<any> {
+    return this.http.put(`${this.API}/${pedido.id}/status`, pedido);
+  }
+
 }

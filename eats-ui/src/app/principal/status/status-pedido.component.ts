@@ -11,8 +11,8 @@ export class StatusPedidoComponent implements OnInit {
   pedido: any = {};
 
   constructor(private route: ActivatedRoute,
-    private router: Router,
-    private pedidoService: PedidoService) {
+              private router: Router,
+              private pedidoService: PedidoService) {
   }
 
   ngOnInit() {

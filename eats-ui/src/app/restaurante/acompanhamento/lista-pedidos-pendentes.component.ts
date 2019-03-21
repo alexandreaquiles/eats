@@ -18,19 +18,27 @@ export class ListaPedidosPendentesComponent implements OnInit {
   }
 
   confirma(pedido) {
-    pedido.status = 'CONFIRMADO'
+    pedido.status = 'CONFIRMADO';
+    this.pedidosService.atualizaStatus(pedido)
+      .subscribe();
   }
 
   avisaPronto(pedido) {
-    pedido.status = 'PRONTO'
+    pedido.status = 'PRONTO';
+    this.pedidosService.atualizaStatus(pedido)
+      .subscribe();
   }
 
   avisaSaiu(pedido) {
-    pedido.status = 'SAIU_PARA_ENTREGA'
+    pedido.status = 'SAIU_PARA_ENTREGA';
+    this.pedidosService.atualizaStatus(pedido)
+      .subscribe();
   }
 
   avisaEntregue(pedido) {
-    pedido.status = 'ENTREGUE'
+    pedido.status = 'ENTREGUE';
+    this.pedidosService.atualizaStatus(pedido)
+      .subscribe();
   }
 
 }

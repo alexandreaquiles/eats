@@ -1,12 +1,12 @@
 <div *ngFor="let pedido of pendentes">
     <div *ngIf="pedido?.status != 'ENTREGUE'">
-          <p>Nome do Cliente: {{ pedido.entrega.nomeDoCliente }}</p>
+          <p>Cliente: {{ pedido.entrega.cliente.nome }} | {{ pedido.entrega.cliente.telefone }}</p>
     <div *ngFor="let itemPedido of pedido.itens">
       <p>{{ itemPedido.quantidade }}x {{ itemPedido.itemDoCardapio.nome }}
       <p><small>{{ itemPedido.observacao }}</small></p>
     </div>
     <p>Endereço: {{ pedido.entrega.endereco }} {{ pedido.entrega.complemento }}</p>
-    <button *ngIf="pedido.status == 'REALIZADO'" (click)="confirma(pedido)">Confirmar</button>
+    <button *ngIf="pedido.status == 'PAGO'" (click)="confirma(pedido)">Confirmar</button>
     <button *ngIf="pedido.status == 'CONFIRMADO'" (click)="avisaPronto(pedido)">Está pronto</button>
     <button *ngIf="pedido.status == 'PRONTO'" (click)="avisaSaiu(pedido)">Saiu para entrega</button>
     <button *ngIf="pedido.status == 'SAIU_PARA_ENTREGA'" (click)="avisaEntregue(pedido)">Entregue</button>
