@@ -8,6 +8,8 @@ import { RouterModule } from '@angular/router';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/pt';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { AppComponent } from './app.component';
 
 import { AdminModule } from './admin/admin.module';
@@ -27,6 +29,7 @@ registerLocaleData(localeFr, 'pt');
     FormsModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([]),
+    NgbModule,
     AdminModule,
     PrincipalModule,
     RestauranteModule
