@@ -42,13 +42,13 @@ public class AdminFormaDePagamentoController {
 	}
 
 	@PostMapping
-	private void adiciona(@RequestBody FormaDePagamento tipoDeCozinha) {
-		repo.save(tipoDeCozinha);
+	private FormaDePagamento adiciona(@RequestBody FormaDePagamento tipoDeCozinha) {
+		return repo.save(tipoDeCozinha);
 	}
 
 	@PutMapping("/{id}")
-	private void atualiza(@RequestBody FormaDePagamento tipoDeCozinha) {
-		repo.save(tipoDeCozinha);
+	private FormaDePagamento atualiza(@RequestBody FormaDePagamento tipoDeCozinha) {
+		return repo.save(tipoDeCozinha);
 	}
 
 	@DeleteMapping("/{id}")

@@ -1,20 +1,14 @@
 <h2>Restaurantes em aprovação</h2>
 
-<table *ngIf="restaurantesEmAprovacao?.length">
-  <thead>
-    <tr>
-      <th>Restaurante</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<table class="table" *ngIf="restaurantesEmAprovacao?.length">
   <tbody>
     <tr *ngFor="let restaurante of restaurantesEmAprovacao">
-      <td>{{ restaurante.nome }}</td>
-      <td><button (click)="detalha(restaurante)">Detalhar</button></td>
-      <td><button [disabled]="restaurante.aprovado" (click)="aprova(restaurante)">Aprovar</button></td>
-      <td>{{ restaurante.aprovado ? 'Aprovado' : '' }}</td>
+      <td>{{ restaurante.nome }} <span class="badge badge-success">{{ restaurante.aprovado ? 'Aprovado' : '' }}</span>
+      </td>
+      <td class="w-25 text-right">
+        <button class="btn btn-primary" [disabled]="restaurante.aprovado" (click)="aprova(restaurante)">Aprovar</button>
+        <button class="btn btn-default" (click)="detalha(restaurante)">Detalhar</button>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -22,33 +16,39 @@
   <p>Não há restaurantes a serem aprovados</p>
 </div>
 
-<div *ngIf="restauranteEmDetalhe">
-  <h3>Restaurante</h3>
-  <div>
-      <p><strong>Nome:</strong> {{ restauranteEmDetalhe.nome }}</p>
-      <p><strong>Tipo de cozinha:</strong> {{ restauranteEmDetalhe.tipoDeCozinha.nome }}</p>
-      <p><strong>CNPJ:</strong> {{ restauranteEmDetalhe.cnpj }}</p>
-      <p><strong>Descrição:</strong> {{ restauranteEmDetalhe.descricao }}</p>
-      <p><strong>Taxa de entrega:</strong> {{ restauranteEmDetalhe.taxaDeEntregaEmReais | currency:'BRL' }}</p>
-      <p><strong>Tempo de entrega mínimo (em minutos):</strong> {{ restauranteEmDetalhe.tempoDeEntregaMinimoEmMinutos}}</p>
-      <p><strong>Tempo de entrega máximo (em minutos):</strong> {{ restauranteEmDetalhe.tempoDeEntregaMaximoEmMinutos }}</p>
-  </div>
+<div class="shadow border bg-light mb-5 p-3" *ngIf="restauranteEmDetalhe">
+  <h3>Detalhes do restaurante</h3>
+  <dl>
+    <dt>Nome</dt>
+    <dd>{{ restauranteEmDetalhe.nome }}</dd>
+
+    <dt>Tipo de cozinha</dt>
+    <dd>{{ restauranteEmDetalhe.tipoDeCozinha.nome }}</dd>
+
+    <dt>CNPJ</dt>
+    <dd>{{ restauranteEmDetalhe.cnpj }}</dd>
+
+    <dt>Descrição</dt>
+    <dd>{{ restauranteEmDetalhe.descricao }}</dd>
+
+    <dt>Taxa de entrega</dt>
+    <dd>{{ restauranteEmDetalhe.taxaDeEntregaEmReais | currency:'BRL' }}</dd>
+
+    <dt>Tempo de entrega mínimo (em minutos)</dt>
+    <dd>{{ restauranteEmDetalhe.tempoDeEntregaMinimoEmMinutos}}</dd>
+
+    <dt>Tempo de entrega máximo (em minutos)</dt>
+    <dd>{{ restauranteEmDetalhe.tempoDeEntregaMaximoEmMinutos }}</dd>
+  </dl>
   <div *ngIf="formasDePagamento?.length">
     <h4>Formas de pagamento</h4>
-    <ul *ngFor="let forma of formasDePagamento">
+    <ul class="list-unstyled" *ngFor="let forma of formasDePagamento">
       <li>{{ forma.nome }}</li>
     </ul>
   </div>
   <div *ngIf="horariosDeFuncionamento?.length">
     <h4>Horários de funcionamento</h4>
     <table>
-        <thead>
-          <tr>
-            <th>Dia da semana</th>
-            <th>Horário de abertura</th>
-            <th>Horário de fechamento</th>
-          </tr>
-        </thead>
         <tbody>
           <tr *ngFor="let horarioDeFuncionamento of horariosDeFuncionamento">
               <td>{{ horarioDeFuncionamento.diaDaSemana }}</td>
@@ -58,19 +58,21 @@
         </tbody>
       </table>
   </div>
-  <div *ngIf="cardapio?.categorias?.length">
+  <div class="mt-3" *ngIf="cardapio?.categorias?.length">
     <h4>Cardápio</h4>
-        <div *ngFor="let categoria of cardapio.categorias">
-          <h3>{{ categoria.nome | uppercase }}</h3>
-          <div *ngFor="let item of categoria.itens">
-            <h4>{{ item.nome }}</h4>
-            <p>{{ item.descricao }}</p>
-            <p *ngIf="!item.precoPromocional; else promocional">{{ item.preco | currency:'BRL' }}</p>
-            <ng-template #promocional>
-              <del>{{ item.preco | currency:'BRL' }}</del>
-              <p>{{ item.precoPromocional | currency:'BRL' }}</p>
-            </ng-template>
-          </div>
-        </div>
+    <div *ngFor="let categoria of cardapio.categorias">
+      <h5>{{ categoria.nome }}</h5>
+      <div *ngFor="let item of categoria.itens">
+        <p>
+          <span>{{ item.nome }}</span> |
+          <span>{{ item.descricao }}</span> |
+          <span *ngIf="!item.precoPromocional; else promocional">{{ item.preco | currency:'BRL' }}</span>
+        <ng-template #promocional>
+          <span><del>{{ item.preco | currency:'BRL' }}</del>
+          {{ item.precoPromocional | currency:'BRL' }}</span>
+        </ng-template>
+        </p>
+      </div>
+    </div>
   </div>
 </div>

@@ -20,9 +20,10 @@ export class TiposDeCozinhaComponent implements OnInit {
               private tipoDeCozinhaService: TipoDeCozinhaService) { }
 
   ngOnInit() {
-    this.tipoDeCozinhaService.todos().subscribe(tiposDeCozinha => {
-      this.tiposDeCozinha = tiposDeCozinha;
-    });
+    this.tipoDeCozinhaService.todos()
+      .subscribe(tiposDeCozinha => {
+        this.tiposDeCozinha = tiposDeCozinha;
+      });
   }
 
   adiciona(tipoDeCozinhaModal) {

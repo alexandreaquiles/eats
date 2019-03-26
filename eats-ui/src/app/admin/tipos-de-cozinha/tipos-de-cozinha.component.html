@@ -1,6 +1,6 @@
 <h2>Tipos de Cozinha</h2>
 
-<button class="btn btn-primary mt-3 mb-1" role="button" (click)="adiciona(tipoDeCozinhaModal)">Adicionar</button>
+<button class="btn btn-primary mt-3 mb-1" (click)="adiciona(tipoDeCozinhaModal)">Adicionar</button>
 
 <table class="table table-striped">
   <thead>
@@ -12,9 +12,9 @@
   <tbody>
     <tr *ngFor="let tipoDeCozinha of tiposDeCozinha">
       <td>{{tipoDeCozinha.nome}}</td>
-      <td class="w-25 pull-right">
-        <button class="btn btn-secondary mr-1 mb-1" role="button" (click)="edita(tipoDeCozinhaModal, tipoDeCozinha)">Editar</button>
-        <button class="btn btn-danger" role="button" (click)="remove(tipoDeCozinha)">Deletar</button>
+      <td class="w-25 text-right">
+        <button class="btn btn-secondary mr-1 mb-1 mb-lg-0" (click)="edita(tipoDeCozinhaModal, tipoDeCozinha)">Editar</button>
+        <button class="btn btn-danger" (click)="remove(tipoDeCozinha)">Deletar</button>
       </td>
     </tr>
   </tbody>
@@ -25,7 +25,7 @@
       <form #tipoDeCozinhaForm="ngForm" (ngSubmit)="salva()">
           <div class="form-group">
               <label for="nome">Nome</label>
-              <input class="form-control" placeholder="digite o nome do tipo de cozinha" [(ngModel)]="tipoDeCozinha.nome" required id="nome" name="nome" #nome>
+              <input class="form-control" placeholder="digite o nome do tipo de cozinha" [(ngModel)]="tipoDeCozinha.nome" required id="nome" name="nome">
           </div>
           <button type="submit" class="btn btn-primary mr-1" [disabled]="!tipoDeCozinhaForm.form.valid">Salvar</button>
           <button type="button" class="btn btn-default" (click)="modal.dismiss()">Cancelar</button>
