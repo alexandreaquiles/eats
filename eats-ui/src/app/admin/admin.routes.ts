@@ -1,39 +1,25 @@
 import { RouterModule, Routes } from '@angular/router';
 
-import { AdminComponent } from './admin.component';
-import { TipoDeCozinhaListagemComponent } from './tipo-de-cozinha/tipo-de-cozinha-listagem.component';
-import { TipoDeCozinhaCadastroComponent } from './tipo-de-cozinha/tipo-de-cozinha-cadastro.component';
+import { TiposDeCozinhaComponent } from './tipo-de-cozinha/tipos-de-cozinha.component';
 import { FormaDePagamentoListagemComponent } from './forma-de-pagamento/forma-de-pagamento-listagem.component';
 import { FormaDePagamentoCadastroComponent } from './forma-de-pagamento/forma-de-pagamento-cadastro.component';
 import { RestauranteEmAprovacaoComponent } from './restaurantes-em-aprovacao/restaurantes-em-aprovacao.component';
 
 const routes: Routes = [
   {
-    path: 'admin',
-    component: AdminComponent
+    path: 'admin/tipos-de-cozinha',
+    component: TiposDeCozinhaComponent
   },
   {
-    path: 'admin/tipo-de-cozinha',
-    component: TipoDeCozinhaListagemComponent
-  },
-  {
-    path: 'admin/tipo-de-cozinha/cadastro',
-    component: TipoDeCozinhaCadastroComponent
-  },
-  {
-    path: 'admin/tipo-de-cozinha/cadastro/:id',
-    component: TipoDeCozinhaCadastroComponent
-  },
-  {
-    path: 'admin/forma-de-pagamento',
+    path: 'admin/formas-de-pagamento',
     component: FormaDePagamentoListagemComponent
   },
   {
-    path: 'admin/forma-de-pagamento/cadastro',
+    path: 'admin/formas-de-pagamento/cadastro',
     component: FormaDePagamentoCadastroComponent
   },
   {
-    path: 'admin/forma-de-pagamento/cadastro/:id',
+    path: 'admin/formas-de-pagamento/cadastro/:id',
     component: FormaDePagamentoCadastroComponent
   },
   {

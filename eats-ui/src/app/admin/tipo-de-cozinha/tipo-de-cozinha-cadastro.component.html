@@ -1,8 +1,0 @@
-<form #tipoDeCozinhaForm="ngForm" (ngSubmit)="salva()">
-    <h2>{{tipoDeCozinha.id ? 'Editar' : 'Adicionar'}} Tipo de Cozinha</h2>
-    <input type="hidden" name="id" [(ngModel)]="tipoDeCozinha.id">
-    <input placeholder="Nome do tipo de cozinha" [(ngModel)]="tipoDeCozinha.nome"
-              required name="nome" #nome>
-    <button type="submit" [disabled]="!tipoDeCozinhaForm.form.valid">Salvar</button>
-    <a routerLink="/admin/tipo-de-cozinha">Voltar</a>
-</form>

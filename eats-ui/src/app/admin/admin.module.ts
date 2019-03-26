@@ -2,9 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { AdminComponent } from './admin.component';
-import { TipoDeCozinhaListagemComponent } from './tipo-de-cozinha/tipo-de-cozinha-listagem.component';
-import { TipoDeCozinhaCadastroComponent } from './tipo-de-cozinha/tipo-de-cozinha-cadastro.component';
+import { TiposDeCozinhaComponent } from './tipo-de-cozinha/tipos-de-cozinha.component';
 import { FormaDePagamentoListagemComponent } from './forma-de-pagamento/forma-de-pagamento-listagem.component';
 import { FormaDePagamentoCadastroComponent } from './forma-de-pagamento/forma-de-pagamento-cadastro.component';
 import { RestauranteEmAprovacaoComponent } from './restaurantes-em-aprovacao/restaurantes-em-aprovacao.component';
@@ -17,9 +15,7 @@ import { RestaurantesService } from './services/restaurantes.service';
 
 @NgModule({
   declarations: [
-    AdminComponent,
-    TipoDeCozinhaListagemComponent,
-    TipoDeCozinhaCadastroComponent,
+    TiposDeCozinhaComponent,
     FormaDePagamentoListagemComponent,
     FormaDePagamentoCadastroComponent,
     RestauranteEmAprovacaoComponent
