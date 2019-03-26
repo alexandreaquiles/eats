@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.caelum.eats.exception.ResourceNotFoundException;
 import br.com.caelum.eats.model.TipoDeCozinha;
 import br.com.caelum.eats.repository.TipoDeCozinhaRepository;
 
@@ -30,19 +29,14 @@ public class AdminTipoDeCozinhaController {
 		return repo.findAllByOrderByNomeAsc();
 	}
 
-	@GetMapping("/{id}")
-	private TipoDeCozinha detalha(@PathVariable("id") Long id) {
-		return repo.findById(id).orElseThrow(() -> new ResourceNotFoundException());
-	}
-
 	@PostMapping
-	private void adiciona(@RequestBody TipoDeCozinha tipoDeCozinha) {
-		repo.save(tipoDeCozinha);
+	private TipoDeCozinha adiciona(@RequestBody TipoDeCozinha tipoDeCozinha) {
+		return repo.save(tipoDeCozinha);
 	}
 
 	@PutMapping("/{id}")
-	private void atualiza(@RequestBody TipoDeCozinha tipoDeCozinha) {
-		repo.save(tipoDeCozinha);
+	private TipoDeCozinha atualiza(@RequestBody TipoDeCozinha tipoDeCozinha) {
+		return repo.save(tipoDeCozinha);
 	}
 
 	@DeleteMapping("/{id}")

@@ -11,7 +11,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -75,20 +74,6 @@ public class TipoDeCozinhaControllerTest {
 
 		Mockito.verify(repo).findAllByOrderByNomeAsc();
 
-	}
-	
-	@Test
-	public void detalhaPorId() throws Exception {
-		Mockito.when(repo.findById(1L)).thenReturn(Optional.of(chinesa));
-		
-		this.mockMvc.perform(get(ADMIN_TIPOS_DE_COZINHA + "/1"))
-			.andDo(print())
-			.andExpect(status().isOk())
-			.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-			.andExpect(jsonPath("$.id").value(1L))
-			.andExpect(jsonPath("$.nome").value("Chinesa"));
-
-		Mockito.verify(repo).findById(1L);
 	}
 
 	@Test
