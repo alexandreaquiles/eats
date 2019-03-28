@@ -11,7 +11,6 @@ import { StatusPedidoComponent } from './status/status-pedido.component';
 
 import { principalRoutes } from './principal.routes';
 
-import { TiposDeCozinhaService } from './services/tipos-de-cozinha.service';
 import { RestaurantesService } from './services/restaurantes.service';
 import { CardapioService } from './services/cardapio.service';
 import { AvaliacoesService } from './services/avaliacoes.service';
@@ -30,7 +29,6 @@ import { RecomendacoesService } from './services/recomendacoes.service';
   ],
   imports: [ CommonModule, FormsModule, principalRoutes ],
   providers: [
-    TiposDeCozinhaService,
     RestaurantesService,
     CardapioService,
     AvaliacoesService,

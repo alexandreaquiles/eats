@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { TiposDeCozinhaService } from '../../principal/services/tipos-de-cozinha.service';
+import { TipoDeCozinhaService } from 'src/app/services/tipo-de-cozinha.service';
 import { RestauranteService } from '../services/restaurante.service';
 
 @Component({
@@ -19,12 +19,12 @@ export class RestauranteCadastroComponent implements OnInit {
   constructor(
               private route: ActivatedRoute,
               private router: Router,
-              private tiposDeCozinhaService: TiposDeCozinhaService,
+              private tipoDeCozinhaService: TipoDeCozinhaService,
               private restauranteService: RestauranteService) {
   }
 
   ngOnInit() {
-    this.tiposDeCozinhaService.todos().subscribe(data => {
+    this.tipoDeCozinhaService.todos().subscribe(data => {
       this.tiposDeCozinha = data;
     });
 
@@ -40,7 +40,8 @@ export class RestauranteCadastroComponent implements OnInit {
   }
 
   salvaRestaurante() {
-    this.restauranteService.salva(this.restaurante).subscribe(restaurante => this.restaurante = restaurante);
+    this.restauranteService.salva(this.restaurante)
+      .subscribe(restaurante => this.restaurante = restaurante);
   }
 
 }

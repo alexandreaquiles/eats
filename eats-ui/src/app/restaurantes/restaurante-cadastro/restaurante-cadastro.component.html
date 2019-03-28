@@ -6,14 +6,12 @@
 
   <div class="form-group">
     <label for="nome">Nome</label>
-    <input class="form-control" placeholder="digite seu nome" [(ngModel)]="restaurante.nome" type="text" required
-      id="nome" name="nome">
+    <input class="form-control" placeholder="digite seu nome" [(ngModel)]="restaurante.nome" type="text" required id="nome" name="nome">
   </div>
 
   <div class="form-group">
-    <label for="nome">CNPJ:</label>
-    <input class="form-control" placeholder="00.000.000/0000-00" [(ngModel)]="restaurante.cnpj" maxlength="18"
-      pattern="\d{2}\.\d{3}\.\d{3}/\d{4}=\d{2}" type="text" required id="cnpj" name="cnpj">
+    <label for="nome">CNPJ</label>
+    <input class="form-control" placeholder="00.000.000/0000-00" [(ngModel)]="restaurante.cnpj" maxlength="18" pattern="\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2}" type="text" required id="cnpj" name="cnpj">
   </div>
 
   <div class="form-group">
@@ -32,24 +30,20 @@
 
   <div class="form-group">
     <label for="taxaDeEntregaEmReais">Taxa de entrega (em R$)</label>
-    <input class="form-control" [(ngModel)]="restaurante.taxaDeEntregaEmReais" type="text" id="taxaDeEntregaEmReais"
-      name="taxaDeEntregaEmReais">
+    <input class="form-control" [(ngModel)]="restaurante.taxaDeEntregaEmReais" type="text" id="taxaDeEntregaEmReais" name="taxaDeEntregaEmReais">
   </div>
 
   <div class="form-group">
     <label for="tempoDeEntregaMinimoEmMinutos">Tempo de entrega mínimo (em minutos):</label>
-    <input class="form-control" [(ngModel)]="restaurante.tempoDeEntregaMinimoEmMinutos" type="number" min="10" max="180"
-      id="tempoDeEntregaMinimoEmMinutos" name="tempoDeEntregaMinimoEmMinutos">
+    <input class="form-control" [(ngModel)]="restaurante.tempoDeEntregaMinimoEmMinutos" type="number" min="10" max="180" id="tempoDeEntregaMinimoEmMinutos" name="tempoDeEntregaMinimoEmMinutos">
   </div>
 
   <div class="form-group">
     <label for="tempoDeEntregaMaximoEmMinutos">Tempo de entrega máximo (em minutos):</label>
-    <input class="form-control" [(ngModel)]="restaurante.tempoDeEntregaMaximoEmMinutos" type="number" min="10" max="180"
-      id="tempoDeEntregaMaximoEmMinutos" name="tempoDeEntregaMaximoEmMinutos">
+    <input class="form-control" [(ngModel)]="restaurante.tempoDeEntregaMaximoEmMinutos" type="number" min="10" max="180" id="tempoDeEntregaMaximoEmMinutos" name="tempoDeEntregaMaximoEmMinutos">
   </div>
 
-  <button class="btn btn-primary btn-lg" type="submit"
-    [disabled]="!restauranteForm.form.valid">{{ restaurante.id ? 'Atualizar' : 'Inserir' }}</button>
+  <button class="btn btn-primary btn-lg mb-3" type="submit" [disabled]="!restauranteForm.form.valid">{{ restaurante.id ? 'Atualizar' : 'Inserir' }}</button>
 
 </form>
 
@@ -62,7 +56,7 @@
         <h2>Horários de Funcionamento</h2>
       </ng-template>
       <ng-template ngbPanelContent>
-        <app-horarios-de-funcionamento-listagem [restaurante]="restaurante"></app-horarios-de-funcionamento-listagem>
+        <app-horarios-de-funcionamento [restaurante]="restaurante"></app-horarios-de-funcionamento>
       </ng-template>
     </ngb-panel>
 
@@ -71,7 +65,7 @@
         <h2>Formas de Pagamento</h2>
       </ng-template>
       <ng-template ngbPanelContent>
-        <app-formas-de-pagamento-listagem [restaurante]="restaurante"></app-formas-de-pagamento-listagem>
+        <app-formas-de-pagamento [restaurante]="restaurante"></app-formas-de-pagamento>
       </ng-template>
     </ngb-panel>
 

@@ -6,8 +6,8 @@ import { TiposDeCozinhaComponent } from './tipos-de-cozinha/tipos-de-cozinha.com
 import { FormasDePagamentoComponent } from './formas-de-pagamento/formas-de-pagamento.component';
 import { RestauranteEmAprovacaoComponent } from './restaurantes-em-aprovacao/restaurantes-em-aprovacao.component';
 
-import { TipoDeCozinhaService } from './services/tipo-de-cozinha.service';
-import { FormaDePagamentoService } from './services/forma-de-pagamento.service';
+import { TipoDeCozinhaService } from '../services/tipo-de-cozinha.service';
+import { FormaDePagamentoService } from '../services/forma-de-pagamento.service';
 
 import { adminRoutes } from './admin.routes';
 import { RestaurantesService } from './services/restaurantes.service';

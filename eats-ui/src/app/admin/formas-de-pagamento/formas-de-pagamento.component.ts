@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
-import { FormaDePagamentoService } from 'src/app/admin/services/forma-de-pagamento.service';
+import { FormaDePagamentoService } from 'src/app/services/forma-de-pagamento.service';
 
 @Component({
   selector: 'app-formas-de-pagamento',

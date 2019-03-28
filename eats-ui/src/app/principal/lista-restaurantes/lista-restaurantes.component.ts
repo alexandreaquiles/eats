@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { TiposDeCozinhaService } from '../services/tipos-de-cozinha.service';
+import { TipoDeCozinhaService } from 'src/app/services/tipo-de-cozinha.service';
 import { RestaurantesService } from '../services/restaurantes.service';
 import { RecomendacoesService } from '../services/recomendacoes.service';
 
@@ -19,13 +19,13 @@ export class ListaRestaurantesComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private tiposDeCozinhaService: TiposDeCozinhaService,
+              private tipoDeCozinhaService: TipoDeCozinhaService,
               private restaurantesService: RestaurantesService,
               private recomendacoesService: RecomendacoesService) {
   }
 
   ngOnInit() {
-    this.tiposDeCozinhaService.todos().subscribe(tipos => {
+    this.tipoDeCozinhaService.todos().subscribe(tipos => {
       this.tiposDeCozinha = tipos;
     });
 

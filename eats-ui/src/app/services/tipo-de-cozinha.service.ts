@@ -4,27 +4,29 @@ import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class TipoDeCozinhaService {
 
-  private ADMIN_API = environment.baseUrl + '/admin/tipos-de-cozinha';
+  private API = environment.baseUrl;
 
   constructor(private http: HttpClient) {
   }
 
   todos(): Observable<any> {
-    return this.http.get(this.ADMIN_API);
+    return this.http.get(`${this.API}/tipos-de-cozinha`);
   }
 
   salva(tipoDeCozinha: any): Observable<any> {
     if (tipoDeCozinha.id) {
-      return this.http.put(`${this.ADMIN_API}/${tipoDeCozinha.id}`, tipoDeCozinha);
+      return this.http.put(`${this.API}/admin/tipos-de-cozinha/${tipoDeCozinha.id}`, tipoDeCozinha);
     }
-    return this.http.post(this.ADMIN_API, tipoDeCozinha);
+    return this.http.post(`${this.API}/admin/tipos-de-cozinha`, tipoDeCozinha);
   }
 
   remove(tipoDeCozinha: any) {
-    return this.http.delete(`${this.ADMIN_API}/${tipoDeCozinha.id}`);
+    return this.http.delete(`${this.API}/admin/tipos-de-cozinha/${tipoDeCozinha.id}`);
   }
 
 }

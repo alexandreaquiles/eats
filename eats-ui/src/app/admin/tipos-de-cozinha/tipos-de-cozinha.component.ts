@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
-import { TipoDeCozinhaService } from 'src/app/admin/services/tipo-de-cozinha.service';
+import { TipoDeCozinhaService } from 'src/app/services/tipo-de-cozinha.service';
 
 
 @Component({
