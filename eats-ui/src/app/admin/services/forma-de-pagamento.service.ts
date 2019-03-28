@@ -16,10 +16,6 @@ export class FormaDePagamentoService {
     return this.http.get(this.ADMIN_API);
   }
 
-  porId(id: string) {
-    return this.http.get(this.ADMIN_API + '/' + id);
-  }
-
   salva(formaDePagamento: any): Observable<any> {
     if (formaDePagamento.id) {
       return this.http.put(this.ADMIN_API + '/' + formaDePagamento.id, formaDePagamento);

@@ -50,7 +50,7 @@ export class ItemDoCardapioCadastroComponent implements OnInit {
     this.categoria.cardapio = this.cardapio;
     this.item.categoria = this.categoria;
     this.itemDoCardapioService.salva(this.item).subscribe(() => {
-      this.router.navigate(['/cadastro/restaurante', this.restaurante.id, 'cardapio', this.cardapio.id, 'categoria', this.categoria.id]);
+      this.router.navigate(['/restaurantes', this.restaurante.id, 'cardapio', this.cardapio.id, 'categoria', this.categoria.id]);
     });
   }
 

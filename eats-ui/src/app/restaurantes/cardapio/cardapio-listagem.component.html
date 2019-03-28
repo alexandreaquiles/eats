@@ -1,5 +1,3 @@
-<h2>Cardápio</h2>
-
 <h3>Categorias</h3>
 
 <form #categoriasDoCardapioForm="ngForm">
@@ -10,6 +8,6 @@
 <ul>
   <li *ngFor="let categoria of cardapio.categorias">
     <span>{{ categoria.nome }}</span>
-    <a [routerLink]="['/cadastro/restaurante',restaurante.id,'cardapio',cardapio.id,'categoria',categoria.id]">Editar</a>
+    <a [routerLink]="['/restaurantes',restaurante.id,'cardapio',cardapio.id,'categoria',categoria.id]">Editar</a>
   </li>
 </ul>

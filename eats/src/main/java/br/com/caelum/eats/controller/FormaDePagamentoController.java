@@ -1,11 +1,13 @@
 package br.com.caelum.eats.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,12 +19,12 @@ import br.com.caelum.eats.repository.FormaDePagamentoRepository;
 import br.com.caelum.eats.repository.RestauranteFormaDePagamentoRepository;
 
 @RestController
-public class FormasDePagamentoController {
+public class FormaDePagamentoController {
 
 	private FormaDePagamentoRepository formaRepo;
 	private RestauranteFormaDePagamentoRepository restauranteFormaDePagamentoRepo;
 	
-	public FormasDePagamentoController(FormaDePagamentoRepository formaRepo, RestauranteFormaDePagamentoRepository restauranteFormaDePagamentoRepo) {
+	public FormaDePagamentoController(FormaDePagamentoRepository formaRepo, RestauranteFormaDePagamentoRepository restauranteFormaDePagamentoRepo) {
 		this.formaRepo = formaRepo;
 		this.restauranteFormaDePagamentoRepo = restauranteFormaDePagamentoRepo;
 	}
@@ -30,6 +32,31 @@ public class FormasDePagamentoController {
 	@GetMapping("/formas-de-pagamento")
 	private List<FormaDePagamento> lista() {
 		return formaRepo.findAllByOrderByNomeAsc();
+	}
+	
+	@GetMapping("/admin/formas-de-pagamento")
+	private List<FormaDePagamento> listaAdmin() {
+		return formaRepo.findAllByOrderByNomeAsc();
+	}
+
+	@GetMapping("/admin/formas-de-pagamento/tipos")
+	private List<FormaDePagamento.Tipo> tipos() {
+		return Arrays.asList(FormaDePagamento.Tipo.values());
+	}
+
+	@PostMapping("/admin/formas-de-pagamento")
+	private FormaDePagamento adiciona(@RequestBody FormaDePagamento tipoDeCozinha) {
+		return formaRepo.save(tipoDeCozinha);
+	}
+
+	@PutMapping("/admin/formas-de-pagamento/{id}")
+	private FormaDePagamento atualiza(@RequestBody FormaDePagamento tipoDeCozinha) {
+		return formaRepo.save(tipoDeCozinha);
+	}
+
+	@DeleteMapping("/admin/formas-de-pagamento/{id}")
+	private void remove(@PathVariable("id") Long id) {
+		formaRepo.deleteById(id);
 	}
 
 	@GetMapping("/restaurantes/{idRestaurante}/formas-de-pagamento")

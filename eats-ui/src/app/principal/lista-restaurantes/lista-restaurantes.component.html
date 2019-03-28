@@ -12,7 +12,7 @@
 <section *ngIf="tiposDeCozinha?.length">
   <h2>Tipos de Cozinha</h2>
   <ul>
-    <li *ngFor="let tipoDeCozinha of tiposDeCozinha"><a [routerLink]="['/restaurantes', cep, 'tipos-de-cozinha', tipoDeCozinha.id]">{{tipoDeCozinha.nome}}</a></li>
+    <li *ngFor="let tipoDeCozinha of tiposDeCozinha"><a [routerLink]="['/pedidos', cep, 'tipos-de-cozinha', tipoDeCozinha.id]">{{tipoDeCozinha.nome}}</a></li>
   </ul>
 </section>
 

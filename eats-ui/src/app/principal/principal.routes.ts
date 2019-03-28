@@ -12,15 +12,15 @@ const routes: Routes = [
     component: PrincipalComponent
   },
   {
-    path: 'restaurantes/:cep',
+    path: 'pedidos/:cep',
     component: ListaRestaurantesComponent
   },
   {
-    path: 'restaurantes/:cep/tipos-de-cozinha/:tipoDeCozinhaId',
+    path: 'pedidos/:cep/tipos-de-cozinha/:tipoDeCozinhaId',
     component: ListaRestaurantesComponent
   },
   {
-    path: 'restaurantes/:cep/restaurante/:restauranteId',
+    path: 'pedidos/:cep/restaurante/:restauranteId',
     component: RestauranteComponent
   },
   {

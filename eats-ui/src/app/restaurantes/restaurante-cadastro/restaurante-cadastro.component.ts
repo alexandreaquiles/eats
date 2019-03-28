@@ -33,7 +33,7 @@ export class RestauranteCadastroComponent implements OnInit {
       this.restauranteService.porId(id).subscribe((restaurante: any) => {
         if (restaurante) {
           this.restaurante = restaurante;
-          this.router.navigate(['/cadastro/restaurante/' + restaurante.id]);
+          this.router.navigate(['/restaurantes/' + restaurante.id]);
         }
       });
     }

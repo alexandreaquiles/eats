@@ -51,6 +51,6 @@ export class ListaRestaurantesComponent implements OnInit {
   }
 
   escolher(restaurante) {
-    this.router.navigateByUrl(`/restaurantes/${this.cep}/restaurante/${restaurante.id}`);
+    this.router.navigateByUrl(`/pedidos/${this.cep}/restaurante/${restaurante.id}`);
   }
 }

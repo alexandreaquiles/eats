@@ -1,6 +1,5 @@
-<h2>Horários de Funcionamento</h2>
-<a [routerLink]="['/cadastro/restaurante',restaurante.id,'horarios-de-funcionamento']">Adicionar</a>
-<table>
+<a class="btn btn-primary btn-sm mb-1" [routerLink]="['/restaurantes',restaurante.id,'horarios-de-funcionamento']">Adicionar</a>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Dia da semana</th>
@@ -15,8 +14,10 @@
         <td>{{diaDaSemanaService.aPartirDoValor(horarioDeFuncionamento.diaDaSemana)?.nome}}</td>
         <td>{{horarioDeFuncionamento.horarioDeAbertura}}</td>
         <td>{{horarioDeFuncionamento.horarioDeFechamento}}</td>
-        <td><a [routerLink]="['/cadastro/restaurante',restaurante.id,'horarios-de-funcionamento', horarioDeFuncionamento.id]">Editar</a></td>
-        <td><a (click)="remove(horarioDeFuncionamento)">Deletar</a></td>
+        <td class="text-right">
+          <button class="btn btn-secondary btn-sm mr-1 mb-1 mb-lg-0" [routerLink]="['/restaurantes',restaurante.id,'horarios-de-funcionamento', horarioDeFuncionamento.id]">Editar</button>
+          <button class="btn btn-danger btn-sm" (click)="remove(horarioDeFuncionamento)">Deletar</button>
+        </td>
     </tr>
   </tbody>
 </table>

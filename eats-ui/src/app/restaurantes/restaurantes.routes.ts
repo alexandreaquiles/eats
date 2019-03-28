@@ -8,35 +8,35 @@ import { ListaPedidosPendentesComponent } from './acompanhamento/lista-pedidos-p
 
 const routes: Routes = [
   {
-    path: 'cadastro/restaurante',
+    path: 'restaurantes',
     component: RestauranteCadastroComponent
   },
   {
-    path: 'cadastro/restaurante/:id',
+    path: 'restaurantes/:id',
     component: RestauranteCadastroComponent
   },
   {
-    path: 'cadastro/restaurante/:restauranteId/horarios-de-funcionamento',
+    path: 'restaurantes/:restauranteId/horarios-de-funcionamento',
     component: HorariosDeFuncionamentoCadastroComponent
   },
   {
-    path: 'cadastro/restaurante/:restauranteId/horarios-de-funcionamento/:horarioId',
+    path: 'restaurantes/:restauranteId/horarios-de-funcionamento/:horarioId',
     component: HorariosDeFuncionamentoCadastroComponent
   },
   {
-    path: 'cadastro/restaurante/:restauranteId/cardapio/:cardapioId/categoria/:categoriaId',
+    path: 'restaurantes/:restauranteId/cardapio/:cardapioId/categoria/:categoriaId',
     component: CategoriaDoCardapioCadastroComponent
   },
   {
-    path: 'cadastro/restaurante/:restauranteId/cardapio/:cardapioId/categoria/:categoriaId/item',
+    path: 'restaurantes/:restauranteId/cardapio/:cardapioId/categoria/:categoriaId/item',
     component: ItemDoCardapioCadastroComponent
   },
   {
-    path: 'cadastro/restaurante/:restauranteId/cardapio/:cardapioId/categoria/:categoriaId/item/:itemId',
+    path: 'restaurantes/:restauranteId/cardapio/:cardapioId/categoria/:categoriaId/item/:itemId',
     component: ItemDoCardapioCadastroComponent
   },
   {
-    path: 'restaurante/:restauranteId/pedidos/pendentes',
+    path: 'restaurantes/:restauranteId/pedidos/pendentes',
     component: ListaPedidosPendentesComponent
   }
 ];

@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {  LOCALE_ID, NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,7 +14,7 @@ import { AppComponent } from './app.component';
 
 import { AdminModule } from './admin/admin.module';
 import { PrincipalModule } from './principal/principal.module';
-import { RestauranteModule } from './restaurante/restaurante.module';
+import { RestaurantesModule } from './restaurantes/restaurantes.module';
 
 
 registerLocaleData(localeFr, 'pt');
@@ -32,7 +32,7 @@ registerLocaleData(localeFr, 'pt');
     NgbModule,
     AdminModule,
     PrincipalModule,
-    RestauranteModule
+    RestaurantesModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'pt' }],
   bootstrap: [AppComponent]

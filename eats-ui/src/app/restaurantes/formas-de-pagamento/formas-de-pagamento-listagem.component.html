@@ -1,5 +1,3 @@
-<h2>Formas de pagamentos</h2>
-
 <form #formasDePagamentoForm="ngForm">
   <select [(ngModel)]="formaDePagamentoParaAdicionar" name="formaDePagamentoParaAdicionar">
     <option *ngFor="let forma of todasAsFormasDePagamento" [ngValue]="forma">{{ forma.nome }}</option>

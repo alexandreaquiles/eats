@@ -20,7 +20,8 @@ import { CategoriaDoCardapioService } from './services/categoria-do-cardapio.ser
 import { ItemDoCardapioService } from './services/item-do-cardapio.service';
 import { PedidosService } from './services/pedidos.service';
 
-import { restauranteRoutes } from './restaurante.routes';
+import { restauranteRoutes } from './restaurantes.routes';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { restauranteRoutes } from './restaurante.routes';
     ItemDoCardapioCadastroComponent,
     ListaPedidosPendentesComponent
   ],
-  imports: [ CommonModule, FormsModule, restauranteRoutes ],
+  imports: [ CommonModule, FormsModule, NgbModule, restauranteRoutes ],
   providers: [
     RestauranteService,
     HorarioDeFuncionamentoService,
@@ -45,4 +46,4 @@ import { restauranteRoutes } from './restaurante.routes';
     PedidosService
   ]
 })
-export class RestauranteModule { }
+export class RestaurantesModule { }
