@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { RestauranteCadastroComponent } from './restaurante-cadastro/restaurante-cadastro.component';
 import { CategoriaDoCardapioCadastroComponent } from './cardapio/categoria-do-cardapio-cadastro.component';
 import { ItemDoCardapioCadastroComponent } from './cardapio/item-do-cardapio-cadastro.component';
-import { ListaPedidosPendentesComponent } from './acompanhamento/lista-pedidos-pendentes.component';
+import { PedidosPendentesComponent } from './pedidos-pendentes/pedidos-pendentes.component';
 
 const routes: Routes = [
   {
@@ -28,7 +28,7 @@ const routes: Routes = [
   },
   {
     path: 'restaurantes/:restauranteId/pedidos/pendentes',
-    component: ListaPedidosPendentesComponent
+    component: PedidosPendentesComponent
   }
 ];
 

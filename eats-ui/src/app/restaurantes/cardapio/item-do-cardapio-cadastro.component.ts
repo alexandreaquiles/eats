@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { RestauranteService } from '../services/restaurante.service';
-import { CardapioService } from '../services/cardapio.service';
-import { CategoriaDoCardapioService } from '../services/categoria-do-cardapio.service';
-import { ItemDoCardapioService } from '../services/item-do-cardapio.service';
+import { RestauranteService } from '../../services/restaurante.service';
+import { CardapioService } from '../../services/cardapio.service';
+import { CategoriaDoCardapioService } from '../../services/categoria-do-cardapio.service';
+import { ItemDoCardapioService } from '../../services/item-do-cardapio.service';
 
 @Component({
   selector: 'app-item-do-cardapio-cadastro',

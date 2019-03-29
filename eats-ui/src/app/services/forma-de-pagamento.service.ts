@@ -33,4 +33,17 @@ export class FormaDePagamentoService {
     return this.http.get(`${this.API}/admin/formas-de-pagamento/tipos`);
   }
 
+  doRestaurante(restaurante) {
+    return this.http.get(`${this.API}/restaurantes/${restaurante.id}/formas-de-pagamento`);
+  }
+
+  adicionaAoRestaurante(formaDePagamento): Observable<any> {
+    return this.http.post(`${this.API}/restaurantes/${formaDePagamento.restaurante.id}/formas-de-pagamento`, formaDePagamento);
+  }
+
+  removeDoRestaurante(formaDePagamento) {
+    return this.http.delete(`${this.API}/restaurantes/${formaDePagamento.restaurante.id}/formas-de-pagamento/${formaDePagamento.id}`);
+  }
+
+
 }

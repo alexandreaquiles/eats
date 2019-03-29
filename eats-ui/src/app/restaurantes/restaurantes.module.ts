@@ -8,16 +8,16 @@ import { FormasDePagamentoComponent } from './formas-de-pagamento/formas-de-paga
 import { CardapioListagemComponent } from './cardapio/cardapio-listagem.component';
 import { CategoriaDoCardapioCadastroComponent } from './cardapio/categoria-do-cardapio-cadastro.component';
 import { ItemDoCardapioCadastroComponent } from './cardapio/item-do-cardapio-cadastro.component';
-import { ListaPedidosPendentesComponent } from './acompanhamento/lista-pedidos-pendentes.component';
+import { PedidosPendentesComponent } from './pedidos-pendentes/pedidos-pendentes.component';
 
-import { RestauranteService } from './services/restaurante.service';
+import { FormaDePagamentoService } from 'src/app/services/forma-de-pagamento.service';
+import { RestauranteService } from '../services/restaurante.service';
 import { HorarioDeFuncionamentoService } from '../services/horario-de-funcionamento.service';
-import { FormaDePagamentoService } from './services/forma-de-pagamento.service';
 import { DiaDaSemanaService } from '../services/dia-da-semana.service';
-import { CardapioService } from './services/cardapio.service';
-import { CategoriaDoCardapioService } from './services/categoria-do-cardapio.service';
-import { ItemDoCardapioService } from './services/item-do-cardapio.service';
-import { PedidosService } from './services/pedidos.service';
+import { CardapioService } from '../services/cardapio.service';
+import { CategoriaDoCardapioService } from '../services/categoria-do-cardapio.service';
+import { ItemDoCardapioService } from '../services/item-do-cardapio.service';
+import { PedidosService } from '../services/pedidos.service';
 
 import { restauranteRoutes } from './restaurantes.routes';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -30,7 +30,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CardapioListagemComponent,
     CategoriaDoCardapioCadastroComponent,
     ItemDoCardapioCadastroComponent,
-    ListaPedidosPendentesComponent
+    PedidosPendentesComponent
   ],
   imports: [ CommonModule, FormsModule, NgbModule, restauranteRoutes ],
   providers: [

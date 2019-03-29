@@ -7,17 +7,17 @@ import { environment } from 'src/environments/environment';
 @Injectable()
 export class PedidosService {
 
-  private API = environment.baseUrl + '/pedidos';
+  private API = environment.baseUrl;
 
   constructor(private http: HttpClient) {
   }
 
   pendentes(): Observable<any> {
-    return this.http.get(`${this.API}/pendentes`);
+    return this.http.get(`${this.API}/pedidos/pendentes`);
   }
 
   atualizaStatus(pedido): Observable<any> {
-    return this.http.put(`${this.API}/${pedido.id}/status`, pedido);
+    return this.http.put(`${this.API}/pedidos/${pedido.id}/status`, pedido);
   }
 
 }

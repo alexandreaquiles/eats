@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { TipoDeCozinhaService } from 'src/app/services/tipo-de-cozinha.service';
-import { RestauranteService } from '../services/restaurante.service';
+import { RestauranteService } from '../../services/restaurante.service';
 
 @Component({
   selector: 'app-restaurante-cadastro',

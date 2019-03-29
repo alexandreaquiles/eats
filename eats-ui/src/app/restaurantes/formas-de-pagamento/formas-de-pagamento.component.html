@@ -5,8 +5,8 @@
   <button class="btn btn-primary mb-2" (click)="adicionaFormaDePagamentoAoRestaurante()">Adicionar</button>
 </form>
 
-<ul class="list-group list-group-horizontal">
-  <li class="list-group-item" *ngFor="let formaDePagamento of formasDePagamentoDoRestaurante">
+<ul class="list-inline">
+  <li class="list-inline-item border rounded p-2" *ngFor="let formaDePagamento of formasDePagamentoDoRestaurante">
     <span>{{ formaDePagamento.nome }}</span>
     <button class="close text-danger ml-2" (click)="remove(formaDePagamento)">
         <span>&times;</span>

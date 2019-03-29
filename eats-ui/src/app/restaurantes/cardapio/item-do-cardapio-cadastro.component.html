@@ -1,34 +1,34 @@
-<h2><small>Categoria: </small> {{ categoria.nome }}</h2>
+<h3><small>Cardápio do restaurante:</small> {{ restaurante.nome }}</h3>
+<h2><small>Categoria do cardápio: </small> {{ categoria.nome }}</h2>
 
-<h3>Cardápio do restaurante: <small>{{ restaurante.nome }}</small></h3>
 
 <form #itemDoCardapioForm="ngForm" (ngSubmit)="salva()">
 
   <input type="hidden" name="id" [(ngModel)]="item.id">
 
-  <div>
+  <div class="form-group">
     <label for="nome">Nome</label>
-    <input required name="nome" id="nome" [(ngModel)]="item.nome" #nome>
+    <input class="form-control" required name="nome" id="nome" [(ngModel)]="item.nome">
   </div>
 
-  <div>
+  <div class="form-group">
     <label for="descricao">Descrição</label>
-    <input required name="descricao" id="descricao" [(ngModel)]="item.descricao" #descricao>
+    <textarea class="form-control" required name="descricao" id="descricao" [(ngModel)]="item.descricao"></textarea>
   </div>
 
-  <div>
+  <div class="form-group">
     <label for="preco">Preço</label>
-    <input required name="preco" id="preco" [(ngModel)]="item.preco" #preco>
+    <input class="form-control" required name="preco" id="preco" [(ngModel)]="item.preco">
   </div>
 
-  <div>
+  <div class="form-group">
     <label for="precoPromocional">Preço Promocional</label>
-    <input name="precoPromocional" id="precoPromocional" [(ngModel)]="item.precoPromocional" #precoPromocional>
+    <input class="form-control" name="precoPromocional" id="precoPromocional" [(ngModel)]="item.precoPromocional">
   </div>
 
-  <button type="submit" [disabled]="!itemDoCardapioForm.form.valid">Salvar</button>
+  <button class="btn btn-primary" type="submit" [disabled]="!itemDoCardapioForm.form.valid">Salvar</button>
 
-  <a [routerLink]="['/restaurantes',restaurante.id, 'cardapio', cardapio.id, 'categoria', categoria.id]">Voltar</a>
+  <a class="btn btn-default" [routerLink]="['/restaurantes',restaurante.id, 'cardapio', cardapio.id, 'categoria', categoria.id]">Voltar</a>
 
 </form>
 

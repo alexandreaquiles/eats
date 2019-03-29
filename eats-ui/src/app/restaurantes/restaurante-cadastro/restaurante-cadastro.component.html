@@ -53,15 +53,6 @@
 
     <ngb-panel>
       <ng-template ngbPanelTitle>
-        <h2>Horários de Funcionamento</h2>
-      </ng-template>
-      <ng-template ngbPanelContent>
-        <app-horarios-de-funcionamento [restaurante]="restaurante"></app-horarios-de-funcionamento>
-      </ng-template>
-    </ngb-panel>
-
-    <ngb-panel>
-      <ng-template ngbPanelTitle>
         <h2>Formas de Pagamento</h2>
       </ng-template>
       <ng-template ngbPanelContent>
@@ -75,6 +66,15 @@
       </ng-template>
       <ng-template ngbPanelContent>
         <app-cardapio-listagem [restaurante]="restaurante"></app-cardapio-listagem>
+      </ng-template>
+    </ngb-panel>
+
+    <ngb-panel>
+      <ng-template ngbPanelTitle>
+        <h2>Horários de Funcionamento</h2>
+      </ng-template>
+      <ng-template ngbPanelContent>
+        <app-horarios-de-funcionamento [restaurante]="restaurante"></app-horarios-de-funcionamento>
       </ng-template>
     </ngb-panel>
 

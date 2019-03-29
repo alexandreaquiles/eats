@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { FormaDePagamentoService } from '../services/forma-de-pagamento.service';
+import { FormaDePagamentoService } from 'src/app/services/forma-de-pagamento.service';
 
 @Component({
   selector: 'app-formas-de-pagamento',

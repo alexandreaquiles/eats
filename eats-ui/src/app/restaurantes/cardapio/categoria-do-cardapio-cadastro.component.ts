@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { RestauranteService } from '../services/restaurante.service';
-import { CardapioService } from '../services/cardapio.service';
-import { CategoriaDoCardapioService } from '../services/categoria-do-cardapio.service';
+import { RestauranteService } from '../../services/restaurante.service';
+import { CardapioService } from '../../services/cardapio.service';
+import { CategoriaDoCardapioService } from '../../services/categoria-do-cardapio.service';
 
 @Component({
   selector: 'app-categoria-do-categoria-cadastro',

@@ -33,7 +33,7 @@ export class RestaurantesService {
     return this.http.patch(`${this.ADMIN_API}/${restaurante.id}`, restaurante);
   }
 
-  formasDePagamentoDoRestaurante(restaurante) {
+  formasDePagamentoDoRestaurante(restaurante): Observable<any> {
     return this.http.get(`${this.API}/restaurantes/${restaurante.id}/formas-de-pagamento`);
   }
 

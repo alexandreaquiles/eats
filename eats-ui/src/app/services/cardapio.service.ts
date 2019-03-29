@@ -7,17 +7,17 @@ import { environment } from 'src/environments/environment';
 @Injectable()
 export class CardapioService {
 
-  private API = environment.baseUrl + '/restaurantes';
+  private API = environment.baseUrl;
 
   constructor(private http: HttpClient) {
   }
 
   porId(restauranteId, cardapioId): Observable<any> {
-    return this.http.get(`${this.API}/${restauranteId}/cardapio/${cardapioId}`);
+    return this.http.get(`${this.API}/restaurantes/${restauranteId}/cardapio/${cardapioId}`);
   }
 
   doRestaurante(restaurante): Observable<any> {
-    return this.http.get(`${this.API}/${restaurante.id}/cardapio`);
+    return this.http.get(`${this.API}/restaurantes/${restaurante.id}/cardapio`);
   }
 
 }

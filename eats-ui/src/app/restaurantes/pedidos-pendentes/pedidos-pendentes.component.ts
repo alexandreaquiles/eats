@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { PedidosService } from '../services/pedidos.service';
+import { PedidosService } from '../../services/pedidos.service';
 
 @Component({
-  selector: 'app-lista-pedidos-pendentes',
-  templateUrl: './lista-pedidos-pendentes.component.html'
+  selector: 'app-pedidos-pendentes',
+  templateUrl: './pedidos-pendentes.component.html'
 })
-export class ListaPedidosPendentesComponent implements OnInit {
+export class PedidosPendentesComponent implements OnInit {
 
   pendentes: Array<any>;
 

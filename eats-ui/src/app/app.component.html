@@ -5,6 +5,8 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
+        <li class="nav-item"><a class="nav-link" routerLink="/login">Login</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/restaurantes">Cadastre seu Restaurante</a></li>
       <li class="nav-item dropdown" ngbDropdown>
         <a class="nav-link dropdown-toggle" ngbDropdownToggle>Admin</a>
         <div class="dropdown-menu" ngbDropdownMenu>
@@ -13,7 +15,13 @@
           <a class="dropdown-item" ngbDropdownItem routerLink="/admin/restaurantes-em-aprovacao">Restaurantes em aprovação</a>
         </div>
       </li>
-      <li class="nav-item"><a class="nav-link" routerLink="/restaurantes">Cadastre seu Restaurante</a></li>
+      <li class="nav-item dropdown" ngbDropdown>
+        <a class="nav-link dropdown-toggle" ngbDropdownToggle>Meu Restaurante</a>
+        <div class="dropdown-menu" ngbDropdownMenu>
+          <a class="dropdown-item" ngbDropdownItem routerLink="/restaurantes/1">Cadastro</a>
+          <a class="dropdown-item" ngbDropdownItem routerLink="/restaurantes/1/pedidos/pendentes">Pedidos pendentes</a>
+        </div>
+      </li>
     </ul>
   </div>
 </nav>

@@ -12,9 +12,9 @@
   <tbody>
     <tr *ngFor="let tipoDeCozinha of tiposDeCozinha">
       <td>{{tipoDeCozinha.nome}}</td>
-      <td class="w-25 text-right">
+      <td class="text-right">
         <button class="btn btn-secondary mr-1 mb-1 mb-lg-0" (click)="edita(tipoDeCozinhaModal, tipoDeCozinha)">Editar</button>
-        <button class="btn btn-danger" (click)="remove(tipoDeCozinha)">Deletar</button>
+        <button class="btn btn-danger" (click)="remove(tipoDeCozinha)">Remover</button>
       </td>
     </tr>
   </tbody>

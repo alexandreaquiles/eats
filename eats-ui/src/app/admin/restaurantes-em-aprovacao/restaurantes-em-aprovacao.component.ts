@@ -8,11 +8,8 @@ import { RestaurantesService } from '../services/restaurantes.service';
 })
 export class RestauranteEmAprovacaoComponent implements OnInit {
 
-  restaurantesEmAprovacao:Array<any> = []
-  restauranteEmDetalhe
-  formasDePagamento
-  horariosDeFuncionamento
-  cardapio
+  restaurantesEmAprovacao: Array<any> = [];
+  restauranteEmDetalhe: any;
 
   constructor(private restaurantesService: RestaurantesService) {
   }
@@ -24,15 +21,6 @@ export class RestauranteEmAprovacaoComponent implements OnInit {
 
   detalha(restaurante) {
     this.restauranteEmDetalhe = restaurante;
-
-    this.restaurantesService.formasDePagamentoDoRestaurante(restaurante)
-      .subscribe(formas => this.formasDePagamento = formas);
-
-    this.restaurantesService.horariosDeFuncionamentoDoRestaurante(restaurante)
-      .subscribe(horarios => this.horariosDeFuncionamento = horarios);
-
-    this.restaurantesService.cardapioDoRestaurante(restaurante)
-      .subscribe(cardapio => this.cardapio = cardapio);
   }
 
   aprova(restaurante) {

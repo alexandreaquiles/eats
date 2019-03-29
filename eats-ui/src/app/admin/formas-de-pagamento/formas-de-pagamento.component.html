@@ -14,9 +14,9 @@
     <tr *ngFor="let formaDePagamento of formasDePagamento">
       <td>{{formaDePagamento.nome}}</td>
       <td>{{descricaoDasFormasDePagamento[formaDePagamento.tipo]}}</td>
-      <td class="w-25 text-right">
+      <td class="text-right">
         <button class="btn btn-secondary mr-1 mb-1 mb-lg-0" (click)="edita(formaDePagamentoModal, formaDePagamento)">Editar</button>
-        <button class="btn btn-danger" (click)="remove(formaDePagamento)">Deletar</button>
+        <button class="btn btn-danger" (click)="remove(formaDePagamento)">Remover</button>
       </td>
     </tr>
   </tbody>

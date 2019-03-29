@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { CardapioService } from '../services/cardapio.service';
-import { CategoriaDoCardapioService } from '../services/categoria-do-cardapio.service';
+import { CardapioService } from '../../services/cardapio.service';
+import { CategoriaDoCardapioService } from '../../services/categoria-do-cardapio.service';
 
 @Component({
   selector: 'app-cardapio-listagem',
@@ -13,7 +13,7 @@ export class CardapioListagemComponent implements OnInit {
   cardapio: any = {
     categorias: []
   };
-  categoriaDoCardapioParaAdicionar: any = {};
+  categoria: any = {};
 
   constructor(private cardapioService: CardapioService,
               private categoriaDoCardapioService: CategoriaDoCardapioService) {
@@ -23,14 +23,13 @@ export class CardapioListagemComponent implements OnInit {
     this.cardapioService.doRestaurante(this.restaurante)
       .subscribe(cardapio => {
         this.cardapio = cardapio;
-        this.categoriaDoCardapioParaAdicionar = { cardapio };
       });
   }
 
   adicionaCategoriaAoCardapio() {
     this.cardapio.restaurante = this.restaurante;
-    this.categoriaDoCardapioParaAdicionar.cardapio = this.cardapio;
-    this.categoriaDoCardapioService.adicionaCategoriaAoCardapio(this.categoriaDoCardapioParaAdicionar)
+    this.categoria.cardapio = this.cardapio;
+    this.categoriaDoCardapioService.adicionaCategoriaAoCardapio(this.categoria)
       .subscribe(categoriaAdicionada => this.cardapio.categorias.push(categoriaAdicionada));
   }
 
