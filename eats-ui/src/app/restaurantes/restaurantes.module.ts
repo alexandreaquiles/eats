@@ -15,8 +15,6 @@ import { RestauranteService } from '../services/restaurante.service';
 import { HorarioDeFuncionamentoService } from '../services/horario-de-funcionamento.service';
 import { DiaDaSemanaService } from '../services/dia-da-semana.service';
 import { CardapioService } from '../services/cardapio.service';
-import { CategoriaDoCardapioService } from '../services/categoria-do-cardapio.service';
-import { ItemDoCardapioService } from '../services/item-do-cardapio.service';
 import { PedidosService } from '../services/pedidos.service';
 
 import { restauranteRoutes } from './restaurantes.routes';
@@ -39,8 +37,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormaDePagamentoService,
     DiaDaSemanaService,
     CardapioService,
-    CategoriaDoCardapioService,
-    ItemDoCardapioService,
     PedidosService
   ]
 })

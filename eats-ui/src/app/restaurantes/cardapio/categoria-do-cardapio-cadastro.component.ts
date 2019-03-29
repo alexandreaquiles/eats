@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 
 import { RestauranteService } from '../../services/restaurante.service';
 import { CardapioService } from '../../services/cardapio.service';
-import { CategoriaDoCardapioService } from '../../services/categoria-do-cardapio.service';
 
 @Component({
   selector: 'app-categoria-do-categoria-cadastro',
@@ -17,8 +16,7 @@ export class CategoriaDoCardapioCadastroComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private restauranteService: RestauranteService,
-              private cardapioService: CardapioService,
-              private categoriaDoCardapioService: CategoriaDoCardapioService) {
+              private cardapioService: CardapioService) {
   }
 
   ngOnInit() {
@@ -32,7 +30,7 @@ export class CategoriaDoCardapioCadastroComponent implements OnInit {
       .subscribe(cardapio => this.cardapio = cardapio);
 
     const categoriaId = this.route.snapshot.params.categoriaId;
-    this.categoriaDoCardapioService.porId(restauranteId, cardapioId, categoriaId)
+    this.cardapioService.categoriaDoCardapioPorId(restauranteId, cardapioId, categoriaId)
       .subscribe(categoria => this.categoria = categoria);
 
   }
@@ -41,7 +39,7 @@ export class CategoriaDoCardapioCadastroComponent implements OnInit {
     this.cardapio.restaurante = this.restaurante;
     this.categoria.cardapio = this.cardapio;
     item.categoria = this.categoria;
-    this.categoriaDoCardapioService.remove(item)
+    this.cardapioService.removeItemDoCardapio(item)
       .subscribe(() => this.categoria.itens = this.categoria.itens.filter(i => i !== item));
   }
 }

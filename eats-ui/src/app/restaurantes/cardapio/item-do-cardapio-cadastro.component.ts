@@ -3,8 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { RestauranteService } from '../../services/restaurante.service';
 import { CardapioService } from '../../services/cardapio.service';
-import { CategoriaDoCardapioService } from '../../services/categoria-do-cardapio.service';
-import { ItemDoCardapioService } from '../../services/item-do-cardapio.service';
 
 @Component({
   selector: 'app-item-do-cardapio-cadastro',
@@ -20,9 +18,7 @@ export class ItemDoCardapioCadastroComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private restauranteService: RestauranteService,
-              private cardapioService: CardapioService,
-              private categoriaDoCardapioService: CategoriaDoCardapioService,
-              private itemDoCardapioService: ItemDoCardapioService) {
+              private cardapioService: CardapioService) {
   }
 
   ngOnInit() {
@@ -35,12 +31,12 @@ export class ItemDoCardapioCadastroComponent implements OnInit {
       .subscribe(cardapio => this.cardapio = cardapio);
 
     const categoriaId = this.route.snapshot.params.categoriaId;
-    this.categoriaDoCardapioService.porId(restauranteId, cardapioId, categoriaId)
+    this.cardapioService.categoriaDoCardapioPorId(restauranteId, cardapioId, categoriaId)
       .subscribe(categoria => this.categoria = categoria);
 
     const itemId = this.route.snapshot.params.itemId;
     if (itemId) {
-      this.itemDoCardapioService.porId(restauranteId, cardapioId, categoriaId, itemId)
+      this.cardapioService.itemDoCardapioPorId(restauranteId, cardapioId, categoriaId, itemId)
       .subscribe(item => this.item = item);
     }
   }
@@ -49,7 +45,7 @@ export class ItemDoCardapioCadastroComponent implements OnInit {
     this.cardapio.restaurante = this.restaurante;
     this.categoria.cardapio = this.cardapio;
     this.item.categoria = this.categoria;
-    this.itemDoCardapioService.salva(this.item).subscribe(() => {
+    this.cardapioService.salvaItemDoCardapio(this.item).subscribe(() => {
       this.router.navigate(['/restaurantes', this.restaurante.id, 'cardapio', this.cardapio.id, 'categoria', this.categoria.id]);
     });
   }
