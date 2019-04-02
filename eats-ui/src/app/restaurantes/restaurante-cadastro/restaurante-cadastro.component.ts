@@ -14,10 +14,9 @@ export class RestauranteCadastroComponent implements OnInit {
     tipoDeCozinha: { }
   };
 
-  tiposDeCozinha:Array<any>;
+  tiposDeCozinha: Array<any>;
 
-  constructor(
-              private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
               private router: Router,
               private tipoDeCozinhaService: TipoDeCozinhaService,
               private restauranteService: RestauranteService) {
@@ -30,18 +29,23 @@ export class RestauranteCadastroComponent implements OnInit {
 
     const id = this.route.snapshot.params.id;
     if (id) {
-      this.restauranteService.porId(id).subscribe((restaurante: any) => {
-        if (restaurante) {
-          this.restaurante = restaurante;
-          this.router.navigate(['/restaurantes/' + restaurante.id]);
-        }
-      });
+      this.restauranteService.porId(id)
+        .subscribe((restaurante: any) => {
+          if (restaurante) {
+            this.restaurante = restaurante;
+            this.router.navigate([`/restaurantes/${restaurante.id}`]);
+          }
+        });
     }
   }
 
   salvaRestaurante() {
     this.restauranteService.salva(this.restaurante)
-      .subscribe(restaurante => this.restaurante = restaurante);
+      .subscribe(restaurante => {
+        if (!this.restaurante.id) {
+          this.router.navigate([`/restaurantes/${restaurante.id}`]);
+        }
+      });
   }
 
 }

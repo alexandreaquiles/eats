@@ -40,17 +40,17 @@ public class HorarioDeFuncionamentoController {
 		return horariosDoRestaurante.stream().map(h -> new HorarioDeFuncionamentoDto(h)).collect(Collectors.toList());
 	}
 
-	@PostMapping("/restaurantes/{idRestaurante}/horarios-de-funcionamento")
+	@PostMapping("/parceiros/restaurantes/{idRestaurante}/horarios-de-funcionamento")
 	private HorarioDeFuncionamento adiciona(@RequestBody HorarioDeFuncionamento horarioDeFuncionamento) {
 		return repo.save(horarioDeFuncionamento);
 	}
 
-	@PutMapping("/restaurantes/{idRestaurante}/horarios-de-funcionamento/{id}")
+	@PutMapping("/parceiros/restaurantes/{idRestaurante}/horarios-de-funcionamento/{id}")
 	private HorarioDeFuncionamento atualiza(@RequestBody HorarioDeFuncionamento horarioDeFuncionamento) {
 		return repo.save(horarioDeFuncionamento);
 	}
 
-	@DeleteMapping("/restaurantes/{idRestaurante}/horarios-de-funcionamento/{id}")
+	@DeleteMapping("/parceiros/restaurantes/{idRestaurante}/horarios-de-funcionamento/{id}")
 	private void remove(@PathVariable("id") Long id) {
 		repo.deleteById(id);
 	}

@@ -9,7 +9,6 @@ import { DetalhesDoRestauranteComponent } from './detalhes-do-restaurante/detalh
 
 import { TipoDeCozinhaService } from '../services/tipo-de-cozinha.service';
 import { FormaDePagamentoService } from '../services/forma-de-pagamento.service';
-import { RestaurantesService } from './services/restaurantes.service';
 
 import { adminRoutes } from './admin.routes';
 
@@ -21,6 +20,6 @@ import { adminRoutes } from './admin.routes';
     DetalhesDoRestauranteComponent
   ],
   imports: [CommonModule, FormsModule, adminRoutes],
-  providers: [TipoDeCozinhaService, FormaDePagamentoService, RestaurantesService ]
+  providers: [TipoDeCozinhaService, FormaDePagamentoService ]
 })
 export class AdminModule { }

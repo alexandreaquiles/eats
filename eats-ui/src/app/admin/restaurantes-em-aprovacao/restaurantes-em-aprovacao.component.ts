@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-import { RestaurantesService } from '../services/restaurantes.service';
+import { RestauranteService } from 'src/app/services/restaurante.service';
 
 @Component({
   selector: 'app-restaurantes-em-aprovacao',
@@ -11,7 +10,7 @@ export class RestauranteEmAprovacaoComponent implements OnInit {
   restaurantesEmAprovacao: Array<any> = [];
   restauranteEmDetalhe: any;
 
-  constructor(private restaurantesService: RestaurantesService) {
+  constructor(private restaurantesService: RestauranteService) {
   }
 
   ngOnInit() {

@@ -45,21 +45,6 @@ public class RestauranteController {
 		return new RestauranteDto(restaurante);
 	}
 
-	@PostMapping("/restaurantes")
-	private Restaurante adiciona(@RequestBody Restaurante restaurante) {
-		restaurante.setAprovado(false);
-		Restaurante restauranteSalvo = restauranteRepo.save(restaurante);
-		Cardapio cardapio = new Cardapio();
-		cardapio.setRestaurante(restauranteSalvo);
-		cardapioRepo.save(cardapio);
-		return restauranteSalvo;
-	}
-
-	@PutMapping("/restaurantes/{id}")
-	private Restaurante atualiza(@RequestBody Restaurante restaurante) {
-		return restauranteRepo.save(restaurante);
-	}
-
 	@GetMapping("/restaurantes/mais-proximos/{cep}")
 	public List<RestauranteComDistanciaEComMediaDeAvaliacoes> maisProximos(@PathVariable("cep") String cep) {
 		List<RestauranteComDistancia> maisProximosAoCep = distanciaService.restaurantesMaisProximosAoCep(cep);
@@ -88,6 +73,21 @@ public class RestauranteController {
 		RestauranteComDistancia restauranteComDistancia = new RestauranteComDistancia(restaurante, distancia);
 		Double mediaAvaliacoes = avaliacoesRepo.mediaDoRestaurantePeloId(id);
 		return new RestauranteComDistanciaEComMediaDeAvaliacoes(restauranteComDistancia, mediaAvaliacoes);
+	}
+
+	@PostMapping("/parceiros/restaurantes")
+	private Restaurante adiciona(@RequestBody Restaurante restaurante) {
+		restaurante.setAprovado(false);
+		Restaurante restauranteSalvo = restauranteRepo.save(restaurante);
+		Cardapio cardapio = new Cardapio();
+		cardapio.setRestaurante(restauranteSalvo);
+		cardapioRepo.save(cardapio);
+		return restauranteSalvo;
+	}
+
+	@PutMapping("/parceiros/restaurantes/{id}")
+	private Restaurante atualiza(@RequestBody Restaurante restaurante) {
+		return restauranteRepo.save(restaurante);
 	}
 
 	@GetMapping("/admin/restaurantes/em-aprovacao")

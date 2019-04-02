@@ -41,7 +41,7 @@ export class FormasDePagamentoComponent implements OnInit {
 
   remove(formaDePagamento) {
     formaDePagamento.restaurante = this.restaurante;
-    this.formaDePagamentoService.remove(formaDePagamento)
+    this.formaDePagamentoService.removeDoRestaurante(formaDePagamento)
       .subscribe(() => {
         this.formasDePagamentoDoRestaurante = this.formasDePagamentoDoRestaurante.filter(f => f !== formaDePagamento);
       });

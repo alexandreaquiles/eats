@@ -32,7 +32,7 @@
   <table>
       <tbody>
         <tr *ngFor="let horarioDeFuncionamento of horariosDeFuncionamento">
-            <td>{{ horarioDeFuncionamento.diaDaSemana }}</td>
+            <td>{{ diaDaSemanaService.aPartirDoValor(horarioDeFuncionamento.diaDaSemana).nome }}</td>
             <td>{{ horarioDeFuncionamento.horarioDeAbertura }}</td>
             <td>{{ horarioDeFuncionamento.horarioDeFechamento }}</td>
         </tr>

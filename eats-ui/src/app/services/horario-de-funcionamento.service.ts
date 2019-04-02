@@ -11,33 +11,33 @@ import { DiaDaSemanaService } from './dia-da-semana.service';
 @Injectable()
 export class HorarioDeFuncionamentoService {
 
-  private API = environment.baseUrl + '/restaurantes';
+  private API = environment.baseUrl + '';
 
   constructor(private http: HttpClient,
               private diaDaSemanaService: DiaDaSemanaService) {
   }
 
   todosDoRestaurante(restaurante): Observable<any> {
-    return this.http.get(`${this.API}/${restaurante.id}/horarios-de-funcionamento`)
+    return this.http.get(`${this.API}/restaurantes/${restaurante.id}/horarios-de-funcionamento`)
       .pipe(
         map(horarios => this.ordena(horarios))
       );
   }
 
   porId(restauranteId, horarioId) {
-    return this.http.get(`${this.API}/${restauranteId}/horarios-de-funcionamento/${horarioId}`);
+    return this.http.get(`${this.API}/restaurantes/${restauranteId}/horarios-de-funcionamento/${horarioId}`);
   }
 
   salva(horario): Observable<any> {
     if (horario.id) {
-      return this.http.put(`${this.API}/${horario.restaurante.id}/horarios-de-funcionamento/${horario.id}`, horario);
+      return this.http.put(`${this.API}/parceiros/restaurantes/${horario.restaurante.id}/horarios-de-funcionamento/${horario.id}`, horario);
     } else {
-      return this.http.post(`${this.API}/${horario.restaurante.id}/horarios-de-funcionamento`, horario);
+      return this.http.post(`${this.API}/parceiros/restaurantes/${horario.restaurante.id}/horarios-de-funcionamento`, horario);
     }
   }
 
   remove(horario) {
-    return this.http.delete(`${this.API}/${horario.restaurante.id}/horarios-de-funcionamento/${horario.id}`);
+    return this.http.delete(`${this.API}/parceiros/restaurantes/${horario.restaurante.id}/horarios-de-funcionamento/${horario.id}`);
   }
 
   ordena(horarios) {

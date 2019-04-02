@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { RestaurantesService } from '../services/restaurantes.service';
+import { FormaDePagamentoService } from 'src/app/services/forma-de-pagamento.service';
+import { HorarioDeFuncionamentoService } from 'src/app/services/horario-de-funcionamento.service';
+import { CardapioService } from 'src/app/services/cardapio.service';
+import { DiaDaSemanaService } from 'src/app/services/dia-da-semana.service';
 
 @Component({
   selector: 'app-detalhes-do-restaurante',
@@ -13,17 +16,20 @@ export class DetalhesDoRestauranteComponent implements OnInit {
   horariosDeFuncionamento: Array<any>;
   cardapio: any;
 
-  constructor(private restaurantesService: RestaurantesService) {
+  constructor(private formaDePagamentoService: FormaDePagamentoService,
+              private horarioDeFuncionamentoService: HorarioDeFuncionamentoService,
+              private cardapioService: CardapioService,
+              private diaDaSemanaService: DiaDaSemanaService) {
   }
 
   ngOnInit() {
-    this.restaurantesService.formasDePagamentoDoRestaurante(this.restaurante)
+    this.formaDePagamentoService.doRestaurante(this.restaurante)
       .subscribe(formas => this.formasDePagamento = formas);
 
-    this.restaurantesService.horariosDeFuncionamentoDoRestaurante(this.restaurante)
+    this.horarioDeFuncionamentoService.todosDoRestaurante(this.restaurante)
       .subscribe(horarios => this.horariosDeFuncionamento = horarios);
 
-    this.restaurantesService.cardapioDoRestaurante(this.restaurante)
+    this.cardapioService.doRestaurante(this.restaurante)
       .subscribe(cardapio => this.cardapio = cardapio);
   }
 
