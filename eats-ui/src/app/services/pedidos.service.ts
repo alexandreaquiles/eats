@@ -13,11 +13,11 @@ export class PedidosService {
   }
 
   pendentes(): Observable<any> {
-    return this.http.get(`${this.API}/pedidos/pendentes`);
+    return this.http.get(`${this.API}/parceiros/pedidos/pendentes`);
   }
 
   atualizaStatus(pedido): Observable<any> {
-    return this.http.put(`${this.API}/pedidos/${pedido.id}/status`, pedido);
+    return this.http.put(`${this.API}/parceiros/pedidos/${pedido.id}/status`, pedido);
   }
 
 }

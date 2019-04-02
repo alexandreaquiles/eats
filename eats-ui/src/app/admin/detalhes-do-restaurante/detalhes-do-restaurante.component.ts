@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
 import { FormaDePagamentoService } from 'src/app/services/forma-de-pagamento.service';
 import { HorarioDeFuncionamentoService } from 'src/app/services/horario-de-funcionamento.service';
@@ -9,7 +9,7 @@ import { DiaDaSemanaService } from 'src/app/services/dia-da-semana.service';
   selector: 'app-detalhes-do-restaurante',
   templateUrl: './detalhes-do-restaurante.component.html'
 })
-export class DetalhesDoRestauranteComponent implements OnInit {
+export class DetalhesDoRestauranteComponent implements OnChanges {
 
   @Input() restaurante: any;
   formasDePagamento: Array<any>;
@@ -22,7 +22,7 @@ export class DetalhesDoRestauranteComponent implements OnInit {
               private diaDaSemanaService: DiaDaSemanaService) {
   }
 
-  ngOnInit() {
+  ngOnChanges() {
     this.formaDePagamentoService.doRestaurante(this.restaurante)
       .subscribe(formas => this.formasDePagamento = formas);
 

@@ -27,18 +27,18 @@ export class CardapioService {
   adicionaCategoriaAoCardapio(categoria): Observable<any> {
     const cardapio = categoria.cardapio;
     const restaurante = cardapio.restaurante;
-    return this.http.post(`${this.API}/restaurantes/${restaurante.id}/cardapio/${cardapio.id}/categoria`, categoria);
+    return this.http.post(`${this.API}/parceiros/restaurantes/${restaurante.id}/cardapio/${cardapio.id}/categoria`, categoria);
   }
 
   removeItemDoCardapio(item): Observable<any> {
     const categoria = item.categoria;
     const cardapio = categoria.cardapio;
     const restaurante = cardapio.restaurante;
-    return this.http.delete(`${this.API}/restaurantes/${restaurante.id}/cardapio/${cardapio.id}/categoria/${categoria.id}/item/${item.id}`);
+    return this.http.delete(`${this.API}/parceiros/restaurantes/${restaurante.id}/cardapio/${cardapio.id}/categoria/${categoria.id}/item/${item.id}`);
   }
 
   itemDoCardapioPorId(restauranteId, cardapioId, categoriaId, itemId): Observable<any> {
-    return this.http.get(`${this.API}/restaurantes/${restauranteId}/cardapio/${cardapioId}/categoria/${categoriaId}/item/${itemId}`);
+    return this.http.get(`${this.API}/parceiros/restaurantes/${restauranteId}/cardapio/${cardapioId}/categoria/${categoriaId}/item/${itemId}`);
   }
 
   salvaItemDoCardapio(item): Observable<any> {
@@ -46,9 +46,9 @@ export class CardapioService {
     const cardapio = categoria.cardapio;
     const restaurante = cardapio.restaurante;
     if (item.id) {
-      return this.http.put(`${this.API}/restaurantes/${restaurante.id}/cardapio/${cardapio.id}/categoria/${categoria.id}/item/${item.id}`, item);
+      return this.http.put(`${this.API}/parceiros/restaurantes/${restaurante.id}/cardapio/${cardapio.id}/categoria/${categoria.id}/item/${item.id}`, item);
     }
-    return this.http.post(`${this.API}/restaurantes/${restaurante.id}/cardapio/${cardapio.id}/categoria/${categoria.id}/item`, item);
+    return this.http.post(`${this.API}/parceiros/restaurantes/${restaurante.id}/cardapio/${cardapio.id}/categoria/${categoria.id}/item`, item);
   }
 
 }
