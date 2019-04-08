@@ -1,29 +1,40 @@
-<h2>Entregar em {{ cep }}</h2>
+<section class="mb-2" *ngIf="tiposDeCozinha?.length">
+    <h3>Tipos de Cozinha</h3>
+    <ul class="list-inline">
+      <li class="list-inline-item border rounded p-2" *ngFor="let tipoDeCozinha of tiposDeCozinha"><a
+          [routerLink]="['/pedidos', cep, 'tipos-de-cozinha', tipoDeCozinha.id]">{{tipoDeCozinha.nome}}</a></li>
+    </ul>
+  </section>
 
-<section *ngIf="recomendacoes?.length">
-  <h2>Recomendações</h2>
-  <ul>
-    <li *ngFor="let recomendacao of recomendacoes">
-      {{ recomendacao.nome }} <button (click)="escolher(recomendacao)">Escolher</button>
-    </li>
-  </ul>
+<section class="my-2" *ngIf="recomendacoes?.length">
+  <h3>Recomendações para você</h3>
+  <div class="card-columns">
+    <div class="card" *ngFor="let recomendacao of recomendacoes">
+      <div class="card-body">
+        <h5 class="card-title">{{ recomendacao.nome }}</h5>
+        <p class="card-text">{{ recomendacao.descricao }}</p>
+        <a [routerLink]="['/pedidos', this.cep, 'restaurante', recomendacao.id]"
+          class="btn btn-light btn-sm stretched-link">Escolher</a>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section *ngIf="tiposDeCozinha?.length">
-  <h2>Tipos de Cozinha</h2>
-  <ul>
-    <li *ngFor="let tipoDeCozinha of tiposDeCozinha"><a [routerLink]="['/pedidos', cep, 'tipos-de-cozinha', tipoDeCozinha.id]">{{tipoDeCozinha.nome}}</a></li>
-  </ul>
-</section>
-
-<section *ngIf="restaurantesMaisProximos?.length">
-  <h2>Restaurantes próximos</h2>
-  <div *ngFor="let restaurante of restaurantesMaisProximos">
-    <p>{{restaurante.nome}}</p>
-    <p>★ {{ restaurante.mediaAvaliacoes | number:'1.1-1' }}</p>
-    <p><span>{{restaurante.tipoDeCozinha.nome}}</span> • <span>{{restaurante.tempoDeEntregaMinimoEmMinutos}} - {{restaurante.tempoDeEntregaMaximoEmMinutos}}</span> min</p>
-    <p>{{ restaurante.distancia | number:'1.1-1' }} km</p>
-    <p>{{ restaurante.taxaDeEntregaEmReais | currency:'BRL' }}</p>
-    <button (click)="escolher(restaurante)">Escolher</button>
+<section class="my-5" *ngIf="restaurantesMaisProximos?.length">
+  <h2>Restaurantes próximos a {{ cep }}</h2>
+  <div class="card-columns">
+    <div class="card bg-light shadow" *ngFor="let restaurante of restaurantesMaisProximos">
+      <div class="card-body">
+        <h5 class="card-title">{{restaurante.nome}}</h5>
+        <h6 class="card-subtitle mb-2">★ {{ restaurante.mediaAvaliacoes | number:'1.1-1' }}</h6>
+        <p class="card-text"><span>{{restaurante.tipoDeCozinha.nome}}</span> •
+          <span>{{restaurante.tempoDeEntregaMinimoEmMinutos}} -
+            {{restaurante.tempoDeEntregaMaximoEmMinutos}} min</span> •
+          <span>{{ restaurante.distancia | number:'1.1-1' }} km</span></p>
+        <p class="card-text">{{ restaurante.taxaDeEntregaEmReais | currency:'BRL' }}</p>
+        <a [routerLink]="['/pedidos', this.cep, 'restaurante', restaurante.id]"
+          class="btn btn-primary stretched-link">Escolher</a>
+      </div>
+    </div>
   </div>
 </section>
