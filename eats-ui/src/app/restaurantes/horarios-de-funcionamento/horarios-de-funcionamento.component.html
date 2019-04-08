@@ -11,7 +11,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let horarioDeFuncionamento of horariosDeFuncionamento">
-        <td>{{diaDaSemanaService.aPartirDoValor(horarioDeFuncionamento.diaDaSemana)?.nome}}</td>
+        <td>{{horarioDeFuncionamento.diaDaSemana | diaDaSemana}}</td>
         <td>{{horarioDeFuncionamento.horarioDeAbertura}}</td>
         <td>{{horarioDeFuncionamento.horarioDeFechamento}}</td>
         <td class="text-right">
@@ -31,7 +31,7 @@
       <div class="form-group">
         <label for="diaDaSemana">Dia da semana</label>
         <select class="form-control" [(ngModel)]="horarioDeFuncionamento.diaDaSemana" required name="diaDaSemana" id="diaDaSemana">
-          <option *ngFor="let dia of diaDaSemanaService.diasDaSemana" [value]="dia.valor">{{dia.nome}}</option>
+          <option *ngFor="let dia of diasDaSemana" [value]="dia.valor">{{dia.nome}}</option>
         </select>
       </div>
 

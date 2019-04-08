@@ -13,7 +13,7 @@
   <tbody>
     <tr *ngFor="let formaDePagamento of formasDePagamento">
       <td>{{formaDePagamento.nome}}</td>
-      <td>{{descricaoDasFormasDePagamento[formaDePagamento.tipo]}}</td>
+      <td>{{formaDePagamento.tipo | tipoDaFormaDePagamento}}</td>
       <td class="text-right">
         <button class="btn btn-secondary mr-1 mb-1 mb-lg-0" (click)="edita(formaDePagamentoModal, formaDePagamento)">Editar</button>
         <button class="btn btn-danger" (click)="remove(formaDePagamento)">Remover</button>
@@ -32,12 +32,11 @@
      <div class="form-group">
         <label for="tipo">Tipo</label>
         <select class="form-control" [(ngModel)]="formaDePagamento.tipo" required id="tipo" name="tipo">
-          <option *ngFor="let tipo of tiposDeFormaDePagamento" [value]="tipo">{{tipo}}</option>
+          <option *ngFor="let tipo of tiposDeFormaDePagamento" [value]="tipo">{{tipo | tipoDaFormaDePagamento }}</option>
         </select>
       </div>
-
-        <button type="submit" class="btn btn-primary mr-1" [disabled]="!formaDePagamentoForm.form.valid">Salvar</button>
-        <button type="button" class="btn btn-default" (click)="modal.dismiss()">Cancelar</button>
+      <button type="submit" class="btn btn-primary mr-1" [disabled]="!formaDePagamentoForm.form.valid">Salvar</button>
+      <button type="button" class="btn btn-default" (click)="modal.dismiss()">Cancelar</button>
       </form>
   </div>
 </ng-template>

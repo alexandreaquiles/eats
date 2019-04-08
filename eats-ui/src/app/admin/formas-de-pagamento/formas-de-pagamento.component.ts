@@ -10,12 +10,6 @@ import { FormaDePagamentoService } from 'src/app/services/forma-de-pagamento.ser
 })
 export class FormasDePagamentoComponent implements OnInit {
 
-  descricaoDasFormasDePagamento: any = {
-    CARTAO_CREDITO: 'Cartão de Crédito',
-    CARTAO_DEBITO: 'Cartão de Débito',
-    VALE_REFEICAO: 'Vale Refeição'
-  };
-
   tiposDeFormaDePagamento: Array<any> = [];
   formasDePagamento: Array<any> = [];
   formaDePagamento: any = {};

@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
@@ -36,7 +37,13 @@ public class Restaurante {
 	
 	@Size(max=1000)
 	private String descricao;
-	
+
+	@NotBlank @Pattern(regexp="\\d{8}")
+	private String cep;
+
+	@NotBlank @Size(max=300)
+	private String endereco;
+
 	@Positive
 	private BigDecimal taxaDeEntregaEmReais;
 	

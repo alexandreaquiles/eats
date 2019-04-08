@@ -11,6 +11,7 @@ import { TipoDeCozinhaService } from '../services/tipo-de-cozinha.service';
 import { FormaDePagamentoService } from '../services/forma-de-pagamento.service';
 
 import { adminRoutes } from './admin.routes';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { adminRoutes } from './admin.routes';
     RestauranteEmAprovacaoComponent,
     DetalhesDoRestauranteComponent
   ],
-  imports: [CommonModule, FormsModule, adminRoutes],
+  imports: [CommonModule, FormsModule, adminRoutes, PipesModule ],
   providers: [TipoDeCozinhaService, FormaDePagamentoService ]
 })
 export class AdminModule { }

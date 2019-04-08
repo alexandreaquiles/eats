@@ -1,6 +1,6 @@
 -- Chinês Long Fu
-INSERT INTO restaurante (id, aprovado, cnpj, descricao, nome, taxa_de_entrega_em_reais, tempo_de_entrega_maximo_em_minutos, tempo_de_entrega_minimo_em_minutos, tipo_de_cozinha_id)
-values (1, true, '98444252000104', 'O melhor da China aqui do seu lado.', 'Long Fu', 6, 25, 40, 1);
+INSERT INTO restaurante (id, aprovado, cnpj, nome, descricao, cep, endereco, taxa_de_entrega_em_reais, tempo_de_entrega_maximo_em_minutos, tempo_de_entrega_minimo_em_minutos, tipo_de_cozinha_id)
+values (1, true, '98444252000104', 'Long Fu', 'O melhor da China aqui do seu lado.', '70238500', 'ShC/SUL COMERCIO LOCAL QD 404-BL D LJ 17-ASA SUL' , 6, 25, 40, 1);
 
 INSERT INTO restaurante_forma_de_pagamento (restaurante_id, forma_de_pagamento_id) values (1, 1);
 INSERT INTO restaurante_forma_de_pagamento (restaurante_id, forma_de_pagamento_id) values (1, 2);

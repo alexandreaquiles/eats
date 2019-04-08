@@ -17,6 +17,7 @@ import { AvaliacoesService } from './services/avaliacoes.service';
 import { PedidoService } from './services/pedido.service';
 import { PagamentoService } from './services/pagamento.service';
 import { RecomendacoesService } from './services/recomendacoes.service';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { RecomendacoesService } from './services/recomendacoes.service';
     ResumoPedidoComponent,
     StatusPedidoComponent
   ],
-  imports: [ CommonModule, FormsModule, principalRoutes ],
+  imports: [ CommonModule, FormsModule, principalRoutes, PipesModule ],
   providers: [
     RestaurantesService,
     CardapioService,

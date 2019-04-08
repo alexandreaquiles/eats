@@ -14,6 +14,7 @@ export class HorariosDeFuncionamentoComponent implements OnInit {
   @Input() restaurante: any;
   horariosDeFuncionamento: Array<any> = [];
   horarioDeFuncionamento: any = {};
+  diasDaSemana: Array<any> = [];
 
   modalRef: NgbModalRef;
 
@@ -23,6 +24,8 @@ export class HorariosDeFuncionamentoComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.diasDaSemana = this.diaDaSemanaService.diasDaSemana;
+
     if (this.restaurante.id) {
       this.horarioDeFuncionamentoService.todosDoRestaurante(this.restaurante)
         .subscribe(horarios => this.horariosDeFuncionamento = horarios);

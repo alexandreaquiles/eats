@@ -19,6 +19,7 @@ import { PedidosService } from '../services/pedidos.service';
 
 import { restauranteRoutes } from './restaurantes.routes';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ItemDoCardapioCadastroComponent,
     PedidosPendentesComponent
   ],
-  imports: [ CommonModule, FormsModule, NgbModule, restauranteRoutes ],
+  imports: [ CommonModule, FormsModule, NgbModule, restauranteRoutes, PipesModule ],
   providers: [
     RestauranteService,
     HorarioDeFuncionamentoService,
