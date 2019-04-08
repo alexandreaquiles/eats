@@ -18,6 +18,7 @@ import { PedidoService } from './services/pedido.service';
 import { PagamentoService } from './services/pagamento.service';
 import { RecomendacoesService } from './services/recomendacoes.service';
 import { PipesModule } from '../pipes/pipes.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { PipesModule } from '../pipes/pipes.module';
     ResumoPedidoComponent,
     StatusPedidoComponent
   ],
-  imports: [ CommonModule, FormsModule, principalRoutes, PipesModule ],
+  imports: [ CommonModule, FormsModule, NgbModule,  principalRoutes, PipesModule ],
   providers: [
     RestaurantesService,
     CardapioService,

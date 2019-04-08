@@ -5,6 +5,7 @@ import { RestaurantesService } from '../services/restaurantes.service';
 import { CardapioService } from '../services/cardapio.service';
 import { AvaliacoesService } from '../services/avaliacoes.service';
 import { PedidoService } from '../services/pedido.service';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-restaurante',
@@ -16,6 +17,7 @@ export class RestauranteComponent implements OnInit {
   restaurante: any;
   cardapio: any;
   avaliacoes: Array<any> = [];
+  avaliacaoMedia: number;
   pedido: any = {
     itens: []
   };
@@ -23,7 +25,10 @@ export class RestauranteComponent implements OnInit {
   adicionandoItemAoPedido = false;
   exibeFormularioDeEntrega = false;
 
-  constructor(private route: ActivatedRoute,
+  itemEscolhidoModalRef: NgbModalRef;
+
+  constructor(private modal: NgbModal,
+              private route: ActivatedRoute,
               private router: Router,
               private restaurantesService: RestaurantesService,
               private cardapioService: CardapioService,
@@ -48,29 +53,43 @@ export class RestauranteComponent implements OnInit {
 
     this.avaliacoesService
       .porIdDoRestaurante(restauranteId)
-      .subscribe(avaliacoes => this.avaliacoes = avaliacoes);
+      .subscribe(avaliacoes => {
+        this.avaliacoes = avaliacoes;
+        this.avaliacaoMedia = avaliacoes.reduce( ( acc, cur ) => acc + cur.nota, 0 ) / avaliacoes.length;
+      });
 
   }
 
-  escolheItemDoCardapio(itemDoCardapio) {
-    this.itemDoPedidoEscolhido = { itemDoCardapio, quantidade: 1 };
-    this.adicionandoItemAoPedido = true;
+  escolheItemDoCardapio(itemDoPedidoEscolhidoModal, itemDoCardapio) {
+    const indice = this.pedido.itens.findIndex(i => i.itemDoCardapio.id === itemDoCardapio.id);
+    if (indice < 0) {
+      this.itemDoPedidoEscolhido = { itemDoCardapio, quantidade: 1 };
+      this.adicionandoItemAoPedido = true;
+    } else {
+      this.itemDoPedidoEscolhido = Object.assign({}, this.pedido.itens[indice]);
+    }
+    this.itemEscolhidoModalRef = this.modal.open(itemDoPedidoEscolhidoModal);
   }
 
-  adicionaItemAoPedido() {
+  salvaItemNoPedido() {
     if (this.adicionandoItemAoPedido) {
       this.pedido.itens.push(this.itemDoPedidoEscolhido);
+    } else if (this.itemDoPedidoEscolhido) {
+      const indice = this.pedido.itens.findIndex(i => i.itemDoCardapio.id === this.itemDoPedidoEscolhido.itemDoCardapio.id);
+      this.pedido.itens[indice] = this.itemDoPedidoEscolhido;
     }
     this.itemDoPedidoEscolhido = null;
     this.adicionandoItemAoPedido = false;
+    this.itemEscolhidoModalRef.close();
   }
 
-  editaItemDoPedido(itemPedido) {
-    this.itemDoPedidoEscolhido = itemPedido;
+  editaItemDoPedido(itemDoPedidoEscolhidoModal, itemPedido) {
+    this.itemDoPedidoEscolhido = Object.assign({}, itemPedido);
+    this.itemEscolhidoModalRef = this.modal.open(itemDoPedidoEscolhidoModal);
   }
 
   removeItemDoPedido(itemPedido) {
-    this.pedido.itens = this.pedido.itens.filter(i => i !== itemPedido);
+    this.pedido.itens = this.pedido.itens.filter(i => i.itemDoCardapio.id !== itemPedido.itemDoCardapio.id);
     this.itemDoPedidoEscolhido = null;
     this.adicionandoItemAoPedido = false;
   }
