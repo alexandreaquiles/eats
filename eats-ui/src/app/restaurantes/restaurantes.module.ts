@@ -10,13 +10,6 @@ import { CategoriaDoCardapioCadastroComponent } from './cardapio/categoria-do-ca
 import { ItemDoCardapioCadastroComponent } from './cardapio/item-do-cardapio-cadastro.component';
 import { PedidosPendentesComponent } from './pedidos-pendentes/pedidos-pendentes.component';
 
-import { FormaDePagamentoService } from 'src/app/services/forma-de-pagamento.service';
-import { RestauranteService } from '../services/restaurante.service';
-import { HorarioDeFuncionamentoService } from '../services/horario-de-funcionamento.service';
-import { DiaDaSemanaService } from '../services/dia-da-semana.service';
-import { CardapioService } from '../services/cardapio.service';
-import { PedidosService } from '../services/pedidos.service';
-
 import { restauranteRoutes } from './restaurantes.routes';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PipesModule } from '../pipes/pipes.module';
@@ -31,14 +24,7 @@ import { PipesModule } from '../pipes/pipes.module';
     ItemDoCardapioCadastroComponent,
     PedidosPendentesComponent
   ],
-  imports: [ CommonModule, FormsModule, NgbModule, restauranteRoutes, PipesModule ],
-  providers: [
-    RestauranteService,
-    HorarioDeFuncionamentoService,
-    FormaDePagamentoService,
-    DiaDaSemanaService,
-    CardapioService,
-    PedidosService
-  ]
+  imports: [ CommonModule, FormsModule, NgbModule, restauranteRoutes, PipesModule ]
+
 })
 export class RestaurantesModule { }

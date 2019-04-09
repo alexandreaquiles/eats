@@ -7,9 +7,6 @@ import { FormasDePagamentoComponent } from './formas-de-pagamento/formas-de-paga
 import { RestauranteEmAprovacaoComponent } from './restaurantes-em-aprovacao/restaurantes-em-aprovacao.component';
 import { DetalhesDoRestauranteComponent } from './detalhes-do-restaurante/detalhes-do-restaurante.component';
 
-import { TipoDeCozinhaService } from '../services/tipo-de-cozinha.service';
-import { FormaDePagamentoService } from '../services/forma-de-pagamento.service';
-
 import { adminRoutes } from './admin.routes';
 import { PipesModule } from '../pipes/pipes.module';
 
@@ -20,7 +17,6 @@ import { PipesModule } from '../pipes/pipes.module';
     RestauranteEmAprovacaoComponent,
     DetalhesDoRestauranteComponent
   ],
-  imports: [CommonModule, FormsModule, adminRoutes, PipesModule ],
-  providers: [TipoDeCozinhaService, FormaDePagamentoService ]
+  imports: [CommonModule, FormsModule, adminRoutes, PipesModule ]
 })
 export class AdminModule { }

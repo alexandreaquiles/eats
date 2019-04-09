@@ -4,8 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as StompJS from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 
-import { PedidoService } from '../services/pedido.service';
-import { AvaliacoesService } from '../services/avaliacoes.service';
+import { PedidosService } from 'src/app/services/pedidos.service';
+import { AvaliacoesService } from 'src/app/services/avaliacoes.service';
 
 @Component({
   selector: 'app-status-pedido',
@@ -19,7 +19,7 @@ export class StatusPedidoComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private pedidoService: PedidoService,
+              private pedidoService: PedidosService,
               private avaliacoesService: AvaliacoesService) {
   }
 

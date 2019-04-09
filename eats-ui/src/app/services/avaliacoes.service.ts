@@ -4,7 +4,9 @@ import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AvaliacoesService {
 
   private API = environment.baseUrl + '/restaurantes';

@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  templateUrl: './principal.component.html'
+  templateUrl: './pedido.component.html'
 })
-export class PrincipalComponent {
+export class PedidoComponent {
   cep: string;
 
   constructor(private router: Router) { }

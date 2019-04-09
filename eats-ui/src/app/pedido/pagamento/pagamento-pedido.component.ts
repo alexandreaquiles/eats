@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { RestaurantesService } from '../services/restaurantes.service';
-import { PedidoService } from '../services/pedido.service';
-import { PagamentoService } from '../services/pagamento.service';
+import { RestauranteService } from 'src/app/services/restaurante.service';
+import { PedidosService } from 'src/app/services/pedidos.service';
+import { PagamentoService } from 'src/app/services/pagamento.service';
 
 @Component({
   selector: 'app-pagamento-pedido',
@@ -18,8 +18,8 @@ export class PagamentoPedidoComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private pagamentoService: PagamentoService,
-              private pedidoService: PedidoService,
-              private restaurantesService: RestaurantesService) {
+              private pedidoService: PedidosService,
+              private restaurantesService: RestauranteService) {
   }
 
   ngOnInit() {

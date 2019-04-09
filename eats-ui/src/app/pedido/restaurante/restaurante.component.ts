@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { RestaurantesService } from '../services/restaurantes.service';
-import { CardapioService } from '../services/cardapio.service';
-import { AvaliacoesService } from '../services/avaliacoes.service';
-import { PedidoService } from '../services/pedido.service';
+import { RestauranteService } from 'src/app/services/restaurante.service';
+import { CardapioService } from 'src/app/services/cardapio.service';
+import { AvaliacoesService } from 'src/app/services/avaliacoes.service';
+import { PedidosService } from 'src/app/services/pedidos.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -30,10 +30,10 @@ export class RestauranteComponent implements OnInit {
   constructor(private modal: NgbModal,
               private route: ActivatedRoute,
               private router: Router,
-              private restaurantesService: RestaurantesService,
+              private restaurantesService: RestauranteService,
               private cardapioService: CardapioService,
               private avaliacoesService: AvaliacoesService,
-              private pedidoService: PedidoService) {
+              private pedidoService: PedidosService) {
   }
 
   ngOnInit() {
@@ -41,7 +41,7 @@ export class RestauranteComponent implements OnInit {
     const restauranteId = this.route.snapshot.params.restauranteId;
 
     this.restaurantesService
-      .porId(this.cep, restauranteId)
+      .porCepEId(this.cep, restauranteId)
       .subscribe(restaurante => {
         this.restaurante = restaurante;
         this.pedido.restaurante = restaurante;

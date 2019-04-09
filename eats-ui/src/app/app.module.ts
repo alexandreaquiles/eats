@@ -15,7 +15,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
 
 import { AdminModule } from './admin/admin.module';
-import { PrincipalModule } from './principal/principal.module';
+import { PedidoModule } from './pedido/pedido.module';
 import { RestaurantesModule } from './restaurantes/restaurantes.module';
 
 import { ErrorHandlingInterceptor } from './interceptors/error-handling-interceptor';
@@ -36,7 +36,7 @@ registerLocaleData(localeFr, 'pt');
     NgbModule,
     ToastrModule.forRoot(),
     AdminModule,
-    PrincipalModule,
+    PedidoModule,
     RestaurantesModule
   ],
   providers: [

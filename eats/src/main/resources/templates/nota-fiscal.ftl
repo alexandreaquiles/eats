@@ -23,7 +23,7 @@
 		<cpf_cnpj>${pedido.entrega.cliente.cpf}</cpf_cnpj>
 		<email>${pedido.entrega.cliente.email}</email>
 		<endereco>${pedido.entrega.endereco}</endereco>
-		<complemento>${pedido.entrega.complemento}</numero>
+		<complemento>${pedido.entrega.complemento!"-"}</numero>
 		<cep>${pedido.entrega.cep}</cep>
 	</cliente>
 </xml>

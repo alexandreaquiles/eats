@@ -4,7 +4,9 @@ import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class RestauranteService {
 
   private API = environment.baseUrl;
@@ -14,6 +16,22 @@ export class RestauranteService {
 
   porId(id: string): Observable<any> {
     return this.http.get(`${this.API}/restaurantes/${id}`);
+  }
+
+  maisProximosPorCep(cep: string): Observable<any> {
+    return this.http.get(`${this.API}/restaurantes/mais-proximos/${cep}`);
+  }
+
+  maisProximosPorCepETipoDeCozinha(cep: string, tipoDeCozinhaId: string): Observable<any> {
+    return this.http.get(`${this.API}/restaurantes/mais-proximos/${cep}/tipos-de-cozinha/${tipoDeCozinhaId}`);
+  }
+
+  porCepEId(cep: string, restauranteId: string): Observable<any> {
+    return this.http.get(`${this.API}/restaurantes/${cep}/restaurante/${restauranteId}`);
+  }
+
+  formasDePagamento(restaurante): Observable<any>  {
+    return this.http.get(`${this.API}/restaurantes/${restaurante.id}/formas-de-pagamento`);
   }
 
   salva(restaurante): Observable<any> {

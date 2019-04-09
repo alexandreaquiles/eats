@@ -8,7 +8,9 @@ import { environment } from 'src/environments/environment';
 
 import { DiaDaSemanaService } from './dia-da-semana.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class HorarioDeFuncionamentoService {
 
   private API = environment.baseUrl + '';

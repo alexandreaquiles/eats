@@ -4,12 +4,18 @@ import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class CardapioService {
 
   private API = environment.baseUrl;
 
   constructor(private http: HttpClient) {
+  }
+
+  porIdDoRestaurante(restauranteId: string): Observable<any> {
+    return this.http.get(`${this.API}/restaurantes/${restauranteId}/cardapio`);
   }
 
   porId(restauranteId, cardapioId): Observable<any> {
