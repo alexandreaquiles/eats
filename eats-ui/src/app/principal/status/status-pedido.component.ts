@@ -1,9 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PedidoService } from '../services/pedido.service';
 
 import * as StompJS from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
+
+import { PedidoService } from '../services/pedido.service';
+import { AvaliacoesService } from '../services/avaliacoes.service';
 
 @Component({
   selector: 'app-status-pedido',
@@ -12,11 +14,13 @@ import SockJS from 'sockjs-client';
 export class StatusPedidoComponent implements OnInit, OnDestroy {
 
   pedido: any = {};
+  avaliacao: any = {};
   stompClient
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private pedidoService: PedidoService) {
+              private pedidoService: PedidoService,
+              private avaliacoesService: AvaliacoesService) {
   }
 
   ngOnInit() {
@@ -38,4 +42,9 @@ export class StatusPedidoComponent implements OnInit, OnDestroy {
     this.stompClient.disconnect();
   }
 
+  salvaAvaliacao() {
+    this.avaliacao.pedido = this.pedido;
+    this.avaliacoesService.salva(this.avaliacao)
+      .subscribe(avaliacao => this.avaliacao = avaliacao);
+  }
 }

@@ -1,14 +1,14 @@
 <div class="row">
   <div class="col-sm-9" *ngIf="restaurante">
-      <section>
-          <h2>{{restaurante.nome}}</h2>
-          <p>★ {{ restaurante.mediaAvaliacoes | number:'1.1-1' }}</p>
-          <p><span>{{restaurante.tipoDeCozinha.nome}}</span> • <span>{{restaurante.tempoDeEntregaMinimoEmMinutos}} -
-              {{restaurante.tempoDeEntregaMaximoEmMinutos}} min </span> • <span>
-              {{ restaurante.distancia | number:'1.1-1' }} km</span>
-            <p class="text-muted">{{ restaurante.descricao }}</p>
-        </section>
-      <ngb-tabset>
+    <section>
+      <h2>{{restaurante.nome}}</h2>
+      <p>★ {{ restaurante.mediaAvaliacoes | number:'1.1-1' }}</p>
+      <p><span>{{restaurante.tipoDeCozinha.nome}}</span> • <span>{{restaurante.tempoDeEntregaMinimoEmMinutos}} -
+          {{restaurante.tempoDeEntregaMaximoEmMinutos}} min </span> • <span>
+          {{ restaurante.distancia | number:'1.1-1' }} km</span>
+        <p class="text-muted">{{ restaurante.descricao }}</p>
+    </section>
+    <ngb-tabset>
       <ngb-tab title="Cardápio">
         <ng-template ngbTabContent>
           <section *ngIf="restaurante && cardapio">
@@ -58,18 +58,18 @@
       <div *ngFor="let itemPedido of pedido.itens">
         <hr>
         <p>{{ itemPedido.quantidade }}x {{ itemPedido.itemDoCardapio.nome }}
-        {{ calculaSubTotal(itemPedido) | currency:'BRL' }}<br>
-        <span class="text-muted"><small>{{ itemPedido.observacao }}</small></span>
+          {{ calculaSubTotal(itemPedido) | currency:'BRL' }}<br>
+          <span class="text-muted"><small>{{ itemPedido.observacao }}</small></span>
         </p>
-        <p><button class="btn btn-secondary btn-sm mr-1" (click)="editaItemDoPedido(itemDoPedidoEscolhidoModal, itemPedido)">Editar</button>
-          <button class="btn btn-light btn-sm mr-1"
-            (click)="removeItemDoPedido(itemPedido)">Remover</button></p>
+        <p><button class="btn btn-secondary btn-sm mr-1"
+            (click)="editaItemDoPedido(itemDoPedidoEscolhidoModal, itemPedido)">Editar</button>
+          <button class="btn btn-light btn-sm mr-1" (click)="removeItemDoPedido(itemPedido)">Remover</button></p>
       </div>
       <hr>
       <p>Taxa de entrega:
         {{ restaurante.taxaDeEntregaEmReais ? (restaurante.taxaDeEntregaEmReais | currency:'BRL') : 'Grátis' }}</p>
       <p class="font-weight-bolder">Total: {{ totalDoPedido() | currency:'BRL' }}</p>
-      <button class="btn btn-primary" (click)="fazPedido()">Fazer Pedido</button>
+      <button class="btn btn-primary" (click)="fazPedido(formularioDeEntregaModal)">Fazer Pedido</button>
     </section>
   </div>
 </div>
@@ -100,30 +100,35 @@
   </div>
 </ng-template>
 
+<ng-template #formularioDeEntregaModal let-modal>
+  <div class="modal-body">
 
-<section *ngIf="exibeFormularioDeEntrega">
-  <h3>Informações de Entrega</h3>
-  <form #entregaForm="ngForm" (ngSubmit)="registraEntrega()">
-    <div>
-      <label for="nome">Nome</label>
-      <input required id="nome" name="nome" maxlength="100" [(ngModel)]="pedido.entrega.cliente.nome">
-    </div>
-    <div>
-      <label for="telefone">Telefone</label>
-      <input required id="telefone" name="telefone" maxlength="10" [(ngModel)]="pedido.entrega.cliente.telefone">
-    </div>
-    <div>
-      <label for="cep">CEP</label>
-      <input required id="cep" name="cep" pattern="\d{8}" maxlength="8" [(ngModel)]="pedido.entrega.cep">
-    </div>
-    <div>
-      <label for="endereco">Endereço</label>
-      <textarea required id="endereco" name="endereco" [(ngModel)]="pedido.entrega.endereco"></textarea>
-    </div>
-    <div>
-      <label for="complemento">Complemento</label>
-      <textarea id="complemento" name="complemento" [(ngModel)]="pedido.entrega.complemento"></textarea>
-    </div>
-    <button type="submit" [disabled]="!entregaForm.form.valid">Confirmar pedido</button>
-  </form>
-</section>
+    <section>
+      <h3>Informações de Entrega</h3>
+      <form #entregaForm="ngForm" (ngSubmit)="registraEntrega()">
+        <div class="form-group">
+          <label for="nome">Nome:</label>
+          <input class="form-control" required id="nome" name="nome" maxlength="100" [(ngModel)]="pedido.entrega.cliente.nome">
+        </div>
+        <div class="form-group">
+          <label for="telefone">Telefone:</label>
+          <input class="form-control" required id="telefone" name="telefone" maxlength="10" [(ngModel)]="pedido.entrega.cliente.telefone">
+        </div>
+        <div class="form-group">
+          <label for="cep">CEP:</label>
+          <input class="form-control" required id="cep" name="cep" pattern="\d{8}" maxlength="8" [(ngModel)]="pedido.entrega.cep">
+        </div>
+        <div class="form-group">
+          <label for="endereco">Endereço:</label>
+          <textarea class="form-control" required id="endereco" name="endereco" [(ngModel)]="pedido.entrega.endereco"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="complemento">Complemento:</label>
+          <textarea class="form-control" id="complemento" name="complemento" [(ngModel)]="pedido.entrega.complemento"></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit" [disabled]="!entregaForm.form.valid">Confirmar pedido</button>
+        <button type="button" class="btn btn-default" (click)="modal.dismiss()">Cancelar</button>
+      </form>
+    </section>
+  </div>
+</ng-template>

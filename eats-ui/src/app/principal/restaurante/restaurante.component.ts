@@ -23,9 +23,9 @@ export class RestauranteComponent implements OnInit {
   };
   itemDoPedidoEscolhido: any;
   adicionandoItemAoPedido = false;
-  exibeFormularioDeEntrega = false;
 
   itemEscolhidoModalRef: NgbModalRef;
+  formularioDeEntregaModalRef: NgbModalRef;
 
   constructor(private modal: NgbModal,
               private route: ActivatedRoute,
@@ -94,18 +94,6 @@ export class RestauranteComponent implements OnInit {
     this.adicionandoItemAoPedido = false;
   }
 
-  fazPedido() {
-    this.pedido.restaurante = this.restaurante;
-    this.pedido.entrega = { cep: this.cep, cliente: {} };
-    this.exibeFormularioDeEntrega = true;
-  }
-
-  registraEntrega() {
-    this.pedidoService.adiciona(this.pedido)
-    .subscribe(pedido => this.router.navigateByUrl(`pedidos/${pedido.id}/pagamento`));
-
-  }
-
   calculaSubTotal(itemPedido) {
     const itemCardapio = itemPedido.itemDoCardapio;
     const preco = itemCardapio.precoPromocional || itemCardapio.preco;
@@ -119,4 +107,20 @@ export class RestauranteComponent implements OnInit {
     });
     return total;
   }
+
+  fazPedido(formularioDeEntregaModal) {
+    this.pedido.restaurante = this.restaurante;
+    this.pedido.entrega = { cep: this.cep, cliente: {} };
+    this.formularioDeEntregaModalRef = this.modal.open(formularioDeEntregaModal);
+  }
+
+  registraEntrega() {
+    this.pedidoService.adiciona(this.pedido)
+    .subscribe(pedido => {
+      this.router.navigateByUrl(`pedidos/${pedido.id}/pagamento`);
+      this.formularioDeEntregaModalRef.close();
+    });
+
+  }
+
 }

@@ -16,4 +16,8 @@ export class AvaliacoesService {
     return this.http.get(`${this.API}/${restauranteId}/avaliacoes`);
   }
 
+  salva(avaliacao: any) {
+    const restauranteId = avaliacao.pedido.restaurante.id;
+    return this.http.post(`${this.API}/${restauranteId}/avaliacoes`, avaliacao);
+  }
 }

@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { PrincipalComponent } from './principal.component';
 import { ListaRestaurantesComponent } from './lista-restaurantes/lista-restaurantes.component';
 import { RestauranteComponent } from './restaurante/restaurante.component';
-import { PagamentoPedidoComponent } from './pedido/pagamento-pedido.component';
+import { PagamentoPedidoComponent } from './pagamento/pagamento-pedido.component';
 import { ResumoPedidoComponent } from './resumo/resumo-pedido.component';
 import { StatusPedidoComponent } from './status/status-pedido.component';
 
