@@ -2,7 +2,7 @@
   {{ mensagem }}
 </p>
 
-<form #restauranteForm="ngForm" (ngSubmit)="salvaRestaurante()">
+<form class="mb-5" #restauranteForm="ngForm" (ngSubmit)="salvaRestaurante()">
 
   <div class="form-group">
     <label for="nome">Nome</label>
@@ -58,7 +58,7 @@
 
 </form>
 
-<div class="my-5" *ngIf="restaurante.id">
+<div class="mb-5" *ngIf="restaurante.id">
 
   <ngb-accordion>
 

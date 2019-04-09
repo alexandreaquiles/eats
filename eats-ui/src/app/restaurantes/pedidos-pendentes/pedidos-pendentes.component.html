@@ -1,4 +1,4 @@
-<div class="card-columns" *ngIf="pendentes?.length">
+<div class="card-columns mb-5" *ngIf="pendentes?.length">
   <div class="card" *ngFor="let pedido of pendentes">
     <div class="card-body">
       <h5 class="card-title">{{ pedido.status | statusDoPedido }}</h5>

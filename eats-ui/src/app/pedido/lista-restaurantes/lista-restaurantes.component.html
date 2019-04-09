@@ -22,7 +22,7 @@
 
 <section class="my-4" *ngIf="restaurantesMaisProximos?.length">
   <h2>Restaurantes próximos a {{ cep }}</h2>
-  <div class="card-columns mt-4">
+  <div class="card-columns mt-4 mb-5">
     <div class="card bg-light shadow" *ngFor="let restaurante of restaurantesMaisProximos">
       <div class="card-body">
         <h5 class="card-title">{{restaurante.nome}}</h5>
