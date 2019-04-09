@@ -74,9 +74,6 @@
   </div>
 </div>
 
-
-
-
 <ng-template #itemDoPedidoEscolhidoModal let-modal>
   <div class="modal-body">
     <section *ngIf="itemDoPedidoEscolhido">
@@ -106,29 +103,51 @@
     <section>
       <h3>Informações de Entrega</h3>
       <form #entregaForm="ngForm" (ngSubmit)="registraEntrega()">
-        <div class="form-group">
-          <label for="nome">Nome:</label>
-          <input class="form-control" required id="nome" name="nome" maxlength="100" [(ngModel)]="pedido.entrega.cliente.nome">
-        </div>
-        <div class="form-group">
-          <label for="telefone">Telefone:</label>
-          <input class="form-control" required id="telefone" name="telefone" maxlength="10" [(ngModel)]="pedido.entrega.cliente.telefone">
-        </div>
-        <div class="form-group">
-          <label for="cep">CEP:</label>
-          <input class="form-control" required id="cep" name="cep" pattern="\d{8}" maxlength="8" [(ngModel)]="pedido.entrega.cep">
-        </div>
-        <div class="form-group">
-          <label for="endereco">Endereço:</label>
-          <textarea class="form-control" required id="endereco" name="endereco" [(ngModel)]="pedido.entrega.endereco"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="complemento">Complemento:</label>
-          <textarea class="form-control" id="complemento" name="complemento" [(ngModel)]="pedido.entrega.complemento"></textarea>
-        </div>
+        <fieldset>
+          <legend>Dados pessoais</legend>
+          <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input class="form-control" required id="nome" name="nome" maxlength="100"
+              [(ngModel)]="pedido.entrega.cliente.nome">
+          </div>
+          <div class="form-group">
+            <label for="cpf">CPF:</label>
+            <input class="form-control" required id="cpf" name="cpf" maxlength="14"
+              [(ngModel)]="pedido.entrega.cliente.cpf" placeholder="000.000.000-00">
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input class="form-control" required type="email" id="email" name="email"
+              [(ngModel)]="pedido.entrega.cliente.email">
+          </div>
+          <div class="form-group">
+            <label for="telefone">Telefone:</label>
+            <input class="form-control" required id="telefone" name="telefone" maxlength="10"
+              [(ngModel)]="pedido.entrega.cliente.telefone">
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Local de entrega</legend>
+          <div class="form-group">
+            <label for="cep">CEP:</label>
+            <input class="form-control" required id="cep" name="cep" pattern="\d{8}" maxlength="8"
+              [(ngModel)]="pedido.entrega.cep">
+          </div>
+          <div class="form-group">
+            <label for="endereco">Endereço:</label>
+            <textarea class="form-control" required id="endereco" name="endereco"
+              [(ngModel)]="pedido.entrega.endereco"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="complemento">Complemento:</label>
+            <textarea class="form-control" id="complemento" name="complemento"
+              [(ngModel)]="pedido.entrega.complemento"></textarea>
+          </div>
+        </fieldset>
         <button class="btn btn-primary" type="submit" [disabled]="!entregaForm.form.valid">Confirmar pedido</button>
         <button type="button" class="btn btn-default" (click)="modal.dismiss()">Cancelar</button>
       </form>
     </section>
+
   </div>
 </ng-template>

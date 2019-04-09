@@ -10,12 +10,12 @@
       <h3>Avalie o pedido</h3>
       <form #avaliacaoForm="ngForm" (ngSubmit)="salvaAvaliacao()">
         <div class="form-group">
-          <ngb-rating max="5" [(ngModel)]="avaliacao.nota" name="nota"></ngb-rating>
+          <ngb-rating required max="5" [(ngModel)]="avaliacao.nota" name="nota"></ngb-rating>
         </div>
         <div class="form-group">
-          <textarea class="form-control" [(ngModel)]="avaliacao.comentario" required id="comentario" name="comentario"></textarea>
+          <textarea class="form-control" [(ngModel)]="avaliacao.comentario" id="comentario" name="comentario"></textarea>
         </div>
-        <button class="btn btn-primary" type="submit">Avaliar</button>
+        <button class="btn btn-primary" type="submit" [disabled]="!avaliacaoForm.form.valid">Avaliar</button>
       </form>
     </div>
 

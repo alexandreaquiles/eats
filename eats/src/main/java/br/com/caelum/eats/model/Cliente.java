@@ -15,12 +15,24 @@ import lombok.NoArgsConstructor;
 @Data
 public class Cliente {
 
-	@NotBlank @Size(max=100)
-	@Column(name="nome_do_cliente")
+	@NotBlank
+	@Size(max = 100)
+	@Column(name = "nome_do_cliente")
 	private String nome;
 
-	@NotBlank @Size(max=10)
-	@Column(name="telefone_do_cliente")
+	@NotBlank
+	@Size(max = 14)
+	@Column(name = "cpf_do_cliente")
+	private String cpf;
+
+	@NotBlank
+	@Size(max = 100)
+	@Column(name = "email_do_cliente")
+	private String email;
+
+	@NotBlank
+	@Size(max = 10)
+	@Column(name = "telefone_do_cliente")
 	private String telefone;
 
 }

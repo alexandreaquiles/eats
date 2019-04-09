@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.caelum.eats.dto.PagamentoDto;
 import br.com.caelum.eats.exception.ResourceNotFoundException;
 import br.com.caelum.eats.model.Pagamento;
+import br.com.caelum.eats.model.Pedido;
 import br.com.caelum.eats.model.Pedido.Status;
 import br.com.caelum.eats.repository.PagamentoRepository;
 import br.com.caelum.eats.repository.PedidoRepository;
+import br.com.caelum.eats.service.NotaFiscalService;
 
 @RestController
 @RequestMapping("/pagamentos")
@@ -22,10 +24,12 @@ public class PagamentoController {
 
 	private PagamentoRepository pagamentoRepo;
 	private PedidoRepository pedidoRepo;
+	private NotaFiscalService notaFiscal;
 
-	public PagamentoController(PagamentoRepository pagamentoRepo, PedidoRepository pedidoRepo) {
+	public PagamentoController(PagamentoRepository pagamentoRepo, PedidoRepository pedidoRepo, NotaFiscalService notaFiscal) {
 		this.pagamentoRepo = pagamentoRepo;
 		this.pedidoRepo = pedidoRepo;
+		this.notaFiscal = notaFiscal;
 	}
 
 	@GetMapping("/{id}")
@@ -45,7 +49,11 @@ public class PagamentoController {
 	public PagamentoDto confirma(@RequestBody Pagamento pagamento) {
 		pagamento.setStatus(Pagamento.Status.CONFIRMADO);
 		pagamentoRepo.save(pagamento);
-		pedidoRepo.atualizaStatus(Status.PAGO, pagamento.getPedido());
+		Pedido pedido = pagamento.getPedido();
+		pedidoRepo.atualizaStatus(Status.PAGO, pedido);
+		String nota = notaFiscal.geraNotaPara(pedido);
+		System.out.println(nota);
+		//TODO: enviar XML para SEFAZ
 		return new PagamentoDto(pagamento);
 	}
 
