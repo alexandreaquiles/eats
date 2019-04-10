@@ -29,6 +29,13 @@ public class PedidoController {
 		this.repo = repo;
 		this.websocket = websocket;
 	}
+	
+	@GetMapping("/pedidos")
+	public List<PedidoDto> lista() {
+		return repo.findAll().stream()
+				.map(pedido -> new PedidoDto(pedido)).collect(Collectors.toList());
+	}
+
 
 	@GetMapping("/pedidos/{id}")
 	public PedidoDto porId(@PathVariable("id") Long id) {
