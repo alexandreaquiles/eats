@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
@@ -10,11 +11,12 @@ export class LoginComponent {
 
   loginInfo: any = {};
 
-  constructor(private authenticationService: AuthenticationService) {
+  constructor(private router: Router,
+              private authenticationService: AuthenticationService) {
   }
 
   efetuaLogin() {
     this.authenticationService.efetuaLogin(this.loginInfo)
-      .subscribe(token => alert(JSON.stringify(token)));
+      .subscribe(() => this.router.navigate(['']));
   }
 }

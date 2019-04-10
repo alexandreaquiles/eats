@@ -4,6 +4,7 @@ import { RestauranteCadastroComponent } from './restaurante-cadastro/restaurante
 import { CategoriaDoCardapioCadastroComponent } from './cardapio/categoria-do-cardapio-cadastro.component';
 import { ItemDoCardapioCadastroComponent } from './cardapio/item-do-cardapio-cadastro.component';
 import { PedidosPendentesComponent } from './pedidos-pendentes/pedidos-pendentes.component';
+import { AuthorizationGuard } from '../guards/authorization.guard';
 
 const routes: Routes = [
   {
@@ -12,23 +13,33 @@ const routes: Routes = [
   },
   {
     path: 'restaurantes/:id',
-    component: RestauranteCadastroComponent
+    component: RestauranteCadastroComponent,
+    canActivate: [AuthorizationGuard],
+    data: { role: 'PARCEIRO'}
   },
   {
     path: 'restaurantes/:restauranteId/cardapio/:cardapioId/categoria/:categoriaId',
-    component: CategoriaDoCardapioCadastroComponent
+    component: CategoriaDoCardapioCadastroComponent,
+    canActivate: [AuthorizationGuard],
+    data: { role: 'PARCEIRO'}
   },
   {
     path: 'restaurantes/:restauranteId/cardapio/:cardapioId/categoria/:categoriaId/item',
-    component: ItemDoCardapioCadastroComponent
+    component: ItemDoCardapioCadastroComponent,
+    canActivate: [AuthorizationGuard],
+    data: { role: 'PARCEIRO'}
   },
   {
     path: 'restaurantes/:restauranteId/cardapio/:cardapioId/categoria/:categoriaId/item/:itemId',
-    component: ItemDoCardapioCadastroComponent
+    component: ItemDoCardapioCadastroComponent,
+    canActivate: [AuthorizationGuard],
+    data: { role: 'PARCEIRO'}
   },
   {
     path: 'restaurantes/:restauranteId/pedidos/pendentes',
-    component: PedidosPendentesComponent
+    component: PedidosPendentesComponent,
+    canActivate: [AuthorizationGuard],
+    data: { role: 'PARCEIRO'}
   }
 ];
 

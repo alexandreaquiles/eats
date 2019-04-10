@@ -25,6 +25,5 @@ import { PipesModule } from '../pipes/pipes.module';
     PedidosPendentesComponent
   ],
   imports: [ CommonModule, FormsModule, NgbModule, restauranteRoutes, PipesModule ]
-
 })
 export class RestaurantesModule { }

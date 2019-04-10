@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthenticationService {
+
   private API = environment.baseUrl + '/auth';
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
@@ -20,6 +21,10 @@ export class AuthenticationService {
 
   public get currentUserValue(): any {
     return this.currentUserSubject.value;
+  }
+
+  hasRole(role: string): boolean {
+    return this.currentUserValue.roles.includes(role);
   }
 
   efetuaLogin(loginInfo): Observable<any> {
