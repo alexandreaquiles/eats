@@ -63,8 +63,8 @@ export class RestauranteCadastroComponent implements OnInit {
   estaAdicionando() {
     return !this.restaurante.id;
   }
+
   salvaRestaurante() {
-    console.log(this.restaurante);
     this.restauranteService.salva(this.restaurante)
       .subscribe(restaurante => {
         if (this.estaAdicionando()) {

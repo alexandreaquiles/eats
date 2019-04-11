@@ -16,8 +16,6 @@ export class AuthorizationGuard implements CanActivate {
               private toasterService: ToastrService) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    console.log(state);
-    console.log(route.params);
     const role = route.data.role;
     if (role && this.authenticationService.hasRole(role)) {
       return true;
