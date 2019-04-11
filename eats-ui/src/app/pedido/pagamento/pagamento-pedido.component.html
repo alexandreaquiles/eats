@@ -30,11 +30,10 @@
           placeholder="000">
       </div>
       <button *ngIf="!pagamento.status" class="btn btn-primary" type="submit" [disabled]="!pagamentoForm.form.valid">Criar pagamento</button>
+      <div *ngIf="pagamento.status === 'CRIADO'">
+        <button class="btn btn-success mr-2" (click)="confirmaPagamento()">Confirmar pagamento</button>
+        <button class="btn btn-danger" (click)="cancelaPagamento()">Cancelar pagamento</button>
+      </div>
     </form>
-
-    <section *ngIf="pagamento.status === 'CRIADO'">
-      <button class="btn btn-success mr-2" (click)="confirmaPagamento()">Confirmar pagamento</button>
-      <button class="btn btn-danger" (click)="cancelaPagamento()">Cancelar pagamento</button>
-    </section>
   </div>
 </div>
