@@ -12,15 +12,4 @@ public class CorsConfig implements WebMvcConfigurer {
 		registry.addMapping("/**").allowedMethods("*").allowCredentials(true);
 	}
 
-//	@Bean
-//	public CorsConfigurationSource corsConfigurationSource() {
-//		CorsConfiguration configuration = new CorsConfiguration();
-//		List<String> all = Arrays.asList("*");
-//		configuration.setAllowedOrigins(all);
-//		configuration.setAllowedMethods(all);
-//		configuration.setAllowedHeaders(all);
-//		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//		source.registerCorsConfiguration("/**", configuration);
-//		return source;
-//	}
 }

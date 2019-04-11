@@ -26,7 +26,7 @@
     <div class="card bg-light shadow" *ngFor="let restaurante of restaurantesMaisProximos">
       <div class="card-body">
         <h5 class="card-title">{{restaurante.nome}}</h5>
-        <h6 class="card-subtitle mb-2">★ {{ restaurante.mediaAvaliacoes | number:'1.1-1' }}</h6>
+        <h6 *ngIf="restaurante.mediaAvaliacoes" class="card-subtitle mb-2">★ {{ restaurante.mediaAvaliacoes | number:'1.1-1' }}</h6>
         <p class="card-text"><span>{{restaurante.tipoDeCozinha.nome}}</span> •
           <span>{{restaurante.tempoDeEntregaMinimoEmMinutos}} -
             {{restaurante.tempoDeEntregaMaximoEmMinutos}} min</span> •
