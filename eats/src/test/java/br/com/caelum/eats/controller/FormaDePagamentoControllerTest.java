@@ -21,6 +21,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -33,6 +34,9 @@ import br.com.caelum.eats.repository.FormaDePagamentoRepository;
 @SpringBootTest
 @AutoConfigureMockMvc
 public class FormaDePagamentoControllerTest {
+
+	private static final String FORMAS_DE_PAGAMENTO = "/formas-de-pagamento";
+	private static final String ADMIN_FORMAS_DE_PAGAMENTO = "/admin/formas-de-pagamento";
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -59,7 +63,7 @@ public class FormaDePagamentoControllerTest {
 	public void todas() throws Exception {
 		Mockito.when(repo.findAllByOrderByNomeAsc()).thenReturn(formasDePagamento);
 
-		this.mockMvc.perform(get("/admin/formas-de-pagamento")).andDo(print()).andExpect(status().isOk())
+		this.mockMvc.perform(get(FORMAS_DE_PAGAMENTO)).andDo(print()).andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8)).andExpect(jsonPath("$").isArray())
 				.andExpect(jsonPath("$.length()").value(2)).andExpect(jsonPath("$.[0].id").value(1L))
 				.andExpect(jsonPath("$.[0].tipo").value(FormaDePagamento.Tipo.CARTAO_CREDITO.name()))
@@ -71,9 +75,9 @@ public class FormaDePagamentoControllerTest {
 
 	}
 
-	@Test
+	@Test @WithMockUser(username="admin",roles={"ADMIN"})
 	public void tipos() throws Exception {
-		this.mockMvc.perform(get("/admin/formas-de-pagamento/tipos")).andDo(print()).andExpect(status().isOk())
+		this.mockMvc.perform(get(ADMIN_FORMAS_DE_PAGAMENTO+"/tipos")).andDo(print()).andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8)).andExpect(jsonPath("$").isArray())
 				.andExpect(jsonPath("$.length()").value(3))
 				.andExpect(jsonPath("$.[0]").value("CARTAO_CREDITO"))
@@ -83,34 +87,34 @@ public class FormaDePagamentoControllerTest {
 		Mockito.verifyZeroInteractions(repo);
 	}
 
-	@Test
+	@Test @WithMockUser(username="admin",roles={"ADMIN"})
 	public void adiciona() throws Exception {
 		FormaDePagamento visaCreditoSemId = new FormaDePagamento(null, FormaDePagamento.Tipo.CARTAO_CREDITO,
 				"Visa Crédito");
 
 		Mockito.when(repo.save(visaCreditoSemId)).thenReturn(visaCredito);
 
-		this.mockMvc.perform(post("/admin/formas-de-pagamento").contentType(MediaType.APPLICATION_JSON_UTF8)
+		this.mockMvc.perform(post(ADMIN_FORMAS_DE_PAGAMENTO).contentType(MediaType.APPLICATION_JSON_UTF8)
 				.content(json.writeValueAsString(visaCreditoSemId))).andDo(print()).andExpect(status().isOk());
 
 		Mockito.verify(repo).save(visaCreditoSemId);
 	}
 
-	@Test
+	@Test @WithMockUser(username="admin",roles={"ADMIN"})
 	public void atualiza() throws Exception {
 		Mockito.when(repo.save(visaCredito)).thenReturn(visaCredito);
 
-		this.mockMvc.perform(put("/admin/formas-de-pagamento/1").contentType(MediaType.APPLICATION_JSON_UTF8)
+		this.mockMvc.perform(put(ADMIN_FORMAS_DE_PAGAMENTO+"/1").contentType(MediaType.APPLICATION_JSON_UTF8)
 				.content(json.writeValueAsString(visaCredito))).andDo(print()).andExpect(status().isOk());
 
 		Mockito.verify(repo).save(visaCredito);
 	}
 
-	@Test
+	@Test @WithMockUser(username="admin",roles={"ADMIN"})
 	public void remove() throws Exception {
 		Mockito.doNothing().when(repo).deleteById(1L);
 
-		this.mockMvc.perform(delete("/admin/formas-de-pagamento/1").contentType(MediaType.APPLICATION_JSON_UTF8))
+		this.mockMvc.perform(delete(ADMIN_FORMAS_DE_PAGAMENTO+"/1").contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andDo(print()).andExpect(status().isOk());
 
 		Mockito.verify(repo).deleteById(1L);

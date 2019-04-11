@@ -21,6 +21,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -34,6 +35,7 @@ import br.com.caelum.eats.repository.TipoDeCozinhaRepository;
 @AutoConfigureMockMvc
 public class TipoDeCozinhaControllerTest {
 
+	private static final String TIPOS_DE_COZINHA = "/tipos-de-cozinha";
 	private static final String ADMIN_TIPOS_DE_COZINHA = "/admin/tipos-de-cozinha";
 
 	@Autowired
@@ -61,7 +63,7 @@ public class TipoDeCozinhaControllerTest {
 	public void todas() throws Exception {
 		Mockito.when(repo.findAllByOrderByNomeAsc()).thenReturn(tiposDeCozinha);
 		
-		this.mockMvc.perform(get(ADMIN_TIPOS_DE_COZINHA))
+		this.mockMvc.perform(get(TIPOS_DE_COZINHA))
 			.andDo(print())
 			.andExpect(status().isOk())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -76,7 +78,7 @@ public class TipoDeCozinhaControllerTest {
 
 	}
 
-	@Test
+	@Test @WithMockUser(username="admin",roles={"ADMIN"})
 	public void adiciona() throws Exception {
 		TipoDeCozinha chinesaSemId = new TipoDeCozinha(null, "Chinesa");
 		
@@ -92,7 +94,7 @@ public class TipoDeCozinhaControllerTest {
 		Mockito.verify(repo).save(chinesaSemId);
 	}
 
-	@Test
+	@Test @WithMockUser(username="admin",roles={"ADMIN"})
 	public void atualiza() throws Exception {
 		Mockito.when(repo.save(chinesa)).thenReturn(chinesa);
 
@@ -106,7 +108,7 @@ public class TipoDeCozinhaControllerTest {
 		Mockito.verify(repo).save(chinesa);
 	}
 	
-	@Test
+	@Test @WithMockUser(username="admin",roles={"ADMIN"})
 	public void remove() throws Exception {
 		Mockito.doNothing().when(repo).deleteById(1L);
 
