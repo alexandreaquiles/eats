@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { AuthenticationService } from './services/authentication.service';
 
 @Component({
@@ -9,10 +11,15 @@ import { AuthenticationService } from './services/authentication.service';
 export class AppComponent implements OnInit {
   title = 'Caelum Eats';
   user: any;
-  constructor(private authenticationService: AuthenticationService) {
-  }
+  constructor(private router: Router,
+              private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
     this.authenticationService.currentUser.subscribe(user => this.user = user);
+  }
+
+  logout() {
+    this.authenticationService.logout();
+    this.router.navigate(['']);
   }
 }

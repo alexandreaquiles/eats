@@ -13,6 +13,7 @@ import org.springframework.data.repository.query.Param;
 
 import br.com.caelum.eats.model.Restaurante;
 import br.com.caelum.eats.model.TipoDeCozinha;
+import br.com.caelum.eats.model.User;
 
 public interface RestauranteRepository extends JpaRepository<Restaurante, Long> {
 
@@ -21,6 +22,8 @@ public interface RestauranteRepository extends JpaRepository<Restaurante, Long> 
 	Page<Restaurante> findAllByAprovadoAndTipoDeCozinha(boolean aprovado, TipoDeCozinha tipo, Pageable limit);
 
 	Page<Restaurante> findAllByAprovado(boolean aprovado, Pageable limit);
+
+	Restaurante findByUser(User user);
 
 	@Transactional
 	@Modifying(clearAutomatically = true)

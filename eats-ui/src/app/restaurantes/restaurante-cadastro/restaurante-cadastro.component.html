@@ -1,8 +1,25 @@
-<p *ngIf="mensagem">
+<p class="alert alert-danger" *ngIf="mensagem">
   {{ mensagem }}
 </p>
 
-<form class="mb-5" #restauranteForm="ngForm" (ngSubmit)="salvaRestaurante()">
+<form *ngIf="registrandoUsuario" class="mb-5" #registroUsuarioForm="ngForm" (ngSubmit)="registraUsuario()">
+  <div class="form-group">
+    <label for="username">Usuário:</label>
+    <input class="form-control" placeholder="registre um usuário" [(ngModel)]="userInfo.username" required id="username" name="username">
+  </div>
+  <div class="form-group">
+    <label for="password">Senha:</label>
+    <input class="form-control" placeholder="registre uma senha" [(ngModel)]="userInfo.password" type="password" required id="password" name="password">
+  </div>
+  <div class="form-group">
+    <label for="passwordConfirmation">Confirmação da Senha:</label>
+    <input class="form-control" placeholder="confirme a senha" [(ngModel)]="userInfo.passwordConfirmation" type="password" required id="passwordConfirmation" name="passwordConfirmation" #passwordConfirmation="ngModel">
+    <p class="text-danger mt-2" *ngIf="passwordConfirmation.dirty && !validaSenhas()">A senha e a confirmação não conferem.</p>
+  </div>
+  <button type="submit" class="btn btn-primary mr-1" [disabled]="!registroUsuarioForm.form.valid || !validaSenhas()">Registrar usuário</button>
+</form>
+
+<form *ngIf="!registrandoUsuario"  class="mb-5" #restauranteForm="ngForm" (ngSubmit)="salvaRestaurante()">
 
   <div class="form-group">
     <label for="nome">Nome</label>

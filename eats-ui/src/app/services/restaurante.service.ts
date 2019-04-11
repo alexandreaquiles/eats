@@ -34,6 +34,10 @@ export class RestauranteService {
     return this.http.get(`${this.API}/restaurantes/${restaurante.id}/formas-de-pagamento`);
   }
 
+  parceiroPorId(id: string): Observable<any> {
+    return this.http.get(`${this.API}/parceiros/restaurantes/${id}`);
+  }
+
   salva(restaurante): Observable<any> {
     if (restaurante.id) {
       return this.http.put(`${this.API}/parceiros/restaurantes/${restaurante.id}`, restaurante);

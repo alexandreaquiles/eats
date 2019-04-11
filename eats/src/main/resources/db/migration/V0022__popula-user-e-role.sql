@@ -7,3 +7,5 @@ insert into user (id, name, password) values (2, 'longfu', '$2a$10$3Qrx0rv8qSmZ8
 
 insert into user_authorities (user_id, authorities_authority) values (1, 'ROLE_ADMIN');
 insert into user_authorities (user_id, authorities_authority) values (2, 'ROLE_PARCEIRO');
+
+update restaurante r set r.user_id = 2 where r.id = 1;

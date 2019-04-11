@@ -17,7 +17,17 @@ public class Role implements GrantedAuthority {
 
 	private static final long serialVersionUID = 1L;
 
+	public static enum ROLES {
+		ADMIN, PARCEIRO;
+		public String asAuthority() {
+			return "ROLE_" + name();
+		}
+	}
+
 	@Id
 	private String authority;
 
+	public String getRole() {
+		return authority.replace("ROLE_", "");
+	}
 }

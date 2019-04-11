@@ -16,7 +16,7 @@ export class LoginComponent {
   }
 
   efetuaLogin() {
-    this.authenticationService.efetuaLogin(this.loginInfo)
+    this.authenticationService.login(this.loginInfo)
       .subscribe(() => this.router.navigate(['']));
   }
 }

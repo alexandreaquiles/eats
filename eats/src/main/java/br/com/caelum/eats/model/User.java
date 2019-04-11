@@ -3,6 +3,7 @@ package br.com.caelum.eats.model;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +16,9 @@ import javax.validation.constraints.NotBlank;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import br.com.caelum.eats.model.Role.ROLES;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,18 +35,27 @@ public class User implements UserDetails {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
+	@NotBlank @JsonIgnore
 	private String name;
 
-	@NotBlank
+	@NotBlank @JsonIgnore
 	private String password;
 
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER) @JsonIgnore
 	private List<Role> authorities = new ArrayList<>();
+	
+	public User(String name, String password) {
+		this.name = name;
+		this.password = password;
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return authorities;
+	}
+	
+	public List<String> getRoles() {
+		return authorities.stream().map(Role::getRole).collect(Collectors.toList());
 	}
 
 	@Override
@@ -73,6 +86,14 @@ public class User implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	public boolean isInRole(ROLES role) {
+		return getRoles().contains(role.name());
+	}
+
+	public void addRole(ROLES role) {
+		this.authorities.add(new Role(role.asAuthority()));
 	}
 
 }

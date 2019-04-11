@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.caelum.eats.model.User;
@@ -14,9 +15,11 @@ import br.com.caelum.eats.repository.UserRepository;
 public class UserService implements UserDetailsService {
 
 	private UserRepository userRepository;
+	private BCryptPasswordEncoder encoder;
 
-	public UserService(UserRepository userRepository) {
+	public UserService(UserRepository userRepository, BCryptPasswordEncoder encoder) {
 		this.userRepository = userRepository;
+		this.encoder = encoder;
 	}
 
 	@Override
@@ -29,6 +32,11 @@ public class UserService implements UserDetailsService {
 		Optional<User> user = userRepository.findById(userId);
 		return user.orElseThrow(
 				() -> new UsernameNotFoundException("Não foi possível encontrar o usuário com id: " + userId));
+	}
+
+	public User save(User user) {
+		user.setPassword(encoder.encode(user.getPassword()));
+		return userRepository.save(user);
 	}
 
 }

@@ -74,6 +74,12 @@ public class RestauranteController {
 		Double mediaAvaliacoes = avaliacoesRepo.mediaDoRestaurantePeloId(id);
 		return new RestauranteComDistanciaEComMediaDeAvaliacoes(restauranteComDistancia, mediaAvaliacoes);
 	}
+	
+	@GetMapping("/parceiros/restaurantes/{id}")
+	private RestauranteDto detalhaParceiro(@PathVariable("id") Long id) {
+		Restaurante restaurante = restauranteRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException());
+		return new RestauranteDto(restaurante);
+	}
 
 	@PostMapping("/parceiros/restaurantes")
 	private Restaurante adiciona(@RequestBody Restaurante restaurante) {
@@ -87,6 +93,9 @@ public class RestauranteController {
 
 	@PutMapping("/parceiros/restaurantes/{id}")
 	private Restaurante atualiza(@RequestBody Restaurante restaurante) {
+		Restaurante doBD = restauranteRepo.getOne(restaurante.getId());
+		restaurante.setUser(doBD.getUser());
+		restaurante.setAprovado(doBD.getAprovado());
 		return restauranteRepo.save(restaurante);
 	}
 

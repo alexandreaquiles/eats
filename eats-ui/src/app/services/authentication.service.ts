@@ -24,10 +24,13 @@ export class AuthenticationService {
   }
 
   hasRole(role: string): boolean {
-    return this.currentUserValue.roles.includes(role);
+    if (this.currentUserValue && this.currentUserValue.roles) {
+      return this.currentUserValue.roles.includes(role);
+    }
+    return false;
   }
 
-  efetuaLogin(loginInfo): Observable<any> {
+  login(loginInfo): Observable<any> {
     return this.http.post(`${this.API}`, loginInfo)
       .pipe(map((authData: any) => {
         if (authData && authData.token) {
@@ -41,6 +44,10 @@ export class AuthenticationService {
   logout() {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
+  }
+
+  registraParceiro(userInfo: any): Observable<any> {
+    return this.http.post(`${this.API}/parceiro`, userInfo);
   }
 
 }
