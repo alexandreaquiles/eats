@@ -1,8 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import * as StompJS from '@stomp/stompjs';
-import SockJS from 'sockjs-client';
+import { Subscription } from 'rxjs';
+
+import { RxStompService} from '@stomp/ng2-stompjs';
+import { Message } from '@stomp/stompjs';
 
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { AvaliacoesService } from 'src/app/services/avaliacoes.service';
@@ -13,11 +15,13 @@ import { AvaliacoesService } from 'src/app/services/avaliacoes.service';
 })
 export class StatusPedidoComponent implements OnInit, OnDestroy {
 
+  private topicSubscription: Subscription;
+
   pedido: any = {};
   avaliacao: any = {};
-  stompClient
 
   constructor(private route: ActivatedRoute,
+              private rxStompService: RxStompService,
               private pedidoService: PedidosService,
               private avaliacoesService: AvaliacoesService) {
   }
@@ -27,18 +31,14 @@ export class StatusPedidoComponent implements OnInit, OnDestroy {
     this.pedidoService.porId(pedidoId)
       .subscribe(pedido => this.pedido = pedido);
 
-    const ws = new SockJS(`http://localhost:8080/socket`);
-    this.stompClient = StompJS.Stomp.over(ws);
-    this.stompClient.connect({}, () => {
-      this.stompClient.subscribe('/pedidos/status', message => {
-        const pedido = JSON.parse(message.body);
-        this.pedido.status = pedido.status;
-      });
+    this.topicSubscription = this.rxStompService.watch('/pedidos/status').subscribe((message: Message) => {
+      const pedido = JSON.parse(message.body);
+      this.pedido.status = pedido.status;
     });
   }
 
   ngOnDestroy() {
-    this.stompClient.disconnect();
+    this.topicSubscription.unsubscribe();
   }
 
   salvaAvaliacao() {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PedidosService } from '../../services/pedidos.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-pedidos-pendentes',
@@ -9,11 +10,13 @@ export class PedidosPendentesComponent implements OnInit {
 
   pendentes: Array<any>;
 
-  constructor(private pedidosService: PedidosService) {
+  constructor(private route: ActivatedRoute,
+              private pedidosService: PedidosService) {
   }
 
   ngOnInit() {
-    this.pedidosService.pendentes()
+    const restauranteId = this.route.snapshot.params.restauranteId;
+    this.pedidosService.pendentes(restauranteId)
       .subscribe(pedidosPendentes => this.pendentes = pedidosPendentes);
   }
 

@@ -22,8 +22,8 @@ export class PedidosService {
     return this.http.post(`${this.API}/pedidos`, pedido);
   }
 
-  pendentes(): Observable<any> {
-    return this.http.get(`${this.API}/parceiros/pedidos/pendentes`);
+  pendentes(restauranteId): Observable<any> {
+    return this.http.get(`${this.API}/parceiros/restaurantes/${restauranteId}/pedidos/pendentes`);
   }
 
   atualizaStatus(pedido): Observable<any> {
