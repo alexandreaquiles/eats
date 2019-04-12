@@ -38,7 +38,7 @@ public class DistanciaService {
 		return restaurantes
 				.stream()
 				.map(restaurante -> {
-					BigDecimal distancia = new BigDecimal(Math.random()*15);
+					BigDecimal distancia = distanciaDoCep(restaurante, cep);
 					return new RestauranteComDistancia(restaurante, distancia);
 				})
 				.collect(Collectors.toList());
@@ -49,7 +49,7 @@ public class DistanciaService {
 	}
 
 	private BigDecimal calculaDistancia() {
-		simulaDemora();
+		//simulaDemora();
 		return new BigDecimal(Math.random()*15);
 	}
 
