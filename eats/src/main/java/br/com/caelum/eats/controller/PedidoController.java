@@ -62,7 +62,7 @@ public class PedidoController {
 	@PutMapping("/parceiros/pedidos/{id}/status")
 	public PedidoDto atualizaStatus(@RequestBody Pedido pedido) {
 		repo.atualizaStatus(pedido.getStatus(), pedido);
-		this.websocket.convertAndSend("/pedidos/"+pedido.getId()+"/status", pedido);
+		websocket.convertAndSend("/pedidos/"+pedido.getId()+"/status", pedido);
 		return new PedidoDto(pedido);
 	}
 

@@ -1,5 +1,6 @@
 package br.com.caelum.eats.controller;
 
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,11 +26,13 @@ public class PagamentoController {
 	private PagamentoRepository pagamentoRepo;
 	private PedidoRepository pedidoRepo;
 	private NotaFiscalService notaFiscal;
+	private SimpMessagingTemplate websocket;
 
-	public PagamentoController(PagamentoRepository pagamentoRepo, PedidoRepository pedidoRepo, NotaFiscalService notaFiscal) {
+	public PagamentoController(PagamentoRepository pagamentoRepo, PedidoRepository pedidoRepo, NotaFiscalService notaFiscal, SimpMessagingTemplate websocket) {
 		this.pagamentoRepo = pagamentoRepo;
 		this.pedidoRepo = pedidoRepo;
 		this.notaFiscal = notaFiscal;
+		this.websocket = websocket;
 	}
 
 	@GetMapping("/{id}")
@@ -50,10 +53,11 @@ public class PagamentoController {
 		pagamento.setStatus(Pagamento.Status.CONFIRMADO);
 		pagamentoRepo.save(pagamento);
 		Pedido pedido = pagamento.getPedido();
+		pedido.setStatus(Status.PAGO);
 		pedidoRepo.atualizaStatus(Status.PAGO, pedido);
 		String nota = notaFiscal.geraNotaPara(pedido);
-		System.out.println(nota);
-		//TODO: enviar XML para SEFAZ
+		System.out.println(nota); //TODO: enviar XML para SEFAZ
+		websocket.convertAndSend("/parceiros/restaurantes/"+pedido.getRestaurante().getId()+"/pedidos/pendentes", pedido);
 		return new PagamentoDto(pagamento);
 	}
 
