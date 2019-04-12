@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import * as StompJS from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
@@ -18,7 +18,6 @@ export class StatusPedidoComponent implements OnInit, OnDestroy {
   stompClient
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
               private pedidoService: PedidosService,
               private avaliacoesService: AvaliacoesService) {
   }

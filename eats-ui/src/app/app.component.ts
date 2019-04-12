@@ -10,6 +10,7 @@ import { AuthenticationService } from './services/authentication.service';
 })
 export class AppComponent implements OnInit {
   title = 'Caelum Eats';
+  isNavbarCollapsed = true;
   user: any;
   constructor(private router: Router,
               private authenticationService: AuthenticationService) { }

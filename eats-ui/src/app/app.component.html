@@ -2,10 +2,10 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a routerLink="/" class="navbar-brand">{{title}}</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" (click)="isNavbarCollapsed = !isNavbarCollapsed">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li *ngIf="!user" class="nav-item"><a class="nav-link" routerLink="/login">Login</a></li>
         <li *ngIf="user?.roles?.includes('ADMIN')" class="nav-item dropdown" ngbDropdown>
@@ -30,8 +30,8 @@
   </nav>
 </header>
 
-<main>
-  <div class="container mt-5">
+<main class="my-5">
+  <div class="container">
     <router-outlet></router-outlet>
   </div>
 </main>

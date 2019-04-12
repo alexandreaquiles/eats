@@ -1,23 +1,20 @@
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
 
 import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 import { ToastrService } from 'ngx-toastr';
 import { Injectable } from '@angular/core';
-import { AuthenticationService } from '../services/authentication.service';
 
 @Injectable()
 export class ErrorHandlingInterceptor implements HttpInterceptor {
 
-  constructor(private toasterService: ToastrService,
-              private authenticationService: AuthenticationService) { }
+  constructor(private toasterService: ToastrService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     return next.handle(req)
       .pipe(
-        //retry(1),
         catchError(err => {
           let mensagemDeErro = '';
           if (err.error instanceof ErrorEvent) {
