@@ -9,6 +9,11 @@ import org.springframework.stereotype.Service;
 import br.com.caelum.eats.model.Restaurante;
 import br.com.caelum.eats.repository.RestauranteRepository;
 
+/*
+ * Serviço que simula recomendações para um dado CEP.
+ * Deve evoluir para uma solução baseada em Data Science.
+ * 
+ */
 @Service
 public class RecomendacoesService {
 

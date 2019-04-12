@@ -13,6 +13,11 @@ import br.com.caelum.eats.model.Restaurante;
 import br.com.caelum.eats.model.TipoDeCozinha;
 import br.com.caelum.eats.repository.RestauranteRepository;
 
+/*
+ * Serviço que simula a obtenção dos restaurantes mais próximos a um dado CEP.
+ * Deve evoluir para uma solução que utiliza geolocalização.
+ * 
+ */
 @Service
 public class DistanciaService {
 	
@@ -53,6 +58,7 @@ public class DistanciaService {
 		return new BigDecimal(Math.random()*15);
 	}
 
+	@SuppressWarnings("unused")
 	private void simulaDemora() {
 		//simula demora de até 5s
 		long demora = (long) (Math.random()*4000+1000);
