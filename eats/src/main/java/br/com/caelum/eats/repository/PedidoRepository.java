@@ -12,13 +12,12 @@ import br.com.caelum.eats.model.Pedido;
 
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 
-	@Query("select p from Pedido p where p.status not in :listaDeStatus")
-	List<Pedido> semStatus(List<Pedido.Status> listaDeStatus);
-	
 	@Transactional
 	@Modifying(clearAutomatically = true)
 	@Query("update Pedido p set p.status = :status where p = :pedido")
 	void atualizaStatus(Pedido.Status status, Pedido pedido);
 
+	@Query("select p from Pedido p where p.restaurante.id = :restauranteId and p.status not in :listaDeStatus")
+	List<Pedido> doRestauranteSemOsStatus(Long restauranteId, List<Pedido.Status> listaDeStatus);
 
 }
