@@ -28,7 +28,7 @@
 
   <div class="form-group">
     <label for="nome">CNPJ</label>
-    <input class="form-control" placeholder="00.000.000/0000-00" [(ngModel)]="restaurante.cnpj" maxlength="18"  required id="cnpj" name="cnpj">
+    <input class="form-control" placeholder="00.000.000/0000-00" [(ngModel)]="restaurante.cnpj" required id="cnpj" name="cnpj" [textMask]="{mask: cnpjMask}">
   </div>
 
   <div class="form-group">
@@ -47,7 +47,7 @@
 
   <div class="form-group">
     <label for="cep">CEP:</label>
-    <input class="form-control" required [(ngModel)]="restaurante.cep" id="cep" name="cep" pattern="\d{8}" maxlength="8">
+    <input class="form-control" required [(ngModel)]="restaurante.cep" id="cep" name="cep" [textMask]="{mask: cepMask}">
   </div>
 
   <div class="form-group">
@@ -63,12 +63,12 @@
 
   <div class="form-group">
     <label for="tempoDeEntregaMinimoEmMinutos">Tempo de entrega mínimo (em minutos):</label>
-    <input class="form-control" [(ngModel)]="restaurante.tempoDeEntregaMinimoEmMinutos" type="number" min="10" max="180" id="tempoDeEntregaMinimoEmMinutos" name="tempoDeEntregaMinimoEmMinutos">
+    <input class="form-control" [(ngModel)]="restaurante.tempoDeEntregaMinimoEmMinutos" type="number" min="10" max="180" id="tempoDeEntregaMinimoEmMinutos" name="tempoDeEntregaMinimoEmMinutos" placeholder="entre 10 e 180">
   </div>
 
   <div class="form-group">
     <label for="tempoDeEntregaMaximoEmMinutos">Tempo de entrega máximo (em minutos):</label>
-    <input class="form-control" [(ngModel)]="restaurante.tempoDeEntregaMaximoEmMinutos" type="number" min="10" max="180" id="tempoDeEntregaMaximoEmMinutos" name="tempoDeEntregaMaximoEmMinutos">
+    <input class="form-control" [(ngModel)]="restaurante.tempoDeEntregaMaximoEmMinutos" type="number" min="10" max="180" id="tempoDeEntregaMaximoEmMinutos" name="tempoDeEntregaMaximoEmMinutos" placeholder="entre 10 e 180">
   </div>
 
   <button class="btn btn-primary btn-lg mb-3" type="submit" [disabled]="!restauranteForm.form.valid">{{ restaurante.id ? 'Atualizar' : 'Inserir' }}</button>

@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ErrorHandlingInterceptor implements HttpInterceptor {
 
-  constructor(private toasterService: ToastrService) { }
+  constructor(private toaster: ToastrService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
@@ -24,7 +24,7 @@ export class ErrorHandlingInterceptor implements HttpInterceptor {
               mensagemDeErro = `[${err.status}] ${err.message}`;
             }
           }
-          this.toasterService.error(mensagemDeErro, 'Erro no servidor');
+          this.toaster.error(mensagemDeErro, 'Erro no servidor');
 
           return throwError(err);
         })

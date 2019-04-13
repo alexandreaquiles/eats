@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import { ToastrService } from 'ngx-toastr';
+
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { TipoDeCozinhaService } from 'src/app/services/tipo-de-cozinha.service';
 import { RestauranteService } from '../../services/restaurante.service';
@@ -22,8 +24,12 @@ export class RestauranteCadastroComponent implements OnInit {
 
   mensagem: any;
 
+  cnpjMask = [/\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/];
+  cepMask = [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/];
+
   constructor(private route: ActivatedRoute,
               private router: Router,
+              private toaster: ToastrService,
               private authenticationService: AuthenticationService,
               private tipoDeCozinhaService: TipoDeCozinhaService,
               private restauranteService: RestauranteService) {
@@ -67,6 +73,7 @@ export class RestauranteCadastroComponent implements OnInit {
   salvaRestaurante() {
     this.restauranteService.salva(this.restaurante)
       .subscribe(restaurante => {
+        this.toaster.success('Dados do restaurante salvos com sucesso.');
         if (this.estaAdicionando()) {
           this.authenticationService.login(this.userInfo)
             .subscribe(() => {

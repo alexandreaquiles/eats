@@ -15,6 +15,9 @@ export class PagamentoPedidoComponent implements OnInit {
   formasDePagamento: Array<any>;
   pagamento: any = {};
 
+  numeroCartaoMask = [/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/];
+  codigoCartaoMask= [/\d/, /\d/, /\d/];
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private pagamentoService: PagamentoService,

@@ -8,6 +8,8 @@ import { InjectableRxStompConfig, RxStompService, rxStompServiceFactory } from '
 
 import { rxStompConfig } from 'src/app/rx-stomp.config';
 
+import { TextMaskModule } from 'angular2-text-mask';
+
 import { PedidoComponent } from './pedido.component';
 import { ListaRestaurantesComponent } from './lista-restaurantes/lista-restaurantes.component';
 import { RestauranteComponent } from './restaurante/restaurante.component';
@@ -28,7 +30,7 @@ import { PipesModule } from '../pipes/pipes.module';
     ResumoPedidoComponent,
     StatusPedidoComponent
   ],
-  imports: [CommonModule, FormsModule, NgbModule, pedidoRoutes, PipesModule],
+  imports: [CommonModule, FormsModule, NgbModule, TextMaskModule, pedidoRoutes, PipesModule],
   providers: [
     {
       provide: InjectableRxStompConfig,

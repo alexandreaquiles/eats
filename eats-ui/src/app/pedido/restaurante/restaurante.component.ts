@@ -27,6 +27,21 @@ export class RestauranteComponent implements OnInit {
   itemEscolhidoModalRef: NgbModalRef;
   formularioDeEntregaModalRef: NgbModalRef;
 
+  cpfMask = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/];
+  cepMask = [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/];
+  telefoneMask = userInput => {
+    const numbers = userInput.match(/\d/g);
+    let numberLength = 0;
+    if (numbers) {
+      numberLength = numbers.join('').length;
+    }
+    if (numberLength > 10) {
+      return ['(', /[1-9]/, /[1-9]/, ')', ' ', /\d/, ' ', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+    } else {
+      return ['(', /[1-9]/, /[1-9]/, ')', ' ', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+    }
+  }
+
   constructor(private modal: NgbModal,
               private route: ActivatedRoute,
               private router: Router,

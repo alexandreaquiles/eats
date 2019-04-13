@@ -108,35 +108,35 @@
           <div class="form-group">
             <label for="nome">Nome:</label>
             <input class="form-control" required id="nome" name="nome" maxlength="100"
-              [(ngModel)]="pedido.entrega.cliente.nome">
+              [(ngModel)]="pedido.entrega.cliente.nome" placeholder="digite seu nome">
           </div>
           <div class="form-group">
             <label for="cpf">CPF:</label>
             <input class="form-control" required id="cpf" name="cpf" maxlength="14"
-              [(ngModel)]="pedido.entrega.cliente.cpf" placeholder="000.000.000-00">
+              [(ngModel)]="pedido.entrega.cliente.cpf" placeholder="000.000.000-00" [textMask]="{mask: cpfMask}">
           </div>
           <div class="form-group">
             <label for="email">Email:</label>
-            <input class="form-control" required type="email" id="email" name="email"
-              [(ngModel)]="pedido.entrega.cliente.email">
+            <input class="form-control" required type="email" id="email" name="email" maxlength="100"
+              [(ngModel)]="pedido.entrega.cliente.email" placeholder="email@exemplo.com">
           </div>
           <div class="form-group">
             <label for="telefone">Telefone:</label>
-            <input class="form-control" required id="telefone" name="telefone" maxlength="10"
-              [(ngModel)]="pedido.entrega.cliente.telefone">
+            <input class="form-control" required id="telefone" name="telefone" maxlength="16"
+              [(ngModel)]="pedido.entrega.cliente.telefone" [textMask]="{mask: telefoneMask}"  placeholder="(00) 0000-0000">
           </div>
         </fieldset>
         <fieldset>
           <legend>Local de entrega</legend>
           <div class="form-group">
             <label for="cep">CEP:</label>
-            <input class="form-control" required id="cep" name="cep" pattern="\d{8}" maxlength="8"
-              [(ngModel)]="pedido.entrega.cep">
+            <input class="form-control" required id="cep" name="cep" maxlength="9"
+              [(ngModel)]="pedido.entrega.cep" [textMask]="{mask: cepMask}">
           </div>
           <div class="form-group">
             <label for="endereco">Endereço:</label>
             <textarea class="form-control" required id="endereco" name="endereco"
-              [(ngModel)]="pedido.entrega.endereco"></textarea>
+              [(ngModel)]="pedido.entrega.endereco" placeholder="rua, número, bloco, bairro, ..."></textarea>
           </div>
           <div class="form-group">
             <label for="complemento">Complemento:</label>

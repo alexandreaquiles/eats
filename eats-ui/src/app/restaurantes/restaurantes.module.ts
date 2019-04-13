@@ -2,6 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TextMaskModule } from 'angular2-text-mask';
+
+import { PipesModule } from '../pipes/pipes.module';
+
+import { restauranteRoutes } from './restaurantes.routes';
+
 import { RestauranteCadastroComponent } from './restaurante-cadastro/restaurante-cadastro.component';
 import { HorariosDeFuncionamentoComponent } from './horarios-de-funcionamento/horarios-de-funcionamento.component';
 import { FormasDePagamentoComponent } from './formas-de-pagamento/formas-de-pagamento.component';
@@ -10,9 +17,6 @@ import { CategoriaDoCardapioCadastroComponent } from './cardapio/categoria-do-ca
 import { ItemDoCardapioCadastroComponent } from './cardapio/item-do-cardapio-cadastro.component';
 import { PedidosPendentesComponent } from './pedidos-pendentes/pedidos-pendentes.component';
 
-import { restauranteRoutes } from './restaurantes.routes';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +28,6 @@ import { PipesModule } from '../pipes/pipes.module';
     ItemDoCardapioCadastroComponent,
     PedidosPendentesComponent
   ],
-  imports: [ CommonModule, FormsModule, NgbModule, restauranteRoutes, PipesModule ]
+  imports: [ CommonModule, FormsModule, NgbModule, TextMaskModule,  restauranteRoutes, PipesModule ]
 })
 export class RestaurantesModule { }
