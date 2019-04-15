@@ -14,7 +14,6 @@ import br.com.caelum.eats.dto.PagamentoDto;
 import br.com.caelum.eats.exception.ResourceNotFoundException;
 import br.com.caelum.eats.model.Pagamento;
 import br.com.caelum.eats.model.Pedido;
-import br.com.caelum.eats.model.Pedido.Status;
 import br.com.caelum.eats.repository.PagamentoRepository;
 import br.com.caelum.eats.repository.PedidoRepository;
 import br.com.caelum.eats.service.NotaFiscalService;
@@ -53,8 +52,8 @@ public class PagamentoController {
 		pagamento.setStatus(Pagamento.Status.CONFIRMADO);
 		pagamentoRepo.save(pagamento);
 		Pedido pedido = pagamento.getPedido();
-		pedido.setStatus(Status.PAGO);
-		pedidoRepo.atualizaStatus(Status.PAGO, pedido);
+		pedido.setStatus(Pedido.Status.PAGO);
+		pedidoRepo.atualizaStatus(Pedido.Status.PAGO, pedido);
 		String nota = notaFiscal.geraNotaPara(pedido);
 		System.out.println(nota); //TODO: enviar XML para SEFAZ
 		websocket.convertAndSend("/parceiros/restaurantes/"+pedido.getRestaurante().getId()+"/pedidos/pendentes", pedido);

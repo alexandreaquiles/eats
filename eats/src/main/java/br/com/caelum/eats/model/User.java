@@ -18,7 +18,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import br.com.caelum.eats.model.Role.ROLES;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -88,11 +87,11 @@ public class User implements UserDetails {
 		return true;
 	}
 
-	public boolean isInRole(ROLES role) {
+	public boolean isInRole(Role.ROLES role) {
 		return getRoles().contains(role.name());
 	}
 
-	public void addRole(ROLES role) {
+	public void addRole(Role.ROLES role) {
 		this.authorities.add(new Role(role.asAuthority()));
 	}
 

@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 
 import br.com.caelum.eats.model.FormaDePagamento;
 import br.com.caelum.eats.model.Pagamento;
-import br.com.caelum.eats.model.Pagamento.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -18,7 +17,7 @@ public class PagamentoDto {
 	private String numero;
 	private String expiracao;
 	private String codigo;
-	private Status status;
+	private Pagamento.Status status;
 	private FormaDePagamento formaDePagamento;
 	private PedidoDto pedido;
 

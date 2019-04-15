@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 import br.com.caelum.eats.model.ItemDoPedido;
 import br.com.caelum.eats.model.Pedido;
-import br.com.caelum.eats.model.Pedido.Status;
 import br.com.caelum.eats.model.Restaurante;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,7 +18,7 @@ public class PedidoDto {
 
 	private Long id;
 	private LocalDateTime dataHora;
-	private Status status;
+	private Pedido.Status status;
 	private Restaurante restaurante;
 	private EntregaDto entrega;
 	private List<ItemDoPedidoDto> itens = new ArrayList<>();

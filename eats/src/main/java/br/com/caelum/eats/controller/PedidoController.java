@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.caelum.eats.dto.PedidoDto;
 import br.com.caelum.eats.exception.ResourceNotFoundException;
 import br.com.caelum.eats.model.Pedido;
-import br.com.caelum.eats.model.Pedido.Status;
 import br.com.caelum.eats.repository.PedidoRepository;
 
 @RestController
@@ -55,7 +54,7 @@ public class PedidoController {
 
 	@GetMapping("/parceiros/restaurantes/{restauranteId}/pedidos/pendentes")
 	public List<PedidoDto> pendentes(@PathVariable("restauranteId") Long restauranteId) {
-		return repo.doRestauranteSemOsStatus(restauranteId, Arrays.asList(Status.REALIZADO, Status.ENTREGUE)).stream()
+		return repo.doRestauranteSemOsStatus(restauranteId, Arrays.asList(Pedido.Status.REALIZADO, Pedido.Status.ENTREGUE)).stream()
 				.map(pedido -> new PedidoDto(pedido)).collect(Collectors.toList());
 	}
 

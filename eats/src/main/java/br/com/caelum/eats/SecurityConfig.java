@@ -13,7 +13,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import br.com.caelum.eats.model.Role.ROLES;
+import br.com.caelum.eats.model.Role;
 import br.com.caelum.eats.service.JwtAuthenticationEntryPoint;
 import br.com.caelum.eats.service.JwtAuthenticationFilter;
 import br.com.caelum.eats.service.UserService;
@@ -41,10 +41,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/restaurantes/**", "/pedidos/**", "/recomendacoes/**", "/pagamentos/**", "/tipos-de-cozinha/**", "/formas-de-pagamento/**").permitAll()
 				.antMatchers("/socket/**").permitAll()
 				.antMatchers("/auth/**").permitAll()
-				.antMatchers("/admin/**").hasRole(ROLES.ADMIN.name())
+				.antMatchers("/admin/**").hasRole(Role.ROLES.ADMIN.name())
 				.antMatchers(HttpMethod.POST, "/parceiros/restaurantes").permitAll()
 				.antMatchers("/parceiros/restaurantes/{restauranteId}/**").access("@authorizationService.checaTargetId(authentication,#restauranteId)")
-				.antMatchers("/parceiros/**").hasRole(ROLES.PARCEIRO.name())
+				.antMatchers("/parceiros/**").hasRole(Role.ROLES.PARCEIRO.name())
 				.anyRequest().authenticated()
 				.and().cors()
 				.and().csrf().disable()

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.caelum.eats.dto.AuthenticationDto;
 import br.com.caelum.eats.dto.UserInfoDto;
 import br.com.caelum.eats.model.Restaurante;
-import br.com.caelum.eats.model.Role.ROLES;
+import br.com.caelum.eats.model.Role;
 import br.com.caelum.eats.model.User;
 import br.com.caelum.eats.repository.RestauranteRepository;
 import br.com.caelum.eats.service.JwtTokenManager;
@@ -57,13 +57,13 @@ public class AuthenticationController {
 	@PostMapping("/parceiro")
 	public Long register(@RequestBody UserInfoDto userInfo) {
 		User user = userInfo.toUser();
-		user.addRole(ROLES.PARCEIRO);
+		user.addRole(Role.ROLES.PARCEIRO);
 		User salvo = userService.save(user);
 		return salvo.getId();
 	}
 
 	private Long getTargetIdFor(User user) {
-		if(user.isInRole(ROLES.PARCEIRO)) {
+		if(user.isInRole(Role.ROLES.PARCEIRO)) {
 			Restaurante restaurante = restauranteRepo.findByUser(user);
 			if (restaurante != null) {
 				return restaurante.getId();
