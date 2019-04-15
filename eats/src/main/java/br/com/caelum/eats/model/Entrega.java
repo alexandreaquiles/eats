@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
@@ -26,10 +25,12 @@ public class Entrega {
 	@Embedded
 	private Cliente cliente;
 
-	@NotBlank @Pattern(regexp="\\d{8}")
+	@NotBlank
+	@Size(max=9)
 	private String cep;
 
-	@NotBlank @Size(max=255)
+	@NotBlank
+	@Size(max=255)
 	private String endereco;
 
 	@Size(max=255)

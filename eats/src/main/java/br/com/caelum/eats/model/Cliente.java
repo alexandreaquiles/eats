@@ -31,7 +31,7 @@ public class Cliente {
 	private String email;
 
 	@NotBlank
-	@Size(max = 10)
+	@Size(max = 16)
 	@Column(name = "telefone_do_cliente")
 	private String telefone;
 

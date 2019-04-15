@@ -11,7 +11,6 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
@@ -28,7 +27,7 @@ public class Restaurante {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
+	@NotBlank @Size(max=18)
 	private String cnpj;
 	
 	@NotBlank @Size(max=255)
@@ -37,7 +36,7 @@ public class Restaurante {
 	@Size(max=1000)
 	private String descricao;
 
-	@NotBlank @Pattern(regexp="\\d{8}")
+	@NotBlank @Size(max=9)
 	private String cep;
 
 	@NotBlank @Size(max=300)
