@@ -18,8 +18,13 @@ export class AvaliacoesService {
     return this.http.get(`${this.API}/${restauranteId}/avaliacoes`);
   }
 
-  salva(avaliacao: any) {
+  salva(avaliacao: any): Observable<any> {
     const restauranteId = avaliacao.pedido.restaurante.id;
     return this.http.post(`${this.API}/${restauranteId}/avaliacoes`, avaliacao);
   }
+
+  mediaDasAvaliacoes(restaurante: any): Observable<any> {
+    return this.http.get(`${this.API}/${restaurante.id}/media-avaliacoes`);
+  }
+
 }

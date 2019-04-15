@@ -1,8 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { Observable } from 'rxjs';
+
 import { TipoDeCozinhaService } from 'src/app/services/tipo-de-cozinha.service';
 import { RestauranteService } from 'src/app/services/restaurante.service';
+import { AvaliacoesService } from 'src/app/services/avaliacoes.service';
 
 @Component({
   selector: 'app-lista-restaurantes',
@@ -18,7 +21,8 @@ export class ListaRestaurantesComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private tipoDeCozinhaService: TipoDeCozinhaService,
-              private restaurantesService: RestauranteService) {
+              private restaurantesService: RestauranteService,
+              private avaliacoesService: AvaliacoesService) {
   }
 
   ngOnInit() {
@@ -32,13 +36,20 @@ export class ListaRestaurantesComponent implements OnInit {
         if (this.cep) {
 
           this.tipoDeCozinhaId = params.tipoDeCozinhaId;
+          let observable: Observable<any>;
           if (this.tipoDeCozinhaId) {
-            this.restaurantesService.maisProximosPorCepETipoDeCozinha(this.cep, this.tipoDeCozinhaId)
-              .subscribe(restaurantes => this.restaurantesMaisProximos = restaurantes);
+            observable = this.restaurantesService.maisProximosPorCepETipoDeCozinha(this.cep, this.tipoDeCozinhaId);
           } else {
-            this.restaurantesService.maisProximosPorCep(this.cep)
-              .subscribe(restaurantes => this.restaurantesMaisProximos = restaurantes);
+            observable = this.restaurantesService.maisProximosPorCep(this.cep)
           }
+
+          observable.subscribe(restaurantes => {
+            this.restaurantesMaisProximos = restaurantes;
+            restaurantes.forEach(restaurante => {
+              this.avaliacoesService.mediaDasAvaliacoes(restaurante)
+                .subscribe(media => restaurante.mediaAvaliacoes = media);
+            });
+          });
         }
       }
     );

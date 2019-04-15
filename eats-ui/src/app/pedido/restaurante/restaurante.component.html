@@ -2,11 +2,14 @@
   <div class="col-sm-9" *ngIf="restaurante">
     <section>
       <h2>{{restaurante.nome}}</h2>
-      <p>★ {{ restaurante.mediaAvaliacoes | number:'1.1-1' }}</p>
-      <p><span>{{restaurante.tipoDeCozinha.nome}}</span> • <span>{{restaurante.tempoDeEntregaMinimoEmMinutos}} -
-          {{restaurante.tempoDeEntregaMaximoEmMinutos}} min </span> • <span>
-          {{ restaurante.distancia | number:'1.1-1' }} km</span>
-        <p class="text-muted">{{ restaurante.descricao }}</p>
+      <p *ngIf="restaurante.mediaAvaliacoes">★ {{ restaurante.mediaAvaliacoes | number:'1.1-1' }}</p>
+      <p>
+        <span>{{restaurante.tipoDeCozinha.nome}}</span>
+        <span *ngIf="restaurante.tempoDeEntregaMinimoEmMinutos"> • {{restaurante.tempoDeEntregaMinimoEmMinutos}} min</span>
+        <span *ngIf="restaurante.tempoDeEntregaMaximoEmMinutos"> - {{restaurante.tempoDeEntregaMaximoEmMinutos}} min</span>
+        <span *ngIf="restaurante.distancia"> • {{ restaurante.distancia | number:'1.1-1' }} km</span>
+      </p>
+      <p class="text-muted">{{ restaurante.descricao }}</p>
     </section>
     <ngb-tabset>
       <ngb-tab title="Cardápio">
@@ -39,9 +42,8 @@
       <ngb-tab title="Avaliações">
         <ng-template ngbTabContent>
           <section class="mb-5" *ngIf="restaurante && avaliacoes.length">
-            <ngb-rating max="5" readonly="true" [(rate)]="avaliacaoMedia"></ngb-rating>
-            <p>{{avaliacaoMedia}} de {{avaliacoes.length}} {{avaliacoes.length > 1 ? 'avaliações' : 'avaliação'}}</p>
-
+            <ngb-rating max="5" readonly="true" [(rate)]="restaurante.mediaAvaliacoes"></ngb-rating>
+            <p>{{restaurante.mediaAvaliacoes}} de {{avaliacoes.length}} {{avaliacoes.length > 1 ? 'avaliações' : 'avaliação'}}</p>
             <div *ngFor="let avaliacao of avaliacoes">
               <p>{{ avaliacao.nota }} • {{ avaliacao.comentario }}</p>
             </div>

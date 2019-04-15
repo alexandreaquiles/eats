@@ -27,15 +27,19 @@ public class AvaliacaoController {
 	public List<AvaliacaoDto> listaDoRestaurante(@PathVariable("restauranteId") Long restauranteId) {
 		Restaurante restaurante = new Restaurante();
 		restaurante.setId(restauranteId);
-		return repo.findAllByRestaurante(restaurante)
-				.stream()
-				.map(a -> new AvaliacaoDto(a))
+		return repo.findAllByRestaurante(restaurante).stream().map(a -> new AvaliacaoDto(a))
 				.collect(Collectors.toList());
 	}
-	
+
+	@GetMapping("/restaurantes/{restauranteId}/media-avaliacoes")
+	public Double mediaDasAvaliacoesDoRestaurante(@PathVariable("restauranteId") Long restauranteId) {
+		return repo.mediaDoRestaurantePeloId(restauranteId);
+	}
+
 	@PostMapping("/restaurantes/{restauranteId}/avaliacoes")
 	public AvaliacaoDto adiciona(@RequestBody Avaliacao avaliacao) {
 		Avaliacao salvo = repo.save(avaliacao);
 		return new AvaliacaoDto(salvo);
 	}
+
 }

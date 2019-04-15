@@ -1,6 +1,5 @@
 package br.com.caelum.eats.controller;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,13 +11,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.caelum.eats.dto.RestauranteComDistancia;
-import br.com.caelum.eats.dto.RestauranteComDistanciaEComMediaDeAvaliacoes;
+import br.com.caelum.eats.dto.RestauranteComDistanciaDto;
 import br.com.caelum.eats.dto.RestauranteDto;
 import br.com.caelum.eats.exception.ResourceNotFoundException;
 import br.com.caelum.eats.model.Cardapio;
 import br.com.caelum.eats.model.Restaurante;
-import br.com.caelum.eats.repository.AvaliacaoRepository;
 import br.com.caelum.eats.repository.CardapioRepository;
 import br.com.caelum.eats.repository.RestauranteRepository;
 import br.com.caelum.eats.service.DistanciaService;
@@ -28,14 +25,12 @@ public class RestauranteController {
 
 	private RestauranteRepository restauranteRepo;
 	private CardapioRepository cardapioRepo;
-	private AvaliacaoRepository avaliacoesRepo;
 	private DistanciaService distanciaService;
 
 	public RestauranteController(RestauranteRepository restauranteRepo, CardapioRepository cardapioRepo,
-			AvaliacaoRepository avaliacoesRepo, DistanciaService distanciaService) {
+			DistanciaService distanciaService) {
 		this.restauranteRepo = restauranteRepo;
 		this.cardapioRepo = cardapioRepo;
-		this.avaliacoesRepo = avaliacoesRepo;
 		this.distanciaService = distanciaService;
 	}
 
@@ -46,35 +41,22 @@ public class RestauranteController {
 	}
 
 	@GetMapping("/restaurantes/mais-proximos/{cep}")
-	public List<RestauranteComDistanciaEComMediaDeAvaliacoes> maisProximos(@PathVariable("cep") String cep) {
-		List<RestauranteComDistancia> maisProximosAoCep = distanciaService.restaurantesMaisProximosAoCep(cep);
-		return maisProximosAoCep.stream().map(restauranteMaisProximo -> {
-			Double mediaAvaliacoes = avaliacoesRepo.mediaDoRestaurantePeloId(restauranteMaisProximo.getId());
-			return new RestauranteComDistanciaEComMediaDeAvaliacoes(restauranteMaisProximo, mediaAvaliacoes);
-		}).collect(Collectors.toList());
+	public List<RestauranteComDistanciaDto> maisProximos(@PathVariable("cep") String cep) {
+		return distanciaService.restaurantesMaisProximosAoCep(cep);
 	}
 
 	@GetMapping("/restaurantes/mais-proximos/{cep}/tipos-de-cozinha/{tipoDeCozinhaId}")
-	public List<RestauranteComDistanciaEComMediaDeAvaliacoes> maisProximos(@PathVariable("cep") String cep,
+	public List<RestauranteComDistanciaDto> maisProximos(@PathVariable("cep") String cep,
 			@PathVariable("tipoDeCozinhaId") Long tipoDeCozinhaId) {
-		List<RestauranteComDistancia> maisProximosAoCep = distanciaService
-				.restaurantesDoTipoDeCozinhaMaisProximosAoCep(tipoDeCozinhaId, cep);
-		return maisProximosAoCep.stream().map(restauranteMaisProximo -> {
-			Double mediaAvaliacoes = avaliacoesRepo.mediaDoRestaurantePeloId(restauranteMaisProximo.getId());
-			return new RestauranteComDistanciaEComMediaDeAvaliacoes(restauranteMaisProximo, mediaAvaliacoes);
-		}).collect(Collectors.toList());
+		return distanciaService.restaurantesDoTipoDeCozinhaMaisProximosAoCep(tipoDeCozinhaId, cep);
 	}
 
-	@GetMapping("/restaurantes/{cep}/restaurante/{id}")
-	public RestauranteComDistanciaEComMediaDeAvaliacoes comDistanciaEMediaDeAvaliacoesPorId(
-			@PathVariable("cep") String cep, @PathVariable("id") Long id) {
-		Restaurante restaurante = restauranteRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException());
-		BigDecimal distancia = distanciaService.distanciaDoCep(restaurante, cep);
-		RestauranteComDistancia restauranteComDistancia = new RestauranteComDistancia(restaurante, distancia);
-		Double mediaAvaliacoes = avaliacoesRepo.mediaDoRestaurantePeloId(id);
-		return new RestauranteComDistanciaEComMediaDeAvaliacoes(restauranteComDistancia, mediaAvaliacoes);
+	@GetMapping("/restaurantes/{cep}/restaurante/{restauranteId}")
+	public RestauranteComDistanciaDto comDistanciaPorId(@PathVariable("cep") String cep,
+			@PathVariable("restauranteId") Long restauranteId) {
+		return distanciaService.restauranteComDistanciaDoCep(restauranteId, cep);
 	}
-	
+
 	@GetMapping("/parceiros/restaurantes/{id}")
 	private RestauranteDto detalhaParceiro(@PathVariable("id") Long id) {
 		Restaurante restaurante = restauranteRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException());

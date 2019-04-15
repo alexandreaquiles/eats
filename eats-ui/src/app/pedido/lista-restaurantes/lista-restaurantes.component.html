@@ -13,10 +13,12 @@
       <div class="card-body">
         <h5 class="card-title">{{restaurante.nome}}</h5>
         <h6 *ngIf="restaurante.mediaAvaliacoes" class="card-subtitle mb-2">★ {{ restaurante.mediaAvaliacoes | number:'1.1-1' }}</h6>
-        <p class="card-text"><span>{{restaurante.tipoDeCozinha.nome}}</span> •
-          <span>{{restaurante.tempoDeEntregaMinimoEmMinutos}} -
-            {{restaurante.tempoDeEntregaMaximoEmMinutos}} min</span> •
-          <span>{{ restaurante.distancia | number:'1.1-1' }} km</span></p>
+        <p class="card-text">
+          <span>{{restaurante.tipoDeCozinha.nome}}</span>
+          <span *ngIf="restaurante.tempoDeEntregaMinimoEmMinutos"> • {{restaurante.tempoDeEntregaMinimoEmMinutos}} min</span>
+          <span *ngIf="restaurante.tempoDeEntregaMaximoEmMinutos"> - {{restaurante.tempoDeEntregaMaximoEmMinutos}} min</span>
+          <span *ngIf="restaurante.distancia"> • {{ restaurante.distancia | number:'1.1-1' }} km</span>
+        </p>
         <p class="card-text">{{ restaurante.taxaDeEntregaEmReais | currency:'BRL' }}</p>
         <a [routerLink]="['/pedidos', this.cep, 'restaurante', restaurante.id]"
           class="btn btn-primary stretched-link">Escolher</a>
