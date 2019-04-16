@@ -11,21 +11,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.caelum.eats.restaurante.Restaurante;
-import br.com.caelum.eats.restaurante.RestauranteFormaDePagamento;
-import br.com.caelum.eats.restaurante.RestauranteFormaDePagamentoRepository;
-import br.com.caelum.eats.restaurante.RestauranteFormaDePagamento.RestauranteFormaDePagamentoId;
-
 @RestController
 public class FormaDePagamentoController {
 
 	private FormaDePagamentoRepository formaRepo;
-	private RestauranteFormaDePagamentoRepository restauranteFormaDePagamentoRepo;
 
-	public FormaDePagamentoController(FormaDePagamentoRepository formaRepo,
-			RestauranteFormaDePagamentoRepository restauranteFormaDePagamentoRepo) {
+	public FormaDePagamentoController(FormaDePagamentoRepository formaRepo) {
 		this.formaRepo = formaRepo;
-		this.restauranteFormaDePagamentoRepo = restauranteFormaDePagamentoRepo;
 	}
 
 	@GetMapping("/formas-de-pagamento")
@@ -51,33 +43,6 @@ public class FormaDePagamentoController {
 	@DeleteMapping("/admin/formas-de-pagamento/{id}")
 	public void remove(@PathVariable("id") Long id) {
 		formaRepo.deleteById(id);
-	}
-
-	@GetMapping("/restaurantes/{idRestaurante}/formas-de-pagamento")
-	public List<FormaDePagamento> lista(@PathVariable("idRestaurante") Long idRestaurante) {
-		Restaurante restaurante = new Restaurante();
-		restaurante.setId(idRestaurante);
-		List<FormaDePagamento> formasDePagamentoDoRestaurante = restauranteFormaDePagamentoRepo
-				.findAllByRestauranteOrderByNomeAsc(restaurante);
-		return formasDePagamentoDoRestaurante;
-	}
-
-	@PostMapping("/parceiros/restaurantes/{idRestaurante}/formas-de-pagamento")
-	public void adiciona(@PathVariable("idRestaurante") Long idRestaurante,
-			@RequestBody FormaDePagamento formaDePagamento) {
-		RestauranteFormaDePagamentoId id = new RestauranteFormaDePagamentoId(idRestaurante, formaDePagamento.getId());
-		Restaurante restaurante = new Restaurante();
-		restaurante.setId(idRestaurante);
-		RestauranteFormaDePagamento restauranteFormaDePagamento = new RestauranteFormaDePagamento(id, restaurante,
-				formaDePagamento);
-		restauranteFormaDePagamentoRepo.save(restauranteFormaDePagamento);
-	}
-
-	@DeleteMapping("/parceiros/restaurantes/{idRestaurante}/formas-de-pagamento/{idFormaDePagamento}")
-	public void removeDoRestaurante(@PathVariable("idRestaurante") Long idRestaurante,
-			@PathVariable("idFormaDePagamento") Long idFormaDePagamento) {
-		RestauranteFormaDePagamentoId id = new RestauranteFormaDePagamentoId(idRestaurante, idFormaDePagamento);
-		restauranteFormaDePagamentoRepo.deleteById(id);
 	}
 
 }

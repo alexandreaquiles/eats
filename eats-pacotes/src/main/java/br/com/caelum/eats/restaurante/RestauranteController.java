@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.caelum.eats.distancia.DistanciaService;
 import br.com.caelum.eats.exception.ResourceNotFoundException;
 
 @RestController
@@ -19,36 +18,16 @@ public class RestauranteController {
 
 	private RestauranteRepository restauranteRepo;
 	private CardapioRepository cardapioRepo;
-	private DistanciaService distanciaService;
 
-	public RestauranteController(RestauranteRepository restauranteRepo, CardapioRepository cardapioRepo,
-			DistanciaService distanciaService) {
+	public RestauranteController(RestauranteRepository restauranteRepo, CardapioRepository cardapioRepo) {
 		this.restauranteRepo = restauranteRepo;
 		this.cardapioRepo = cardapioRepo;
-		this.distanciaService = distanciaService;
 	}
 
 	@GetMapping("/restaurantes/{id}")
 	public RestauranteDto detalha(@PathVariable("id") Long id) {
 		Restaurante restaurante = restauranteRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException());
 		return new RestauranteDto(restaurante);
-	}
-
-	@GetMapping("/restaurantes/mais-proximos/{cep}")
-	public List<RestauranteComDistanciaDto> maisProximos(@PathVariable("cep") String cep) {
-		return distanciaService.restaurantesMaisProximosAoCep(cep);
-	}
-
-	@GetMapping("/restaurantes/mais-proximos/{cep}/tipos-de-cozinha/{tipoDeCozinhaId}")
-	public List<RestauranteComDistanciaDto> maisProximos(@PathVariable("cep") String cep,
-			@PathVariable("tipoDeCozinhaId") Long tipoDeCozinhaId) {
-		return distanciaService.restaurantesDoTipoDeCozinhaMaisProximosAoCep(tipoDeCozinhaId, cep);
-	}
-
-	@GetMapping("/restaurantes/{cep}/restaurante/{restauranteId}")
-	public RestauranteComDistanciaDto comDistanciaPorId(@PathVariable("cep") String cep,
-			@PathVariable("restauranteId") Long restauranteId) {
-		return distanciaService.restauranteComDistanciaDoCep(restauranteId, cep);
 	}
 
 	@GetMapping("/parceiros/restaurantes/{id}")

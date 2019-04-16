@@ -1,7 +1,9 @@
-package br.com.caelum.eats.restaurante;
+package br.com.caelum.eats.distancia;
 
 import java.math.BigDecimal;
 
+import br.com.caelum.eats.restaurante.Restaurante;
+import br.com.caelum.eats.restaurante.RestauranteDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
