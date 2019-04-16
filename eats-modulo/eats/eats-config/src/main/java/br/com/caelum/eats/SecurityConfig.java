@@ -1,4 +1,4 @@
-package br.com.caelum.eats.seguranca;
+package br.com.caelum.eats;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
