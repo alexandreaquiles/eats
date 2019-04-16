@@ -31,27 +31,27 @@ public class FormaDePagamentoController {
 	}
 
 	@GetMapping("/formas-de-pagamento")
-	private List<FormaDePagamento> lista() {
+	public List<FormaDePagamento> lista() {
 		return formaRepo.findAllByOrderByNomeAsc();
 	}
 
 	@GetMapping("/admin/formas-de-pagamento/tipos")
-	private List<FormaDePagamento.Tipo> tipos() {
+	public List<FormaDePagamento.Tipo> tipos() {
 		return Arrays.asList(FormaDePagamento.Tipo.values());
 	}
 
 	@PostMapping("/admin/formas-de-pagamento")
-	private FormaDePagamento adiciona(@RequestBody FormaDePagamento tipoDeCozinha) {
+	public FormaDePagamento adiciona(@RequestBody FormaDePagamento tipoDeCozinha) {
 		return formaRepo.save(tipoDeCozinha);
 	}
 
 	@PutMapping("/admin/formas-de-pagamento/{id}")
-	private FormaDePagamento atualiza(@RequestBody FormaDePagamento tipoDeCozinha) {
+	public FormaDePagamento atualiza(@RequestBody FormaDePagamento tipoDeCozinha) {
 		return formaRepo.save(tipoDeCozinha);
 	}
 
 	@DeleteMapping("/admin/formas-de-pagamento/{id}")
-	private void remove(@PathVariable("id") Long id) {
+	public void remove(@PathVariable("id") Long id) {
 		formaRepo.deleteById(id);
 	}
 

@@ -35,7 +35,7 @@ public class RestauranteController {
 	}
 
 	@GetMapping("/restaurantes/{id}")
-	private RestauranteDto detalha(@PathVariable("id") Long id) {
+	public RestauranteDto detalha(@PathVariable("id") Long id) {
 		Restaurante restaurante = restauranteRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException());
 		return new RestauranteDto(restaurante);
 	}
@@ -58,13 +58,13 @@ public class RestauranteController {
 	}
 
 	@GetMapping("/parceiros/restaurantes/{id}")
-	private RestauranteDto detalhaParceiro(@PathVariable("id") Long id) {
+	public RestauranteDto detalhaParceiro(@PathVariable("id") Long id) {
 		Restaurante restaurante = restauranteRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException());
 		return new RestauranteDto(restaurante);
 	}
 
 	@PostMapping("/parceiros/restaurantes")
-	private Restaurante adiciona(@RequestBody Restaurante restaurante) {
+	public Restaurante adiciona(@RequestBody Restaurante restaurante) {
 		restaurante.setAprovado(false);
 		Restaurante restauranteSalvo = restauranteRepo.save(restaurante);
 		Cardapio cardapio = new Cardapio();
@@ -74,7 +74,7 @@ public class RestauranteController {
 	}
 
 	@PutMapping("/parceiros/restaurantes/{id}")
-	private Restaurante atualiza(@RequestBody Restaurante restaurante) {
+	public Restaurante atualiza(@RequestBody Restaurante restaurante) {
 		Restaurante doBD = restauranteRepo.getOne(restaurante.getId());
 		restaurante.setUser(doBD.getUser());
 		restaurante.setAprovado(doBD.getAprovado());
