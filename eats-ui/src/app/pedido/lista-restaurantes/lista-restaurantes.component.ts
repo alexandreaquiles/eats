@@ -36,24 +36,42 @@ export class ListaRestaurantesComponent implements OnInit {
         if (this.cep) {
 
           this.tipoDeCozinhaId = params.tipoDeCozinhaId;
-          let observable: Observable<any>;
+
+          let observableMaisProximos: Observable<any>;
           if (this.tipoDeCozinhaId) {
-            observable = this.restaurantesService.maisProximosPorCepETipoDeCozinha(this.cep, this.tipoDeCozinhaId);
+            observableMaisProximos = this.restaurantesService.maisProximosPorCepETipoDeCozinha(this.cep, this.tipoDeCozinhaId);
           } else {
-            observable = this.restaurantesService.maisProximosPorCep(this.cep)
+            observableMaisProximos = this.restaurantesService.maisProximosPorCep(this.cep);
           }
 
-          observable.subscribe(restaurantes => {
+          observableMaisProximos.subscribe(restaurantes => {
             this.restaurantesMaisProximos = restaurantes;
-            restaurantes.forEach(restaurante => {
-              this.avaliacoesService.mediaDasAvaliacoes(restaurante)
-                .subscribe(media => restaurante.mediaAvaliacoes = media);
-            });
+            this.mediaDeAvaliacoesParaCadaRestaurante();
           });
         }
       }
     );
   }
+
+  mediaDeAvaliacoesParaCadaRestaurante() {
+    this.restaurantesMaisProximos.forEach(restaurante => {
+      this.avaliacoesService.mediaDasAvaliacoes(restaurante)
+        .subscribe(media => restaurante.mediaAvaliacoes = media);
+    });
+  }
+
+  /*
+  mediaDeAvaliacoesDosRestaurantes() {
+    this.avaliacoesService.mediaDasAvaliacoesDosRestaurantes(this.restaurantesMaisProximos)
+      .subscribe(infoMedias => {
+        infoMedias.forEach(infoMedia => {
+          const restaurante = this.restaurantesMaisProximos.find(restaurante => restaurante.id === infoMedia.restauranteId);
+          restaurante.mediaAvaliacoes = infoMedia.media;
+        });
+
+      });
+  }
+  */
 
   escolher(restaurante) {
     this.router.navigateByUrl(`/pedidos/${this.cep}/restaurante/${restaurante.id}`);

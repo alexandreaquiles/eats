@@ -1,15 +1,15 @@
 <div class="row">
   <div class="col-sm-9" *ngIf="restaurante">
     <section>
-      <h2>{{restaurante.nome}}</h2>
+      <h2>{{restaurante?.nome}}</h2>
       <p *ngIf="restaurante.mediaAvaliacoes">★ {{ restaurante.mediaAvaliacoes | number:'1.1-1' }}</p>
       <p>
-        <span>{{restaurante.tipoDeCozinha.nome}}</span>
+        <span>{{restaurante?.tipoDeCozinha?.nome}}</span>
         <span *ngIf="restaurante.tempoDeEntregaMinimoEmMinutos"> • {{restaurante.tempoDeEntregaMinimoEmMinutos}} min</span>
         <span *ngIf="restaurante.tempoDeEntregaMaximoEmMinutos"> - {{restaurante.tempoDeEntregaMaximoEmMinutos}} min</span>
         <span *ngIf="restaurante.distancia"> • {{ restaurante.distancia | number:'1.1-1' }} km</span>
       </p>
-      <p class="text-muted">{{ restaurante.descricao }}</p>
+      <p class="text-muted">{{ restaurante?.descricao }}</p>
     </section>
     <ngb-tabset>
       <ngb-tab title="Cardápio">

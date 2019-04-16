@@ -27,4 +27,9 @@ export class AvaliacoesService {
     return this.http.get(`${this.API}/${restaurante.id}/media-avaliacoes`);
   }
 
+  mediaDasAvaliacoesDosRestaurantes(restaurantes: any[]): Observable<any> {
+    const idsDosRestaurantes = restaurantes.map(restaurante => restaurante.id).join(',');
+    return this.http.get(`${this.API}/media-avaliacoes?idsDosRestaurantes=${idsDosRestaurantes}`);
+  }
+
 }

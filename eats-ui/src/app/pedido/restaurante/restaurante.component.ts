@@ -14,7 +14,7 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 export class RestauranteComponent implements OnInit {
 
   cep: string;
-  restaurante: any = {};
+  restaurante: any;
   cardapio: any = {};
   avaliacoes: Array<any> = [];
   pedido: any = {
@@ -69,7 +69,12 @@ export class RestauranteComponent implements OnInit {
       .porIdDoRestaurante(restauranteId)
       .subscribe(avaliacoes => {
         this.avaliacoes = avaliacoes;
-        this.restaurante.mediaAvaliacoes = avaliacoes.reduce( ( acc, cur ) => acc + cur.nota, 0 ) / avaliacoes.length;
+        const media = avaliacoes.reduce( ( acc, cur ) => acc + cur.nota, 0 ) / avaliacoes.length;
+        if (this.restaurante) {
+          this.restaurante.mediaAvaliacoes = media;
+        } else {
+          this.restaurante = { mediaAvaliacoes: media };
+        }
       });
 
   }
