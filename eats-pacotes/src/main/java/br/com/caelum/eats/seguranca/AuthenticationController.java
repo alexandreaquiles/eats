@@ -1,5 +1,7 @@
 package br.com.caelum.eats.seguranca;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -10,9 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.caelum.eats.restaurante.Restaurante;
-import br.com.caelum.eats.restaurante.RestauranteRepository;
-
 
 @RestController
 @RequestMapping("/auth")
@@ -21,13 +20,13 @@ public class AuthenticationController {
 	private AuthenticationManager authManager;
 	private JwtTokenManager jwtTokenManager;
 	private UserService userService;
-	private RestauranteRepository restauranteRepo;
+	private List<AuthorizationTargetService> authorizationServices;
 
-	public AuthenticationController(AuthenticationManager authManager, JwtTokenManager jwtTokenManager, UserService userService, RestauranteRepository restauranteRepo) {
+	public AuthenticationController(AuthenticationManager authManager, JwtTokenManager jwtTokenManager, UserService userService, List<AuthorizationTargetService> authorizationServices) {
 		this.authManager = authManager;
 		this.jwtTokenManager = jwtTokenManager;
 		this.userService = userService;
-		this.restauranteRepo = restauranteRepo;
+		this.authorizationServices = authorizationServices;
 	}
 
 	@PostMapping
@@ -57,10 +56,10 @@ public class AuthenticationController {
 	}
 
 	private Long getTargetIdFor(User user) {
-		if(user.isInRole(Role.ROLES.PARCEIRO)) {
-			Restaurante restaurante = restauranteRepo.findByUser(user);
-			if (restaurante != null) {
-				return restaurante.getId();
+		for (AuthorizationTargetService authorizationTargetService : authorizationServices) {
+			Long targetId = authorizationTargetService.getTargetIdByUser(user);
+			if (targetId != null) {
+				return targetId;
 			}
 		}
 		return null;

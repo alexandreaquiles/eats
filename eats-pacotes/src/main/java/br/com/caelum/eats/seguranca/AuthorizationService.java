@@ -1,26 +1,25 @@
 package br.com.caelum.eats.seguranca;
 
+import java.util.List;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-
-import br.com.caelum.eats.restaurante.Restaurante;
-import br.com.caelum.eats.restaurante.RestauranteRepository;
 
 @Service
 public class AuthorizationService {
 
-	private RestauranteRepository restauranteRepo;
+	private List<AuthorizationTargetService> authorizationServices;
 
-	public AuthorizationService(RestauranteRepository restauranteRepo) {
-		this.restauranteRepo = restauranteRepo;
+	public AuthorizationService(List<AuthorizationTargetService> authorizationServices) {
+		this.authorizationServices = authorizationServices;
 	}
 
 	public boolean checaTargetId(Authentication authentication, long id) {
 		User user = (User) authentication.getPrincipal();
-		if(user.isInRole(Role.ROLES.PARCEIRO)) {
-			Restaurante restaurante = restauranteRepo.findByUser(user);
-			if (restaurante != null) {
-				return id == restaurante.getId();
+		for (AuthorizationTargetService authorizationTargetService : authorizationServices) {
+			Long targetId = authorizationTargetService.getTargetIdByUser(user);
+			if (targetId != null && targetId == id) {
+				return true;
 			}
 		}
 		return false;
