@@ -12,6 +12,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>br.com.caelum</groupId>
+			<artifactId>eats-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>br.com.caelum</groupId>
 			<artifactId>eats-admin</artifactId>
 			<version>${project.version}</version>
 		</dependency>
@@ -19,6 +24,10 @@
 			<groupId>br.com.caelum</groupId>
 			<artifactId>eats-pedido</artifactId>
 			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
 		</dependency>
 	</dependencies>
 </project>
