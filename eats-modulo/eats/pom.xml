@@ -20,7 +20,6 @@
 		<module>eats-pagamento</module>
 		<module>eats-restaurante</module>
 		<module>eats-pedido</module>
-		<module>eats-distancia</module>
 		<module>eats-seguranca</module>
 		<module>eats-common</module>
 		<module>eats-application</module>
