@@ -5,11 +5,13 @@ import { catchError } from 'rxjs/operators';
 
 import { ToastrService } from 'ngx-toastr';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class ErrorHandlingInterceptor implements HttpInterceptor {
 
-  constructor(private toaster: ToastrService) { }
+  constructor(private router: Router,
+              private toaster: ToastrService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
@@ -25,7 +27,7 @@ export class ErrorHandlingInterceptor implements HttpInterceptor {
             }
           }
           this.toaster.error(mensagemDeErro, 'Erro no servidor');
-
+          this.router.navigate(['']);
           return throwError(err);
         })
       );
