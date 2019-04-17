@@ -35,7 +35,7 @@ public class RestauranteDto {
 	public RestauranteDto(Restaurante restaurante) {
 		this(restaurante.getId(), restaurante.getCnpj(), restaurante.getNome(), restaurante.getDescricao(), restaurante.getCep(), restaurante.getEndereco(),
 				restaurante.getTaxaDeEntregaEmReais(), restaurante.getTempoDeEntregaMinimoEmMinutos(),
-				restaurante.getTempoDeEntregaMinimoEmMinutos(), restaurante.getAprovado(),
+				restaurante.getTempoDeEntregaMaximoEmMinutos(), restaurante.getAprovado(),
 				restaurante.getTipoDeCozinha());
 	}
 
