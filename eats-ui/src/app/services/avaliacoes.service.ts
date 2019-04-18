@@ -23,10 +23,6 @@ export class AvaliacoesService {
     return this.http.post(`${this.API}/${restauranteId}/avaliacoes`, avaliacao);
   }
 
-  mediaDasAvaliacoes(restaurante: any): Observable<any> {
-    return this.http.get(`${this.API}/${restaurante.id}/media-avaliacoes`);
-  }
-
   mediaDasAvaliacoesDosRestaurantes(restaurantes: any[]): Observable<any> {
     const idsDosRestaurantes = restaurantes.map(restaurante => restaurante.id).join(',');
     return this.http.get(`${this.API}/media-avaliacoes?idsDosRestaurantes=${idsDosRestaurantes}`);

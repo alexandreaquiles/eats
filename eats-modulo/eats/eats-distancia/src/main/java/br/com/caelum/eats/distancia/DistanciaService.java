@@ -21,6 +21,8 @@ import br.com.caelum.eats.restaurante.RestauranteRepository;
 @Service
 public class DistanciaService {
 
+	private static final Pageable LIMIT = PageRequest.of(0,5);
+
 	private RestauranteRepository repo;
 
 	public DistanciaService(RestauranteRepository repo) {
@@ -28,34 +30,37 @@ public class DistanciaService {
 	}
 
 	public List<RestauranteComDistanciaDto> restaurantesMaisProximosAoCep(String cep) {
-		Pageable limit = PageRequest.of(0,5);
-		return calculaDistanciaParaOsRestaurantes(repo.findAllByAprovado(true, limit).getContent(), cep);
+		List<Restaurante> restaurantes = repo.findAllByAprovado(true, LIMIT).getContent();
+		return calculaDistanciaParaOsRestaurantes(restaurantes, cep);
 	}
 
 	public List<RestauranteComDistanciaDto> restaurantesDoTipoDeCozinhaMaisProximosAoCep(Long tipoDeCozinhaId, String cep) {
-		Pageable limit = PageRequest.of(0,5);
 		TipoDeCozinha tipo = new TipoDeCozinha();
 		tipo.setId(tipoDeCozinhaId);
-		return calculaDistanciaParaOsRestaurantes(repo.findAllByAprovadoAndTipoDeCozinha(true, tipo, limit).getContent(), cep);
+		List<Restaurante> restaurantes = repo.findAllByAprovadoAndTipoDeCozinha(true, tipo, LIMIT).getContent();
+		return calculaDistanciaParaOsRestaurantes(restaurantes, cep);
 	}
 
 	public RestauranteComDistanciaDto restauranteComDistanciaDoCep(Long restauranteId, String cep) {
 		Restaurante restaurante = repo.findById(restauranteId).orElseThrow(() -> new ResourceNotFoundException());
-		BigDecimal distancia = distanciaDoCep(restaurante, cep);
-		return new RestauranteComDistanciaDto(restaurante, distancia);
+		String cepDoRestaurante = restaurante.getCep();
+		BigDecimal distancia = distanciaDoCep(cepDoRestaurante, cep);
+		return new RestauranteComDistanciaDto(restauranteId, distancia);
 	}
 
 	private List<RestauranteComDistanciaDto> calculaDistanciaParaOsRestaurantes(List<Restaurante> restaurantes, String cep) {
 		return restaurantes
 				.stream()
 				.map(restaurante -> {
-					BigDecimal distancia = distanciaDoCep(restaurante, cep);
-					return new RestauranteComDistanciaDto(restaurante, distancia);
+					String cepDoRestaurante = restaurante.getCep();
+					BigDecimal distancia = distanciaDoCep(cepDoRestaurante, cep);
+					Long restauranteId = restaurante.getId();
+					return new RestauranteComDistanciaDto(restauranteId, distancia);
 				})
 				.collect(Collectors.toList());
 	}
 
-	private BigDecimal distanciaDoCep(Restaurante restaurante, String cep) {
+	private BigDecimal distanciaDoCep(String cepDoRestaurante, String cep) {
 		return calculaDistancia();
 	}
 

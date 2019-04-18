@@ -1,5 +1,6 @@
 package br.com.caelum.eats.pedido;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.caelum.eats.restaurante.Restaurante;
@@ -28,15 +30,20 @@ public class AvaliacaoController {
 				.collect(Collectors.toList());
 	}
 
-	@GetMapping("/restaurantes/{restauranteId}/media-avaliacoes")
-	public Double mediaDasAvaliacoesDoRestaurante(@PathVariable("restauranteId") Long restauranteId) {
-		return repo.mediaDoRestaurantePeloId(restauranteId);
-	}
-
 	@PostMapping("/restaurantes/{restauranteId}/avaliacoes")
 	public AvaliacaoDto adiciona(@RequestBody Avaliacao avaliacao) {
 		Avaliacao salvo = repo.save(avaliacao);
 		return new AvaliacaoDto(salvo);
+	}
+
+	@GetMapping("/restaurantes/media-avaliacoes")
+	public List<MediaAvaliacoesDto> mediaDasAvaliacoesDosRestaurantes(@RequestParam List<Long> idsDosRestaurantes) {
+		List<MediaAvaliacoesDto> medias = new ArrayList<>();
+		for (Long restauranteId : idsDosRestaurantes) {
+			Double media = repo.mediaDoRestaurantePeloId(restauranteId);
+			medias.add(new MediaAvaliacoesDto(restauranteId, media));
+		}
+		return medias;
 	}
 
 }

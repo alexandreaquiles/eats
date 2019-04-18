@@ -18,6 +18,10 @@ export class RestauranteService {
     return this.http.get(`${this.API}/restaurantes/${id}`);
   }
 
+  porIds(ids): Observable<any> {
+    return this.http.get(`${this.API}/restaurantes?ids=${ids}`);
+  }
+
   maisProximosPorCep(cep: string): Observable<any> {
     return this.http.get(`${this.API}/restaurantes/mais-proximos/${cep}`);
   }
@@ -26,7 +30,7 @@ export class RestauranteService {
     return this.http.get(`${this.API}/restaurantes/mais-proximos/${cep}/tipos-de-cozinha/${tipoDeCozinhaId}`);
   }
 
-  porCepEId(cep: string, restauranteId: string): Observable<any> {
+  distanciaPorCepEId(cep: string, restauranteId: string): Observable<any> {
     return this.http.get(`${this.API}/restaurantes/${cep}/restaurante/${restauranteId}`);
   }
 

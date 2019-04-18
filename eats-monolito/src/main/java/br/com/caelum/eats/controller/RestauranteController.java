@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.caelum.eats.dto.RestauranteComDistanciaDto;
@@ -38,6 +39,11 @@ public class RestauranteController {
 	public RestauranteDto detalha(@PathVariable("id") Long id) {
 		Restaurante restaurante = restauranteRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException());
 		return new RestauranteDto(restaurante);
+	}
+
+	@GetMapping("/restaurantes")
+	public List<RestauranteDto> detalhePorIds(@RequestParam List<Long> ids) {
+		return restauranteRepo.findAllById(ids).stream().map(RestauranteDto::new).collect(Collectors.toList());
 	}
 
 	@GetMapping("/restaurantes/mais-proximos/{cep}")

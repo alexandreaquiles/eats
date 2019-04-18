@@ -16,7 +16,9 @@ export class ListaRestaurantesComponent implements OnInit {
   tiposDeCozinha: Array<any>;
   cep: string;
   tipoDeCozinhaId: string;
+  distancias: Array<any>;
   restaurantesMaisProximos: Array<any>;
+  restaurantesComDetalhes: Array<any>;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -30,48 +32,55 @@ export class ListaRestaurantesComponent implements OnInit {
       this.tiposDeCozinha = tipos;
     });
 
-    this.route.params.subscribe(
-      params => {
-        this.cep = params.cep;
-        if (this.cep) {
-
-          this.tipoDeCozinhaId = params.tipoDeCozinhaId;
-
-          let observableMaisProximos: Observable<any>;
-          if (this.tipoDeCozinhaId) {
-            observableMaisProximos = this.restaurantesService.maisProximosPorCepETipoDeCozinha(this.cep, this.tipoDeCozinhaId);
-          } else {
-            observableMaisProximos = this.restaurantesService.maisProximosPorCep(this.cep);
-          }
-
-          observableMaisProximos.subscribe(restaurantes => {
-            this.restaurantesMaisProximos = restaurantes;
-            this.mediaDeAvaliacoesParaCadaRestaurante();
-          });
-        }
+    this.route.params.subscribe(params => {
+      this.cep = params.cep;
+      if (this.cep) {
+        this.tipoDeCozinhaId = params.tipoDeCozinhaId;
+        this.obtemRestaurantesMaisProximos();
       }
-    );
-  }
-
-  mediaDeAvaliacoesParaCadaRestaurante() {
-    this.restaurantesMaisProximos.forEach(restaurante => {
-      this.avaliacoesService.mediaDasAvaliacoes(restaurante)
-        .subscribe(media => restaurante.mediaAvaliacoes = media);
     });
   }
 
-  /*
-  mediaDeAvaliacoesDosRestaurantes() {
-    this.avaliacoesService.mediaDasAvaliacoesDosRestaurantes(this.restaurantesMaisProximos)
-      .subscribe(infoMedias => {
-        infoMedias.forEach(infoMedia => {
-          const restaurante = this.restaurantesMaisProximos.find(restaurante => restaurante.id === infoMedia.restauranteId);
-          restaurante.mediaAvaliacoes = infoMedia.media;
-        });
+  obtemRestaurantesMaisProximos() {
+    let observableMaisProximos: Observable<any>;
+    if (this.tipoDeCozinhaId) {
+      observableMaisProximos = this.restaurantesService.maisProximosPorCepETipoDeCozinha(this.cep, this.tipoDeCozinhaId);
+    } else {
+      observableMaisProximos = this.restaurantesService.maisProximosPorCep(this.cep);
+    }
 
+    observableMaisProximos.subscribe(restaurantesMaisProximos => {
+      this.restaurantesMaisProximos = restaurantesMaisProximos;
+      this.obtemDetalhesDosRestaurantes();
+    });
+  }
+
+  obtemDetalhesDosRestaurantes() {
+    const idsDosRestaurantes = this.restaurantesMaisProximos.map(maisProximo => maisProximo.restauranteId).join(',');
+    this.restaurantesService.porIds(idsDosRestaurantes)
+      .subscribe(restaurantes => {
+        this.restaurantesComDetalhes = restaurantes;
+        this.agregaDistanciaAosDetalhesDosRestaurantes();
+        this.mediaDeAvaliacoesDosRestaurantes();
       });
   }
-  */
+
+  agregaDistanciaAosDetalhesDosRestaurantes() {
+    this.restaurantesComDetalhes.forEach(restaurante => {
+      const maisProximo = this.restaurantesMaisProximos.find(maisProximo => restaurante.id === maisProximo.restauranteId);
+      restaurante.distancia = maisProximo.distancia;
+    });
+  }
+
+  mediaDeAvaliacoesDosRestaurantes() {
+    this.avaliacoesService.mediaDasAvaliacoesDosRestaurantes(this.restaurantesComDetalhes)
+      .subscribe(infoMedias => {
+        infoMedias.forEach(infoMedia => {
+          const restaurante = this.restaurantesComDetalhes.find(restaurante => restaurante.id === infoMedia.restauranteId);
+          restaurante.mediaAvaliacoes = infoMedia.media;
+        });
+      });
+  }
 
   escolher(restaurante) {
     this.router.navigateByUrl(`/pedidos/${this.cep}/restaurante/${restaurante.id}`);

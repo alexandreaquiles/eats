@@ -6,13 +6,13 @@
     </ul>
   </section>
 
-<section class="my-4" *ngIf="restaurantesMaisProximos?.length">
+<section class="my-4" *ngIf="restaurantesComDetalhes?.length">
   <h2>Restaurantes próximos a {{ cep }}</h2>
   <div class="card-columns mt-4 mb-5">
-    <div class="card bg-light shadow" *ngFor="let restaurante of restaurantesMaisProximos">
+    <div class="card bg-light shadow" *ngFor="let restaurante of restaurantesComDetalhes">
       <div class="card-body">
         <h5 class="card-title">{{restaurante.nome}}</h5>
-        <h6 *ngIf="restaurante.mediaAvaliacoes" class="card-subtitle mb-2">★ {{ restaurante.mediaAvaliacoes | number:'1.1-1' }}</h6>
+        <h6 class="card-subtitle" *ngIf="restaurante.mediaAvaliacoes" class="card-subtitle mb-2">★ {{ restaurante.mediaAvaliacoes | number:'1.1-1' }}</h6>
         <p class="card-text">
           <span>{{restaurante.tipoDeCozinha?.nome}}</span>
           <span *ngIf="restaurante.tempoDeEntregaMinimoEmMinutos"> • {{restaurante.tempoDeEntregaMinimoEmMinutos}} min</span>
@@ -27,6 +27,6 @@
   </div>
 </section>
 
-<section class="my-4" *ngIf="tipoDeCozinhaId && !restaurantesMaisProximos?.length">
+<section class="my-4" *ngIf="tipoDeCozinhaId && !restaurantesComDetalhes?.length">
   <p>Desculpe! Não há nenhum restaurante.</p>
 </section>
