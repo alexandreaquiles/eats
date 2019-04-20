@@ -2,7 +2,6 @@ package br.com.caelum.eats.restaurante;
 
 import java.math.BigDecimal;
 
-import br.com.caelum.eats.admin.TipoDeCozinha;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -30,13 +29,13 @@ public class RestauranteDto {
 
 	private Boolean aprovado;
 
-	private TipoDeCozinha tipoDeCozinha;
+	private Long tipoDeCozinhaId;
 
 	public RestauranteDto(Restaurante restaurante) {
 		this(restaurante.getId(), restaurante.getCnpj(), restaurante.getNome(), restaurante.getDescricao(), restaurante.getCep(), restaurante.getEndereco(),
 				restaurante.getTaxaDeEntregaEmReais(), restaurante.getTempoDeEntregaMinimoEmMinutos(),
 				restaurante.getTempoDeEntregaMaximoEmMinutos(), restaurante.getAprovado(),
-				restaurante.getTipoDeCozinha());
+				restaurante.getTipoDeCozinhaId());
 	}
 
 }

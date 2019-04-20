@@ -8,7 +8,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import br.com.caelum.eats.admin.TipoDeCozinha;
 import br.com.caelum.eats.exception.ResourceNotFoundException;
 import br.com.caelum.eats.restaurante.Restaurante;
 import br.com.caelum.eats.restaurante.RestauranteRepository;
@@ -35,9 +34,7 @@ public class DistanciaService {
 	}
 
 	public List<RestauranteComDistanciaDto> restaurantesDoTipoDeCozinhaMaisProximosAoCep(Long tipoDeCozinhaId, String cep) {
-		TipoDeCozinha tipo = new TipoDeCozinha();
-		tipo.setId(tipoDeCozinhaId);
-		List<Restaurante> restaurantes = repo.findAllByAprovadoAndTipoDeCozinha(true, tipo, LIMIT).getContent();
+		List<Restaurante> restaurantes = repo.findAllByAprovadoAndTipoDeCozinhaId(true, tipoDeCozinhaId, LIMIT).getContent();
 		return calculaDistanciaParaOsRestaurantes(restaurantes, cep);
 	}
 
