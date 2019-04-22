@@ -7,14 +7,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.caelum.eats.pagamento.pedido.PedidoDto;
+import br.com.caelum.eats.pagamento.pedido.PedidoRestClient;
+
 @RestController
 @RequestMapping("/pagamentos")
 public class PagamentoController {
 
 	private PagamentoRepository pagamentoRepo;
+	private NotaFiscalService notaFiscal;
+	private PedidoRestClient pedidoClient;
 
-	public PagamentoController(PagamentoRepository pagamentoRepo) {
+	public PagamentoController(PagamentoRepository pagamentoRepo, PedidoRestClient pedidoClient, NotaFiscalService notaFiscal) {
 		this.pagamentoRepo = pagamentoRepo;
+		this.pedidoClient = pedidoClient;
+		this.notaFiscal = notaFiscal;
 	}
 
 	@PostMapping
@@ -28,6 +35,10 @@ public class PagamentoController {
 	public PagamentoDto confirma(@RequestBody Pagamento pagamento) {
 		pagamento.setStatus(Pagamento.Status.CONFIRMADO);
 		pagamentoRepo.save(pagamento);
+		Long pedidoId = pagamento.getPedidoId();
+		PedidoDto pedido = pedidoClient.detalhaPorId(pedidoId);
+		String nota = notaFiscal.geraNotaPara(pedido);
+		System.out.println(nota); //TODO: enviar XML para SEFAZ
 		return new PagamentoDto(pagamento);
 	}
 
