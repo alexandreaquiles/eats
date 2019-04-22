@@ -36,6 +36,7 @@ public class PagamentoController {
 		pagamento.setStatus(Pagamento.Status.CONFIRMADO);
 		pagamentoRepo.save(pagamento);
 		Long pedidoId = pagamento.getPedidoId();
+		pedidoClient.avisaQueFoiPago(pedidoId);
 		PedidoDto pedido = pedidoClient.detalhaPorId(pedidoId);
 		String nota = notaFiscal.geraNotaPara(pedido);
 		System.out.println(nota); //TODO: enviar XML para SEFAZ

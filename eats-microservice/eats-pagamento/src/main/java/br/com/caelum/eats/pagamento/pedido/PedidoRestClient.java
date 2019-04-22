@@ -21,4 +21,9 @@ public class PedidoRestClient {
 		return restTemplate.getForObject(url, PedidoDto.class);
 	}
 
+	public void avisaQueFoiPago(Long pedidoId) {
+		String url = pedidoServiceUrl + "/pedidos/" + pedidoId + "/pago";
+		restTemplate.put(url, null);
+	}
+
 }
