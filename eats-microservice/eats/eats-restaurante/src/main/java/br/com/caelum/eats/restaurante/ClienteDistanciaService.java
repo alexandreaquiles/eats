@@ -2,6 +2,8 @@ package br.com.caelum.eats.restaurante;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -35,12 +37,16 @@ public class ClienteDistanciaService {
 	public void novoRestauranteAprovado(Restaurante restaurante) {
 		RestauranteParaDistanciaService restauranteParaDistancia = new RestauranteParaDistanciaService(restaurante);
 		String url = distanciaServiceUrl+"/restaurantes";
-		System.out.println(url);
-		restTemplate.postForObject(url, restauranteParaDistancia, RestauranteParaDistanciaService.class);
+		ResponseEntity<RestauranteParaDistanciaService> responseEntity = restTemplate.postForEntity(url, restauranteParaDistancia, RestauranteParaDistanciaService.class);
+		HttpStatus statusCode = responseEntity.getStatusCode();
+		if(!HttpStatus.CREATED.equals(statusCode)) {
+			throw new RuntimeException("Status diferente do esperado: " + statusCode);
+		}
 	}
 
 	public void restauranteAtualizado(Restaurante restaurante) {
 		RestauranteParaDistanciaService restauranteParaDistancia = new RestauranteParaDistanciaService(restaurante);
-		restTemplate.put(distanciaServiceUrl+"/restaurantes/" + restaurante.getId(), restauranteParaDistancia, RestauranteParaDistanciaService.class);
+		String url = distanciaServiceUrl+"/restaurantes/" + restaurante.getId();
+		restTemplate.put(url, restauranteParaDistancia, RestauranteParaDistanciaService.class);
 	}
 }
