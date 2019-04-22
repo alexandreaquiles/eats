@@ -49,17 +49,17 @@ public class PedidoController {
 		return new PedidoDto(salvo);
 	}
 
-	@GetMapping("/parceiros/restaurantes/{restauranteId}/pedidos/pendentes")
-	public List<PedidoDto> pendentes(@PathVariable("restauranteId") Long restauranteId) {
-		return repo.doRestauranteSemOsStatus(restauranteId, Arrays.asList(Pedido.Status.REALIZADO, Pedido.Status.ENTREGUE)).stream()
-				.map(pedido -> new PedidoDto(pedido)).collect(Collectors.toList());
-	}
-
-	@PutMapping("/parceiros/pedidos/{id}/status")
+	@PutMapping("/pedidos/{id}/status")
 	public PedidoDto atualizaStatus(@RequestBody Pedido pedido) {
 		repo.atualizaStatus(pedido.getStatus(), pedido);
 		websocket.convertAndSend("/pedidos/"+pedido.getId()+"/status", pedido);
 		return new PedidoDto(pedido);
+	}
+
+	@GetMapping("/parceiros/restaurantes/{restauranteId}/pedidos/pendentes")
+	public List<PedidoDto> pendentes(@PathVariable("restauranteId") Long restauranteId) {
+		return repo.doRestauranteSemOsStatus(restauranteId, Arrays.asList(Pedido.Status.REALIZADO, Pedido.Status.ENTREGUE)).stream()
+				.map(pedido -> new PedidoDto(pedido)).collect(Collectors.toList());
 	}
 
 }

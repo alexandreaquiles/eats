@@ -22,12 +22,12 @@ export class PedidosService {
     return this.http.post(`${this.API}/pedidos`, pedido);
   }
 
-  pendentes(restauranteId): Observable<any> {
-    return this.http.get(`${this.API}/parceiros/restaurantes/${restauranteId}/pedidos/pendentes`);
+  atualizaStatus(pedido): Observable<any> {
+    return this.http.put(`${this.API}/pedidos/${pedido.id}/status`, pedido);
   }
 
-  atualizaStatus(pedido): Observable<any> {
-    return this.http.put(`${this.API}/parceiros/pedidos/${pedido.id}/status`, pedido);
+  pendentes(restauranteId): Observable<any> {
+    return this.http.get(`${this.API}/parceiros/restaurantes/${restauranteId}/pedidos/pendentes`);
   }
 
 }
