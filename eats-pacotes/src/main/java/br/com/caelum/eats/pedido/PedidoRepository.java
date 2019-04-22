@@ -18,4 +18,7 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 	@Query("select p from Pedido p where p.restaurante.id = :restauranteId and p.status not in :listaDeStatus")
 	List<Pedido> doRestauranteSemOsStatus(Long restauranteId, List<Pedido.Status> listaDeStatus);
 
+	@Query(value = "SELECT p from Pedido p LEFT JOIN FETCH p.itens where p.id = :id") 
+	Pedido porIdComItens(Long id);
+
 }
