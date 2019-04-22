@@ -114,7 +114,7 @@
           </div>
           <div class="form-group">
             <label for="cpf">CPF:</label>
-            <input class="form-control" required id="cpf" name="cpf" maxlength="14"
+            <input class="form-control" required id="cpf" name="cpf" maxlength="15"
               [(ngModel)]="pedido.entrega.cliente.cpf" placeholder="000.000.000-00" [textMask]="{mask: cpfMask}">
           </div>
           <div class="form-group">
@@ -132,7 +132,7 @@
           <legend>Local de entrega</legend>
           <div class="form-group">
             <label for="cep">CEP:</label>
-            <input class="form-control" required id="cep" name="cep" maxlength="9"
+            <input class="form-control" required id="cep" name="cep" maxlength="10"
               [(ngModel)]="pedido.entrega.cep" [textMask]="{mask: cepMask}">
           </div>
           <div class="form-group">
