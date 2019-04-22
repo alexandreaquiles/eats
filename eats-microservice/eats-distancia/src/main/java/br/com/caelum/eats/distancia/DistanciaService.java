@@ -9,8 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.caelum.eats.exception.ResourceNotFoundException;
-import br.com.caelum.eats.restaurante.Restaurante;
-import br.com.caelum.eats.restaurante.RestauranteRepository;
+import br.com.caelum.eats.restaurante.mongo.MongoRestaurante;
+import br.com.caelum.eats.restaurante.mongo.MongoRestauranteRepository;
 
 /*
  * Serviço que simula a obtenção dos restaurantes mais próximos a um dado CEP.
@@ -22,30 +22,30 @@ public class DistanciaService {
 
 	private static final Pageable LIMIT = PageRequest.of(0,5);
 
-	private RestauranteRepository repo;
+	private MongoRestauranteRepository repo;
 
-	public DistanciaService(RestauranteRepository repo) {
+	public DistanciaService(MongoRestauranteRepository repo) {
 		this.repo = repo;
 	}
 
 	public List<RestauranteComDistanciaDto> restaurantesMaisProximosAoCep(String cep) {
-		List<Restaurante> restaurantes = repo.findAllByAprovado(true, LIMIT).getContent();
+		List<MongoRestaurante> restaurantes = repo.findAll(LIMIT).getContent();
 		return calculaDistanciaParaOsRestaurantes(restaurantes, cep);
 	}
 
 	public List<RestauranteComDistanciaDto> restaurantesDoTipoDeCozinhaMaisProximosAoCep(Long tipoDeCozinhaId, String cep) {
-		List<Restaurante> restaurantes = repo.findAllByAprovadoAndTipoDeCozinhaId(true, tipoDeCozinhaId, LIMIT).getContent();
+		List<MongoRestaurante> restaurantes = repo.findAllByTipoDeCozinhaId(tipoDeCozinhaId, LIMIT).getContent();
 		return calculaDistanciaParaOsRestaurantes(restaurantes, cep);
 	}
 
 	public RestauranteComDistanciaDto restauranteComDistanciaDoCep(Long restauranteId, String cep) {
-		Restaurante restaurante = repo.findById(restauranteId).orElseThrow(() -> new ResourceNotFoundException());
+		MongoRestaurante restaurante = repo.findById(restauranteId).orElseThrow(() -> new ResourceNotFoundException());
 		String cepDoRestaurante = restaurante.getCep();
 		BigDecimal distancia = distanciaDoCep(cepDoRestaurante, cep);
 		return new RestauranteComDistanciaDto(restauranteId, distancia);
 	}
 
-	private List<RestauranteComDistanciaDto> calculaDistanciaParaOsRestaurantes(List<Restaurante> restaurantes, String cep) {
+	private List<RestauranteComDistanciaDto> calculaDistanciaParaOsRestaurantes(List<MongoRestaurante> restaurantes, String cep) {
 		return restaurantes
 				.stream()
 				.map(restaurante -> {
