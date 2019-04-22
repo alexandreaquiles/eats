@@ -2,15 +2,12 @@ package br.com.caelum.eats.pagamento;
 
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.caelum.eats.exception.ResourceNotFoundException;
 import br.com.caelum.eats.pedido.Pedido;
 import br.com.caelum.eats.pedido.PedidoRepository;
 
@@ -28,12 +25,6 @@ public class PagamentoController {
 		this.pedidoRepo = pedidoRepo;
 		this.notaFiscal = notaFiscal;
 		this.websocket = websocket;
-	}
-
-	@GetMapping("/{id}")
-	public PagamentoDto porId(@PathVariable("id") Long id) {
-		Pagamento pagamento = pagamentoRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException());
-		return new PagamentoDto(pagamento);
 	}
 
 	@PostMapping

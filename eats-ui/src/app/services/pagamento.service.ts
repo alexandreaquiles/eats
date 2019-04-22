@@ -14,20 +14,16 @@ export class PagamentoService {
   constructor(private http: HttpClient) {
   }
 
-  porId(pedidoId) {
-    return this.http.get(`${this.API}/${pedidoId}`);
+  cria(pagamento): Observable<any> {
+    return this.http.post(`${this.API}`, pagamento);
   }
 
-  cria(pedido): Observable<any> {
-    return this.http.post(`${this.API}`, pedido);
+  confirma(pagamento): Observable<any> {
+    return this.http.put(`${this.API}/${pagamento.id}`, pagamento);
   }
 
-  confirma(pedido): Observable<any> {
-    return this.http.put(`${this.API}/${pedido.id}`, pedido);
-  }
-
-  cancela(pedido): Observable<any> {
-    return this.http.delete(`${this.API}/${pedido.id}`, pedido);
+  cancela(pagamento): Observable<any> {
+    return this.http.delete(`${this.API}/${pagamento.id}`, pagamento);
   }
 
 }
