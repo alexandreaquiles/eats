@@ -3,6 +3,8 @@ package br.com.caelum.eats.restaurante;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,10 +21,12 @@ public class RestauranteController {
 
 	private RestauranteRepository restauranteRepo;
 	private CardapioRepository cardapioRepo;
+	private ClienteDistanciaService clienteDistanciaService;
 
-	public RestauranteController(RestauranteRepository restauranteRepo, CardapioRepository cardapioRepo) {
+	public RestauranteController(RestauranteRepository restauranteRepo, CardapioRepository cardapioRepo, ClienteDistanciaService clienteDistanciaService) {
 		this.restauranteRepo = restauranteRepo;
 		this.cardapioRepo = cardapioRepo;
+		this.clienteDistanciaService = clienteDistanciaService;
 	}
 
 	@GetMapping("/restaurantes/{id}")
@@ -57,6 +61,13 @@ public class RestauranteController {
 		Restaurante doBD = restauranteRepo.getOne(restaurante.getId());
 		restaurante.setUser(doBD.getUser());
 		restaurante.setAprovado(doBD.getAprovado());
+		if (doBD.getAprovado() 
+				&&
+				(!doBD.getCep().equals(restaurante.getCep())
+					||
+				(!doBD.getTipoDeCozinha().getId().equals(restaurante.getTipoDeCozinha().getId())))) {
+			clienteDistanciaService.restauranteAtualizado(restaurante);
+		}
 		return restauranteRepo.save(restaurante);
 	}
 
@@ -66,8 +77,11 @@ public class RestauranteController {
 				.collect(Collectors.toList());
 	}
 
+	@Transactional
 	@PatchMapping("/admin/restaurantes/{id}")
 	public void aprova(@PathVariable("id") Long id) {
 		restauranteRepo.aprovaPorId(id);
+		Restaurante restaurante = restauranteRepo.getOne(id);
+		clienteDistanciaService.novoRestauranteAprovado(restaurante );
 	}
 }
