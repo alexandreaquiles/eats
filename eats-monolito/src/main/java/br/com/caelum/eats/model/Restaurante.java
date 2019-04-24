@@ -14,6 +14,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -56,7 +58,7 @@ public class Restaurante {
 	@ManyToOne(optional=false)
 	private TipoDeCozinha tipoDeCozinha;
 	
-	@OneToOne
+	@OneToOne @JsonIgnore
 	private User user;
 
 }
