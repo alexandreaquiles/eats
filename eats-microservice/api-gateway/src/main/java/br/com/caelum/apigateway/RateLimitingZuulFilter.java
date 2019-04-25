@@ -7,14 +7,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.core.Ordered;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
 import org.springframework.util.ReflectionUtils;
 
 import com.google.common.util.concurrent.RateLimiter;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 
-@Component
+//@Component
 public class RateLimitingZuulFilter extends ZuulFilter {
 
 	private final RateLimiter rateLimiter = RateLimiter.create(1.0 / 30.0); //queries per second
