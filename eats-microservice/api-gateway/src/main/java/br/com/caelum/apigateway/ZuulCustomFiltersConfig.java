@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import com.netflix.zuul.context.RequestContext;
 
 @Configuration
-public class LocationRewriteConfig {
+public class ZuulCustomFiltersConfig {
 
 	@Bean
 	public LocationRewriteFilter locationRewriteFilter() {
