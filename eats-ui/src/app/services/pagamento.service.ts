@@ -21,12 +21,14 @@ export class PagamentoService {
 
   confirma(pagamento): Observable<any> {
     const url = pagamento._links.confirma.href;
-    return this.http.put(url, pagamento);
+    const method = pagamento._links.confirma.method;
+    return this.http.request(method, url, { body: pagamento });
   }
 
   cancela(pagamento): Observable<any> {
     const url = pagamento._links.cancela.href;
-    return this.http.delete(url, pagamento);
+    const method = pagamento._links.cancela.method;
+    return this.http.request(method, url, { body: pagamento });
   }
 
   private ajustaIds(pagamento) {

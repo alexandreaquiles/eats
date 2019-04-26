@@ -52,10 +52,10 @@ public class PagamentoController {
 
 		if (Pagamento.Status.CRIADO.equals(pagamento.getStatus())) {
 			Link confirma = linkTo(methodOn(PagamentoController.class).confirma(pagamento, id)).withRel("confirma");
-			links.add(confirma);
+			links.add(new LinkWithMethod(confirma, "PUT"));
 
 			Link cancela = linkTo(methodOn(PagamentoController.class).cancela(pagamento, id)).withRel("cancela");
-			links.add(cancela);
+			links.add(new LinkWithMethod(cancela, "DELETE"));
 		}
 
 		PagamentoDto dto = new PagamentoDto(pagamento);
@@ -80,10 +80,10 @@ public class PagamentoController {
 		links.add(self);
 
 		Link confirma = linkTo(methodOn(PagamentoController.class).confirma(pagamento, id)).withRel("confirma");
-		links.add(confirma);
+		links.add(new LinkWithMethod(confirma, "PUT"));
 
 		Link cancela = linkTo(methodOn(PagamentoController.class).cancela(pagamento, id)).withRel("cancela");
-		links.add(cancela);
+		links.add(new LinkWithMethod(cancela, "DELETE"));
 
 		Resource<PagamentoDto> resource = new Resource<PagamentoDto>(dto, links);
 		return ResponseEntity.created(uri).contentType(MediaType.APPLICATION_JSON).body(resource);
