@@ -21,13 +21,13 @@ export class PagamentoService {
 
   confirma(pagamento): Observable<any> {
     const url = pagamento._links.confirma.href;
-    const method = pagamento._links.confirma.method;
+    const method = pagamento._templates.default.method;
     return this.http.request(method, url, { body: pagamento });
   }
 
   cancela(pagamento): Observable<any> {
     const url = pagamento._links.cancela.href;
-    const method = pagamento._links.cancela.method;
+    const method = pagamento._templates.cancela.method;
     return this.http.request(method, url, { body: pagamento });
   }
 
