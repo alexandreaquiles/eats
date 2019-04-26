@@ -3,7 +3,7 @@
     <app-resumo-pedido [pedido]="pedido"></app-resumo-pedido>
   </div>
   <div class="col-sm-8 mb-5">
-    <form class="mb-5" #pagamentoForm="ngForm" (ngSubmit)="criaPagamento()">
+    <form *ngIf="pagamento.status !== 'CRIADO'" class="mb-5" #pagamentoForm="ngForm" (ngSubmit)="criaPagamento()">
       <h3>Dados do pagamento</h3>
       <div class="form-group">
         <label for="formaDePagamento">Forma de pagamento</label>
@@ -30,10 +30,16 @@
           placeholder="000" [textMask]="{mask: codigoCartaoMask}">
       </div>
       <button *ngIf="!pagamento.status" class="btn btn-primary" type="submit" [disabled]="!pagamentoForm.form.valid">Criar pagamento</button>
-      <div *ngIf="pagamento.status === 'CRIADO'">
-        <button class="btn btn-success mr-2" (click)="confirmaPagamento()">Confirmar pagamento</button>
-        <button class="btn btn-danger" (click)="cancelaPagamento()">Cancelar pagamento</button>
-      </div>
     </form>
-  </div>
+    <div *ngIf="pagamento.status === 'CRIADO'">
+      <dl>
+        <dt>Cartão</dt>
+        <dd>{{ pagamento.numero.substring(0, 5) }} XXXX XXXX XXXX</dd>
+        <dt>Valor</dt>
+        <dd>{{ pedido.total | currency:'BRL' }}</dd>
+      </dl>
+      <button class="btn btn-success mr-2" (click)="confirmaPagamento()">Confirmar pagamento</button>
+      <button class="btn btn-danger" (click)="cancelaPagamento()">Cancelar pagamento</button>
+    </div>
+</div>
 </div>

@@ -39,8 +39,7 @@ export class PagamentoPedidoComponent implements OnInit {
   criaPagamento() {
     this.pagamentoService.cria(this.pagamento)
       .subscribe(pagamento => {
-        this.pagamento.id = pagamento.id;
-        this.pagamento.status = pagamento.status;
+        this.pagamento = pagamento;
       });
   }
 
