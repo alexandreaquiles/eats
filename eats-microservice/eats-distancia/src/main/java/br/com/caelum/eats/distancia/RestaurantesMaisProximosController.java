@@ -2,6 +2,7 @@ package br.com.caelum.eats.distancia;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,9 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class RestaurantesMaisProximosController {
 
 	private DistanciaService distanciaService;
+	private Integer porta;
 
-	public RestaurantesMaisProximosController(DistanciaService distanciaService) {
+	public RestaurantesMaisProximosController(DistanciaService distanciaService, @Value("${server.port}") Integer porta) {
 		this.distanciaService = distanciaService;
+		this.porta = porta;
 	}
 
 	@GetMapping("/restaurantes/mais-proximos/{cep}")
@@ -29,6 +32,7 @@ public class RestaurantesMaisProximosController {
 	@GetMapping("/restaurantes/{cep}/restaurante/{restauranteId}")
 	public RestauranteComDistanciaDto comDistanciaPorId(@PathVariable("cep") String cep,
 			@PathVariable("restauranteId") Long restauranteId) {
+		System.out.println("Acessando eats-distancia na porta: " + porta);
 		return distanciaService.restauranteComDistanciaDoCep(restauranteId, cep);
 	}
 
