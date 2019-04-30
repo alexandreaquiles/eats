@@ -14,8 +14,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import br.com.caelum.eats.admin.TipoDeCozinha;
 import br.com.caelum.eats.seguranca.User;
 import lombok.AllArgsConstructor;
@@ -60,7 +58,7 @@ public class Restaurante {
 	@ManyToOne(optional=false)
 	private TipoDeCozinha tipoDeCozinha;
 	
-	@OneToOne @JsonIgnore
+	@OneToOne
 	private User user;
 
 }
