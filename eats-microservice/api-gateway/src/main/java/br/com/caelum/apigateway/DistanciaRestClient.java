@@ -1,13 +1,26 @@
 package br.com.caelum.apigateway;
 
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
-@FeignClient("distancia")
-public interface DistanciaRestClient {
+@Service
+public class DistanciaRestClient {
 
-	@GetMapping("/restaurantes/{cep}/restaurante/{restauranteId}")
-	public RestauranteComDistanciaDto porCepEId(@PathVariable("cep") String cep, @PathVariable("restauranteId") Long restauranteId);
+	private String distanciaServiceUrl;
+	private RestTemplate restTemplate;
 
+	public DistanciaRestClient(RestTemplate restTemplate, @Value("${configuracao.distancia.service.url}") String distanciaServiceUrl) {
+		this.distanciaServiceUrl = distanciaServiceUrl;
+		this.restTemplate = restTemplate;
+	}
+
+	public RestauranteComDistanciaDto porCepEId(String cep, Long restauranteId) {
+		String url = distanciaServiceUrl+"/restaurantes/"+cep+"/restaurante/"+restauranteId;
+		return restTemplate.getForObject(url, RestauranteComDistanciaDto.class);
+	}
+
+	public RestauranteComDistanciaDto restauranteComDistanciaEmCache(String cep, Long restauranteId) {
+		return new RestauranteComDistanciaDto(restauranteId, null, null);
+	}
 }
