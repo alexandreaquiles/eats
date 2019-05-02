@@ -1,0 +1,46 @@
+alexandre ~ $ ab -n 100 -c 10 http://localhost:9999/restaurantes-com-distancia/71503510/restaurante/1
+This is ApacheBench, Version 2.3 <$Revision: 1528965 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        
+Server Hostname:        localhost
+Server Port:            9999
+
+Document Path:          /restaurantes-com-distancia/71503510/restaurante/1
+Document Length:        5065 bytes
+
+Concurrency Level:      10
+Time taken for tests:   2.997 seconds
+Complete requests:      100
+Failed requests:        90
+   (Connect: 0, Receive: 0, Length: 90, Exceptions: 0)
+Non-2xx responses:      100
+Total transferred:      1510892 bytes
+HTML transferred:       1498992 bytes
+Requests per second:    33.37 [#/sec] (mean)
+Time per request:       299.687 [ms] (mean)
+Time per request:       29.969 [ms] (mean, across all concurrent requests)
+Transfer rate:          492.34 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.3      0       2
+Processing:    84  278 322.7    158    1210
+Waiting:       55  274 320.8    155    1209
+Total:         84  279 323.0    158    1211
+
+Percentage of the requests served within a certain time (ms)
+  50%    158
+  66%    186
+  75%    211
+  80%    259
+  90%   1196
+  95%   1209
+  98%   1211
+  99%   1211
+ 100%   1211 (longest request)
+
