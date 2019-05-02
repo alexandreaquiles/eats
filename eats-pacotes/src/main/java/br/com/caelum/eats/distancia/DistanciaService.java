@@ -71,14 +71,12 @@ public class DistanciaService {
 
 	@SuppressWarnings("unused")
 	private void simulaDemora() {
-		//simula demora de até 5s
-		long demora = (long) (Math.random()*4000+1000);
-		if (demora % 2 == 0) {
-			try {
-				Thread.sleep(demora);
-			} catch (InterruptedException e) {
-				throw new RuntimeException(e);
-			}
+		//simula demora de 10s a 20s
+		long demora = (long) (Math.random()*10000+10000);
+		try {
+			Thread.sleep(demora);
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
 		}
 	}
 
