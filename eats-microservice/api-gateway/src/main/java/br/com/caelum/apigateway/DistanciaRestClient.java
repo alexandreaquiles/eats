@@ -17,7 +17,7 @@ public class DistanciaRestClient {
 		this.restTemplate = restTemplate;
 	}
 
-	@HystrixCommand
+	@HystrixCommand(fallbackMethod="restauranteComDistanciaEmCache")
 	public RestauranteComDistanciaDto porCepEId(String cep, Long restauranteId) {
 		String url = distanciaServiceUrl+"/restaurantes/"+cep+"/restaurante/"+restauranteId;
 		return restTemplate.getForObject(url, RestauranteComDistanciaDto.class);
