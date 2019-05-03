@@ -39,11 +39,12 @@ public class RestaurantesController {
 
 	@PutMapping("/restaurantes/{id}")
 	public MongoRestaurante atualiza(@PathVariable Long id, @RequestBody MongoRestaurante restaurante) {
-		System.out.println("Acessando eats-distancia na porta: " + porta);
-		if (!repo.existsById(id)) {
-			throw new ResourceNotFoundException();
-		}
-		return repo.save(restaurante);
+		throw new RuntimeException();
+//		System.out.println("Acessando eats-distancia na porta: " + porta);
+//		if (!repo.existsById(id)) {
+//			throw new ResourceNotFoundException();
+//		}
+//		return repo.save(restaurante);
 	}
 
 }
