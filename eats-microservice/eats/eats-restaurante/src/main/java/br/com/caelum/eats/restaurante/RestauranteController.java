@@ -23,7 +23,8 @@ public class RestauranteController {
 	private CardapioRepository cardapioRepo;
 	private ClienteDistanciaService clienteDistanciaService;
 
-	public RestauranteController(RestauranteRepository restauranteRepo, CardapioRepository cardapioRepo, ClienteDistanciaService clienteDistanciaService) {
+	public RestauranteController(RestauranteRepository restauranteRepo, CardapioRepository cardapioRepo,
+			ClienteDistanciaService clienteDistanciaService) {
 		this.restauranteRepo = restauranteRepo;
 		this.cardapioRepo = cardapioRepo;
 		this.clienteDistanciaService = clienteDistanciaService;
@@ -31,15 +32,10 @@ public class RestauranteController {
 
 	@GetMapping("/restaurantes/{id}")
 	public RestauranteDto detalha(@PathVariable("id") Long id) {
-		try {
-			Thread.sleep(20000);
-		} catch (InterruptedException e) {
-			throw new RuntimeException(e);
-		}
 		Restaurante restaurante = restauranteRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException());
 		return new RestauranteDto(restaurante);
 	}
-	
+
 	@GetMapping("/restaurantes")
 	public List<RestauranteDto> detalhePorIds(@RequestParam List<Long> ids) {
 		return restauranteRepo.findAllById(ids).stream().map(RestauranteDto::new).collect(Collectors.toList());
@@ -66,11 +62,8 @@ public class RestauranteController {
 		Restaurante doBD = restauranteRepo.getOne(restaurante.getId());
 		restaurante.setUser(doBD.getUser());
 		restaurante.setAprovado(doBD.getAprovado());
-		if (doBD.getAprovado() 
-				&&
-				(!doBD.getCep().equals(restaurante.getCep())
-					||
-				(!doBD.getTipoDeCozinha().getId().equals(restaurante.getTipoDeCozinha().getId())))) {
+		if (doBD.getAprovado() && (!doBD.getCep().equals(restaurante.getCep())
+				|| (!doBD.getTipoDeCozinha().getId().equals(restaurante.getTipoDeCozinha().getId())))) {
 			clienteDistanciaService.restauranteAtualizado(restaurante);
 		}
 		return restauranteRepo.save(restaurante);
@@ -87,6 +80,6 @@ public class RestauranteController {
 	public void aprova(@PathVariable("id") Long id) {
 		restauranteRepo.aprovaPorId(id);
 		Restaurante restaurante = restauranteRepo.getOne(id);
-		clienteDistanciaService.novoRestauranteAprovado(restaurante );
+		clienteDistanciaService.novoRestauranteAprovado(restaurante);
 	}
 }
