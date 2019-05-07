@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 
-@FeignClient(url="${configuracao.pedido.service.url}", name="pedido")
+@FeignClient(name="monolito")
 public interface PedidoRestClient {
 
 	@GetMapping("/pedidos/{pedidoId}")
