@@ -74,11 +74,24 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
 	<repositories>
 		<repository>
 			<id>spring-libs-snapshot</id>
 			<url>https://repo.spring.io/libs-snapshot</url>
 		</repository>
 	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>spring-plugins-snapshot</id>
+			<url>https://repo.spring.io/libs-snapshot</url>
+		</pluginRepository>
+	</pluginRepositories>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 </project>
