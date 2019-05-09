@@ -22,7 +22,6 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.caelum.eats.exception.ResourceNotFoundException;
-import br.com.caelum.eats.pagamento.pedido.PedidoDto;
 import br.com.caelum.eats.pagamento.pedido.PedidoRestClient;
 
 @RestController
@@ -30,14 +29,11 @@ import br.com.caelum.eats.pagamento.pedido.PedidoRestClient;
 public class PagamentoController {
 
 	private PagamentoRepository pagamentoRepo;
-	private NotaFiscalService notaFiscal;
 	private PedidoRestClient pedidoClient;
 
-	public PagamentoController(PagamentoRepository pagamentoRepo, PedidoRestClient pedidoClient,
-			NotaFiscalService notaFiscal) {
+	public PagamentoController(PagamentoRepository pagamentoRepo, PedidoRestClient pedidoClient) {
 		this.pagamentoRepo = pagamentoRepo;
 		this.pedidoClient = pedidoClient;
-		this.notaFiscal = notaFiscal;
 	}
 
 	@GetMapping("/{id}")
@@ -96,9 +92,6 @@ public class PagamentoController {
 		pagamentoRepo.save(pagamento);
 		Long pedidoId = pagamento.getPedidoId();
 		pedidoClient.avisaQueFoiPago(pedidoId);
-		PedidoDto pedido = pedidoClient.detalhaPorId(pedidoId);
-		String nota = notaFiscal.geraNotaPara(pedido);
-		System.out.println(nota); // TODO: enviar XML para SEFAZ
 		return new PagamentoDto(pagamento);
 	}
 
