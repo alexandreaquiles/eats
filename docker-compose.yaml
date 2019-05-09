@@ -1,0 +1,81 @@
+version: '3'
+
+services:
+  mysql.monolito:
+    image: mysql:5.7
+    restart: on-failure
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "caelum123"
+  mysql.pagamento:
+    image: mysql:5.7
+    restart: on-failure
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "caelum123"
+  mongo.distancia:
+    image: mongo:3.6
+    restart: on-failure
+    ports:
+      - "27017:27017"
+  service.registry:
+    build: ./eats-microservice/service-registry
+    ports:
+      - "8761:8761"
+    restart: on-failure
+    volumes:
+      - "/dev/urandom:/dev/random" 
+  distancia.service:
+    build: ./eats-microservice/eats-distancia
+    ports:
+      - "8081:8081"
+    depends_on:
+      - service.registry
+      - mongo.distancia
+    environment:
+      SPRING_DATA_MONGODB_HOST: mongo.distancia
+      EUREKA_URI: http://service.registry:8761/eureka
+  pagamento.service:
+    build: ./eats-microservice/eats-distancia
+    ports:
+      - "8082:8082"
+    depends_on:
+      - service.registry
+      - mysql.pagamento
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql.pagamento/eats_pagamento?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: caelum123
+      EUREKA_URI: http://service.registry:8761/eureka
+  monolito:
+    build: ./eats-microservice/eats/eats-application
+    ports:
+      - "8080:8080"
+    depends_on:
+      - service.registry
+      - mysql.monolito
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql.monolito/eats?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: caelum123
+      EUREKA_URI: http://service.registry:8761/eureka
+  api.gateway:
+    build: ./eats-microservice/api-gateway
+    ports:
+      - "9999:9999"
+    depends_on:
+      - service.registry
+      - monolito
+      - pagamento.service
+      - distancia.service
+    environment:
+      EUREKA_URI: http://service.registry:8761/eureka
+  ui:
+    build: ./eats-ui
+    ports:
+      - "80:80"
+    depends_on:
+      - api.gateway
+
