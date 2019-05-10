@@ -26,7 +26,13 @@ services:
       - "8761:8761"
     restart: on-failure
     volumes:
-      - "/dev/urandom:/dev/random" 
+      - "/dev/urandom:/dev/random"
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    restart: on-failure
+    ports:
+      - "5672:5672"
+      - "15672:15672"
   distancia.service:
     build: ./eats-microservice/eats-distancia
     ports:

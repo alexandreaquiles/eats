@@ -23,19 +23,18 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.caelum.eats.exception.ResourceNotFoundException;
+import br.com.caelum.eats.pagamento.confirmacao.NotificadorPagamentoConfirmado;
 import br.com.caelum.eats.pagamento.pedido.PedidoRestClient;
+import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping("/pagamentos")
+@AllArgsConstructor
 public class PagamentoController {
 
 	private PagamentoRepository pagamentoRepo;
 	private PedidoRestClient pedidoClient;
-
-	public PagamentoController(PagamentoRepository pagamentoRepo, PedidoRestClient pedidoClient) {
-		this.pagamentoRepo = pagamentoRepo;
-		this.pedidoClient = pedidoClient;
-	}
+	private NotificadorPagamentoConfirmado pagamentoConfirmado;
 
 	@GetMapping("/{id}")
 	public Resource<PagamentoDto> detalha(@PathVariable("id") Long id) {
@@ -91,6 +90,8 @@ public class PagamentoController {
 		pagamentoRepo.save(pagamento);
 		Long pedidoId = pagamento.getPedidoId();
 		pedidoClient.avisaQueFoiPago(pedidoId);
+		
+		pagamentoConfirmado.notificaPagamentoConfirmado(pagamento);
 
 		List<Link> links = new ArrayList<>();
 		
