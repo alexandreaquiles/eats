@@ -8,10 +8,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableDiscoveryClient
 @EnableFeignClients
 @SpringBootApplication
-public class NotaFiscalApplication {
+public class EatsNotaFiscalApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(NotaFiscalApplication.class, args);
+		SpringApplication.run(EatsNotaFiscalApplication.class, args);
 	}
 
 }
