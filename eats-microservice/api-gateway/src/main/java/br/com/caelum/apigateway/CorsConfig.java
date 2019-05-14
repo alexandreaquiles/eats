@@ -1,4 +1,4 @@
-package br.com.caelum.eats;
+package br.com.caelum.apigateway;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
