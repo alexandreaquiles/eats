@@ -33,6 +33,9 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: eats
+      RABBITMQ_DEFAULT_PASS: caelum123
   distancia.service:
     build: ./eats-microservice/eats-distancia
     ports:
@@ -84,4 +87,3 @@ services:
       - "80:80"
     depends_on:
       - api.gateway
-
