@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.integration.support.MessageBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,18 +13,16 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.caelum.eats.AmqpConfig.AtualizacaoPedidoSource;
 import br.com.caelum.eats.exception.ResourceNotFoundException;
+import lombok.AllArgsConstructor;
 
 @RestController
+@AllArgsConstructor
 public class PedidoController {
 
 	private PedidoRepository repo;
-	private SimpMessagingTemplate websocket;
-
-	public PedidoController(PedidoRepository repo, SimpMessagingTemplate websocket) {
-		this.repo = repo;
-		this.websocket = websocket;
-	}
+	private AtualizacaoPedidoSource atualizacaoPedido;
 	
 	@GetMapping("/pedidos")
 	public List<PedidoDto> lista() {
@@ -52,8 +50,9 @@ public class PedidoController {
 	@PutMapping("/pedidos/{id}/status")
 	public PedidoDto atualizaStatus(@RequestBody Pedido pedido) {
 		repo.atualizaStatus(pedido.getStatus(), pedido);
-		websocket.convertAndSend("/pedidos/"+pedido.getId()+"/status", pedido);
-		return new PedidoDto(pedido);
+		PedidoDto dto = new PedidoDto(pedido);
+		atualizacaoPedido.pedidoComStatusAtualizado().send(MessageBuilder.withPayload(dto).build());
+		return dto;
 	}
 
 	@GetMapping("/parceiros/restaurantes/{restauranteId}/pedidos/pendentes")
@@ -70,6 +69,8 @@ public class PedidoController {
 		}
 		pedido.setStatus(Pedido.Status.PAGO);
 		repo.atualizaStatus(Pedido.Status.PAGO, pedido);
-		websocket.convertAndSend("/parceiros/restaurantes/"+pedido.getRestaurante().getId()+"/pedidos/pendentes", new PedidoDto(pedido));
+		PedidoDto dto = new PedidoDto(pedido);
+		atualizacaoPedido.pedidoComStatusAtualizado().send(MessageBuilder.withPayload(dto).build());
+
 	}
 }
