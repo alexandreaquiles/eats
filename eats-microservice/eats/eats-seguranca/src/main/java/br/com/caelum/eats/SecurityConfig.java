@@ -41,6 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/restaurantes/**", "/pedidos/**", "/pagamentos/**", "/tipos-de-cozinha/**", "/formas-de-pagamento/**").permitAll()
 				.antMatchers("/socket/**").permitAll()
 				.antMatchers("/auth/**").permitAll()
+				.antMatchers("/actuator/**").permitAll()
 				.antMatchers("/admin/**").hasRole(Role.ROLES.ADMIN.name())
 				.antMatchers(HttpMethod.POST, "/parceiros/restaurantes").permitAll()
 				.antMatchers("/parceiros/restaurantes/{restauranteId}/**").access("@authorizationService.checaTargetId(authentication,#restauranteId)")
